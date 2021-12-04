@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+    database_postgres:
+        container_name: database_postgres
+        image: postgres:12-alpine
+        restart: always
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_DB: myonewallet_api
+            POSTGRES_USER: admin_user
+            POSTGRES_PASSWORD: admin_password
+    app:
+        container_name: app
+        build: .
+        links:
+            - database_postgres
+        volumes:
+            - ./src:/app/src
+        command: sh -c "yarn dev"
+        ports:
+            - "3000:3000"
+        environment:
+            PORT: 3000
+            DATABASE_HOST: database_postgres
+            DATABASE_PORT: 5432

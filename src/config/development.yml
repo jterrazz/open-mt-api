@@ -1,0 +1,8 @@
+LOG:
+    LEVEL: 'verbose'
+
+API:
+    PORT: '3000'
+
+DATABASE:
+    URL: 'postgresql://postgres:postgres@localhost:5432/db_myonewallet?schema=public'
