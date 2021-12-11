@@ -1,4 +1,4 @@
-import { getProjectDependencies } from '@config/project-dependencies';
+import { getProjectDependencies } from '~/configuration/project-dependencies';
 
 export const startApplication = async () => {
     const { dependencies, webserver } = getProjectDependencies();

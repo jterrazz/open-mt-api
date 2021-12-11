@@ -1,6 +1,6 @@
 import { IProjectDependencies } from '@application/contracts/IProjectDependencies';
 import { IWebServer } from '@application/contracts/IWebServer';
-import { getProjectDependencies } from '@config/project-dependencies';
+import { getProjectDependencies } from '~/configuration/project-dependencies';
 
 export const createMockProjectDependencies = (): {
     dependencies: IProjectDependencies;

@@ -12,7 +12,7 @@
             "~/*": ["./src/*"],
             "@adapters/*": ["./src/adapters/*"],
             "@application/*": ["./src/application/*"],
-            "@config/*": ["./src/config/*"],
+            "@configuration/*": ["./src/configuration/*"],
             "@entities/*": ["./src/entities/*"],
             "@infrastructure/*": ["./src/infrastructure/*"]
         },

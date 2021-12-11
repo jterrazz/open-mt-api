@@ -5,7 +5,7 @@
 # MacOS
 .DS_Store
 
-# Local config
+# Local configuration
 src/configuration/local.yml
 
 # Logs
@@ -42,7 +42,7 @@ coverage
 # Bower dependency directory (https://bower.io/)
 bower_components
 
-# node-waf config
+# node-waf configuration
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)

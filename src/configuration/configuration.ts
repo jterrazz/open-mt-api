@@ -6,10 +6,7 @@ import {
     environmentSchema,
     logConfigSchema,
 } from '@application/contracts/IConfiguration';
-
-// .yml config
-process.env['NODE_CONFIG_DIR'] = __dirname + '/';
-import config from 'config';
+import config from 'config'; // .yml configuration
 
 export const configurationFactory = (): IConfiguration => {
     const ENVIRONMENT = environmentSchema.parse(process.env.NODE_ENV);

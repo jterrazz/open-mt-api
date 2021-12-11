@@ -3,7 +3,7 @@ import { IProjectDependencies } from '@application/contracts/IProjectDependencie
 import { IWebServer } from '@application/contracts/IWebServer';
 import { PaymentServiceValidationMethod } from '@application/contracts/IPaymentService';
 import { apiControllerFactory } from '@adapters/controllers/api.controller';
-import { configurationFactory } from '@config/configuration';
+import { configurationFactory } from '@configuration/configuration';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
 import { loggerFactory } from '@infrastructure/logger/winston/winston-logger';
 import { mixpanelTrackerFactory } from '@infrastructure/tracker/mixpanel/mixpanel-tracker';

@@ -7,9 +7,9 @@ services:
         ports:
             - "5432:5432"
         environment:
-            POSTGRES_DB: myonewallet_api
-            POSTGRES_USER: admin_user
-            POSTGRES_PASSWORD: admin_password
+            POSTGRES_DB: db_myopenmarket
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
     app:
         container_name: app
         build: .

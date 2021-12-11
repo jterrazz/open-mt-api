@@ -1,4 +1,4 @@
-import { getProjectDependencies } from '@config/project-dependencies';
+import { getProjectDependencies } from '~/configuration/project-dependencies';
 import request from 'supertest';
 
 const {
