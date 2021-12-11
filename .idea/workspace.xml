@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a9e1a8b-7414-41e8-80b0-2942d527f53b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/config/development.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/application/contracts/mocks/project-dependencies.mock.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/application/contracts/mocks/project-dependencies.mock.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/configuration.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configuration/configuration.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/custom-environment-variables.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/custom-environment-variables.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/default.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/default.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/development.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/production.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/production.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/project-dependencies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configuration/project-dependencies.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config/test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/e2e/api/get.test.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tests/e2e/api/get.test.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jest.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/jest.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +12,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -99,7 +93,7 @@
       <workItem from="1639179575887" duration="598000" />
       <workItem from="1639182061943" duration="598000" />
       <workItem from="1639240224026" duration="3829000" />
-      <workItem from="1639256675828" duration="1724000" />
+      <workItem from="1639256675828" duration="3793000" />
     </task>
     <servers />
   </component>
