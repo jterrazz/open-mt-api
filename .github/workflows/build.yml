@@ -1,4 +1,4 @@
-name: CI-build-pipeline
+name: CI Build Pipeline
 on:
     pull_request:
         branches: [ develop, main ]
