@@ -1,13 +1,10 @@
+import { IConfiguration, IDatabase, ILogger } from '@application/contracts';
 import { PrismaClient } from '@prisma/client';
-
-import { IConfiguration } from '@application/contracts/IConfiguration';
-import { IDatabaseService } from '@application/contracts/IDatabaseService';
-import { ILogger } from '@application/contracts/ILogger';
 
 export const prismaDatabaseFactory = (
     { DATABASE: { URL } }: IConfiguration,
     logger: ILogger,
-): IDatabaseService => {
+): IDatabase => {
     // Passing database URL to prisma
     process.env['DATABASE_URL'] = URL;
 

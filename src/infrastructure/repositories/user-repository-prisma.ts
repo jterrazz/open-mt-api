@@ -1,14 +1,13 @@
-import { IDatabaseService } from '@application/contracts/IDatabaseService';
-import { IUserRepository } from '@application/contracts/repositories/IUserRepository';
-import { User } from '@entities/user';
+import { IDatabase } from '@application/contracts';
+import { IUserRepository } from '@domain/user/user.repository';
+import { UserEntity } from '@domain/user/user.entity';
 
 export const userRepositoryPrismaFactory = (
-    database: IDatabaseService,
+    database: IDatabase,
 ): IUserRepository => {
     return {
-        async getByHandle(handle: string): Promise<User> {
+        async getByHandle(handle: string): Promise<UserEntity> {
             return {
-                accounts: [],
                 biography: '',
                 firstName: '',
                 handle: '',
@@ -16,6 +15,6 @@ export const userRepositoryPrismaFactory = (
                 lastName: '',
             };
         },
-        async persist(user: User): Promise<void> {},
+        async persist(user: UserEntity): Promise<void> {},
     };
 };

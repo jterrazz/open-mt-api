@@ -1,12 +1,12 @@
-import { IDatabaseService } from '@application/contracts/IDatabaseService';
-import { IPaymentRepository } from '@application/contracts/repositories/IPaymentRepository';
-import { Payment } from '@entities/payment';
+import { IDatabase } from '@application/contracts';
+import { IPaymentRepository } from '@domain/payment/payment.repository';
+import { PaymentEntity } from '@domain/payment/payment.entity';
 
 export const paymentRepositoryPrismaFactory = (
-    database: IDatabaseService,
+    database: IDatabase,
 ): IPaymentRepository => {
     return {
-        async merge(payment: Payment): Promise<void> {},
-        async persist(payment: Payment): Promise<void> {},
+        async merge(payment: PaymentEntity): Promise<void> {},
+        async persist(payment: PaymentEntity): Promise<void> {},
     };
 };

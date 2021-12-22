@@ -1,7 +1,6 @@
 import winston from 'winston';
 
-import { IConfiguration } from '@application/contracts/IConfiguration';
-import { ILogger } from '@application/contracts/ILogger';
+import { IConfiguration, ILogger } from '@application/contracts';
 import { getCallerFile } from '@application/utils/node';
 import { winstonLocalFormat } from '@infrastructure/logger/winston/local-format';
 

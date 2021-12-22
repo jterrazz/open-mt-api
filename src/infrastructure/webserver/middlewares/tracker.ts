@@ -1,4 +1,4 @@
-import { IProjectDependencies } from '@application/contracts/IProjectDependencies';
+import { IProjectDependencies } from '@application/contracts';
 import { Middleware } from 'koa';
 
 export const trackerMiddlewareFactory = ({

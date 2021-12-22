@@ -1,9 +1,9 @@
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
 
-import { createMockProjectDependencies } from '@application/contracts/mocks/project-dependencies.mock';
-import { createMockTracker } from '@application/contracts/mocks/tracker.mock';
+import { createMockProjectDependencies } from '@configuration/project-dependencies.mock';
+import { createMockTracker } from '@application/contracts/tracker.mock';
 
-describe('use-case - getApiState()', function () {
+describe('use-case - get API state', function () {
     it('should return the API state', function () {
         // Given
         const { dependencies: mockDependencies } =

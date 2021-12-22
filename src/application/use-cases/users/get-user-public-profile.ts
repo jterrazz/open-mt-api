@@ -1,5 +1,5 @@
-import { ILogger } from '@application/contracts/ILogger';
-import { IUserRepository } from '@application/contracts/repositories/IUserRepository';
+import { ILogger } from '@application/contracts';
+import { IUserRepository } from '@domain/user/user.repository';
 
 export const getUserPublicProfileFactory = (
     logger: ILogger,

@@ -5,7 +5,7 @@ import {
     databaseConfigSchema,
     environmentSchema,
     logConfigSchema,
-} from '@application/contracts/IConfiguration';
+} from '@application/contracts/configuration';
 import config from 'config'; // .yml configuration
 
 export const configurationFactory = (): IConfiguration => {

@@ -1,15 +1,16 @@
-import { IControllers } from '@adapters/controllers/IControllers';
-import { IProjectDependencies } from '@application/contracts/IProjectDependencies';
-import { IWebServer } from '@application/contracts/IWebServer';
-import { PaymentServiceValidationMethod } from '@application/contracts/IPaymentService';
+import { IControllers } from '@adapters';
+import { IProjectDependencies, IWebServer } from '@application/contracts';
 import { apiControllerFactory } from '@adapters/controllers/api.controller';
 import { configurationFactory } from '@configuration/configuration';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
 import { loggerFactory } from '@infrastructure/logger/winston/winston-logger';
-import { mixpanelTrackerFactory } from '@infrastructure/tracker/mixpanel/mixpanel-tracker';
+import { mixpanelTrackerFactoryStrategy } from '@infrastructure/tracker/tracker-mixpanel';
 import { paymentRepositoryPrismaFactory } from '@infrastructure/repositories/payment-repository-prisma';
-import { paymentsControllerFactory } from '@adapters/controllers/payments.controller';
 import { prismaDatabaseFactory } from '@infrastructure/orm/prisma/prisma-database';
+import { productRepositoryPrisma } from '@infrastructure/repositories/product-repository-prisma';
+import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop-repository-prisma';
+import { shopsControllerFactory } from '@adapters/controllers/shops.controller';
+import { trackerInMemoryFactory } from '@infrastructure/tracker/tracker-in-memory';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user-repository-prisma';
 import { usersControllerFactory } from '@adapters/controllers/users.controller';
 
@@ -21,43 +22,39 @@ export const getProjectDependencies = (): {
     const logger = loggerFactory(configuration);
     const database = prismaDatabaseFactory(configuration, logger);
 
-    /**
-     * Dependencies
-     */
+    // Dependencies
+
+    const trackerFactory = [
+        mixpanelTrackerFactoryStrategy,
+        trackerInMemoryFactory,
+    ].find((strategy) => strategy.isApplicable(configuration.ENVIRONMENT));
+
+    if (!trackerFactory) {
+        throw new Error('a tracker dependency was not found');
+    }
 
     const dependencies: IProjectDependencies = {
         configuration,
         database,
         logger,
-        paymentService: {
-            async initiatePayment() {
-                // Dump mock now
-                return {
-                    validationMethod: PaymentServiceValidationMethod.Webview,
-                    validationUrl: 'PaymentServiceValidationMethod.Webview',
-                };
-            },
-        },
         repositories: {
             paymentRepository: paymentRepositoryPrismaFactory(database),
+            productRepository: productRepositoryPrisma(),
+            shopRepository: shopRepositoryPrismaFactory(database),
             userRepository: userRepositoryPrismaFactory(database),
         },
-        trackerFactory: mixpanelTrackerFactory,
+        trackerFactory,
     };
 
-    /**
-     * Controllers
-     */
+    // Controllers
 
     const controllers: IControllers = {
         api: apiControllerFactory(dependencies),
-        payments: paymentsControllerFactory(dependencies),
+        shops: shopsControllerFactory(dependencies),
         users: usersControllerFactory(dependencies),
     };
 
-    /**
-     * Web server
-     */
+    // Web server
 
     const webserver = koaServerFactory(dependencies, controllers);
 

@@ -1,9 +1,8 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 
-import { IControllers } from '@adapters/controllers/IControllers';
-import { IProjectDependencies } from '@application/contracts/IProjectDependencies';
-import { IWebServer } from '@application/contracts/IWebServer';
+import { IControllers } from '@adapters';
+import { IProjectDependencies, IWebServer } from '@application/contracts';
 import { authenticationMiddleware } from '@infrastructure/webserver/middlewares/authentication';
 import { routerFactory } from '@infrastructure/webserver/routes';
 import { trackerMiddlewareFactory } from '@infrastructure/webserver/middlewares/tracker';

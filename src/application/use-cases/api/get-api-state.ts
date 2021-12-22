@@ -1,9 +1,8 @@
-import { IProjectDependencies } from '@application/contracts/IProjectDependencies';
-import { ITrackerService } from '@application/contracts/ITrackerService';
+import { IProjectDependencies, ITracker } from '@application/contracts';
 
 export const getApiStateFactory = (
     { configuration }: IProjectDependencies,
-    tracker: ITrackerService,
+    tracker: ITracker,
 ) => {
     return () => {
         tracker.events.requested.getApiState();
