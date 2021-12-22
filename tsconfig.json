@@ -10,10 +10,11 @@
         "sourceMap": true,
         "paths": {
             "~/*": ["./src/*"],
+            "@adapters": ["./src/adapters"],
             "@adapters/*": ["./src/adapters/*"],
             "@application/*": ["./src/application/*"],
             "@configuration/*": ["./src/configuration/*"],
-            "@entities/*": ["./src/entities/*"],
+            "@domain/*": ["./src/domain/*"],
             "@infrastructure/*": ["./src/infrastructure/*"]
         },
         "emitDecoratorMetadata": true,

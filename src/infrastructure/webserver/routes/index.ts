@@ -1,6 +1,7 @@
 import Router from 'koa-router';
 
-import { IControllers } from '@adapters/controllers/IControllers';
+import { Context } from 'koa';
+import { IControllers } from '@adapters';
 import { paymentsRouter } from './payments';
 import { userRouter } from './user';
 import { usersRouter } from './users';
