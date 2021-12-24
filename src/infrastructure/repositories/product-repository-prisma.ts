@@ -12,7 +12,7 @@ const mockResult: ProductEntity = {
 
 export const productRepositoryPrisma = (): IProductRepository => {
     return {
-        findById: async (id: string) => {
+        findById: async (id) => {
             return mockResult;
         },
         merge: async (product) => {

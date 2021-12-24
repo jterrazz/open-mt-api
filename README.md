@@ -1,4 +1,12 @@
-# My One Wallet - Services - API
+# My Open Market - API
+
+> A marketplace for the people by the people. Open, social and direct.
+
+Find out more about us on [our new MyOpenMarket blog](https://blog.myopen.market/) !
+
+## Get started
+
+- `e`
 
 ---
 

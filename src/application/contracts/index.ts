@@ -3,7 +3,7 @@ import { IDatabase } from '@application/contracts/database';
 import { ILogger } from '@application/contracts/logger';
 import { IPaymentRepository } from '@domain/payment/payment.repository';
 import { IProductRepository } from '@domain/product/product.repository';
-import { IShopRepository } from '@domain/shop/shop.repository';
+import { IShopRepository } from '@domain/shop/shop-repository';
 import { ITracker } from '@application/contracts/tracker';
 import { IUserRepository } from '@domain/user/user.repository';
 

@@ -6,7 +6,7 @@ export const userRepositoryPrismaFactory = (
     database: IDatabase,
 ): IUserRepository => {
     return {
-        async getByHandle(handle: string): Promise<UserEntity> {
+        async getByHandle(handle) {
             return {
                 biography: '',
                 firstName: '',

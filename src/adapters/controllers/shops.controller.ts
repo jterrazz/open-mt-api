@@ -1,7 +1,7 @@
 import { IControllers, IKoaContext } from '@adapters';
 import { IProjectDependencies } from '@application/contracts';
 import { createNewShopFactory } from '@application/use-cases/shops/create-new-shop';
-import ShopEntity from '@domain/shop/shop.entity';
+import ShopEntity from '@domain/shop/shop-entity';
 
 interface INewShopRequest {
     handle: string;

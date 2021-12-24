@@ -9,9 +9,17 @@ beforeAll(() => {
     jest.useFakeTimers().setSystemTime(new Date('2020-01-01').getTime());
 });
 
-describe('end to end - GET /', function () {
-    it('should return API status', function (done) {
-        request(app.callback()).get('/').expect('Content-Type', /json/).expect(
+afterAll(function () {
+    jest.useRealTimers();
+});
+
+describe('END TO END - GET /', function () {
+    test.concurrent('returns the API status', (done) => {
+        // When
+        const ft = request(app.callback()).get('/');
+
+        // Then
+        ft.expect('Content-Type', /json/).expect(
             200,
             {
                 env: 'test',

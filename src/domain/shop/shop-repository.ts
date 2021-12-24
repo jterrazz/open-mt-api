@@ -3,7 +3,7 @@ import {
     IRepositoryMerge,
     IRepositoryPersist,
 } from '@application/contracts';
-import ShopEntity from '@domain/shop/shop.entity';
+import ShopEntity from '@domain/shop/shop-entity';
 
 export interface IShopRepository {
     persist: IRepositoryPersist<ShopEntity>;

@@ -1,5 +1,5 @@
 import { IDatabase } from '@application/contracts';
-import { IShopRepository } from '@domain/shop/shop.repository';
+import { IShopRepository } from '@domain/shop/shop-repository';
 
 export const shopRepositoryPrismaFactory = (
     database: IDatabase,

@@ -3,7 +3,7 @@ import { IProjectDependencies, IWebServer } from '@application/contracts';
 import { apiControllerFactory } from '@adapters/controllers/api.controller';
 import { configurationFactory } from '@configuration/configuration';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
-import { loggerFactory } from '@infrastructure/logger/winston/winston-logger';
+import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';
 import { mixpanelTrackerFactoryStrategy } from '@infrastructure/tracker/tracker-mixpanel';
 import { paymentRepositoryPrismaFactory } from '@infrastructure/repositories/payment-repository-prisma';
 import { prismaDatabaseFactory } from '@infrastructure/orm/prisma/prisma-database';
@@ -19,7 +19,7 @@ export const getProjectDependencies = (): {
     webserver: IWebServer;
 } => {
     const configuration = configurationFactory();
-    const logger = loggerFactory(configuration);
+    const logger = winstonLoggerFactory(configuration);
     const database = prismaDatabaseFactory(configuration, logger);
 
     // Dependencies
