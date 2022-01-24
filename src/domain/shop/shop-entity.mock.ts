@@ -1,3 +1,10 @@
-import ShopEntity from '@domain/shop/shop-entity';
+import { IShopEntity } from '@domain/shop/shop-entity';
 
-export const createMockShopEntity = (): ShopEntity => new ShopEntity();
+export const createMockOfShopEntity = (): IShopEntity => ({
+    bannerImageUrl: '',
+    creationDate: new Date('2020-01-01'),
+    description: '',
+    handle: '',
+    name: '',
+    numberOfFollowers: 42,
+});

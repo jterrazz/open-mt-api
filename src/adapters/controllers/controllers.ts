@@ -13,14 +13,18 @@ export interface IKoaContext<RequestBody, ResponseBody> extends Context {
     body: ResponseBody;
 }
 
+export type IController<RequestBody, ResponseBody> = (
+    ctx: IKoaContext<RequestBody, ResponseBody>,
+) => Promise<void>;
+
 export interface IControllers {
     users: {
-        getPublicProfile: (ctx: IKoaContext<any, any>) => Promise<void>; // TODO To type
+        getPublicProfile: IController<any, any>;
     };
     api: {
-        getState: (ctx: IKoaContext<any, any>) => Promise<void>; // TODO To type
+        getState: IController<any, any>;
     };
     shops: {
-        createNewShop: (ctx: IKoaContext<any, any>) => Promise<void>; // TODO To type
+        createNewShop: IController<any, any>;
     };
 }

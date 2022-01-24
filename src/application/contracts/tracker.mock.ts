@@ -1,6 +1,6 @@
 import { ITracker } from '.';
 
-export const createMockTracker = (): ITracker => {
+export const createMockOfTracker = (): ITracker => {
     return {
         events: {
             requested: {

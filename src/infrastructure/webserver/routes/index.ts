@@ -1,7 +1,7 @@
 import Router from 'koa-router';
 
 import { Context } from 'koa';
-import { IControllers } from '@adapters';
+import { IControllers } from '@adapters/controllers/controllers';
 import { paymentsRouter } from './payments';
 import { userRouter } from './user';
 import { usersRouter } from './users';
@@ -17,7 +17,7 @@ export const routerFactory = (controllers: IControllers): Router => {
     );
     router.use('/user', userRouter.routes(), userRouter.allowedMethods());
     router.use(
-        '/users/:userId',
+        '/user/:userId',
         usersRouter.routes(),
         usersRouter.allowedMethods(),
     );

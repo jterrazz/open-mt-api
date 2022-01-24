@@ -15,7 +15,7 @@ export * from './strategy';
 export * from './tracker';
 export * from './web-server';
 
-export interface IProjectDependencies {
+export interface IDependencies {
     configuration: IConfiguration;
     logger: ILogger;
     trackerFactory: () => ITracker;

@@ -8,9 +8,11 @@ const userPropertySchemas = {
 const userSchema = z.object(userPropertySchemas);
 
 export const serializeUserHandle = (handle: string): string => {
+    // deserializeCreateShopRequest
     return userPropertySchemas.handle.parse(handle);
 };
 
 export const serializeUser = (rawUser: unknown) => {
+    // deserializeCreateShopRequest
     return userSchema.parse(rawUser);
 };

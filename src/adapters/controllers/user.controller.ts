@@ -1,10 +1,10 @@
-import { IControllers, IKoaContext } from '@adapters';
-import { IProjectDependencies } from '@application/contracts';
-import { getUserPublicProfileFactory } from '@application/use-cases/users/get-user-public-profile';
-import { serializeUserHandle } from '@adapters/serializers/users';
+import { IControllers, IKoaContext } from '@adapters/controllers/controllers';
+import { IDependencies } from '@application/contracts';
+import { getUserPublicProfileFactory } from '@application/use-cases/user/get-user-public-profile';
+import { serializeUserHandle } from '@adapters/serializers/user-serializer';
 
-export const usersControllerFactory = (
-    dependencies: IProjectDependencies,
+export const userControllerFactory = (
+    dependencies: IDependencies,
 ): IControllers['users'] => {
     const getPublicProfile = async (ctx: IKoaContext<any, any>) => {
         // TODO replace any

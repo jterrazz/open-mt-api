@@ -1,7 +1,7 @@
 import { ProductEntity } from '@domain/product/product.entity';
-import { createMockProjectDependencies } from '@configuration/project-dependencies.mock';
-import { createMockTracker } from '@application/contracts/tracker.mock';
-import { createNewProductFactory } from '@application/use-cases/products/create-new-product';
+import { createMockOfDependencies } from '@configuration/dependencies.mock';
+import { createMockOfTracker } from '@application/contracts/tracker.mock';
+import { createNewProductFactory } from '@application/use-cases/product/create-product';
 
 describe('use-case - create new product', function () {
     it('should create a new product for a given user', async function () {
@@ -15,8 +15,8 @@ describe('use-case - create new product', function () {
             },
         };
         const createNewProduct = createNewProductFactory(
-            createMockProjectDependencies().dependencies,
-            createMockTracker(),
+            createMockOfDependencies(),
+            createMockOfTracker(),
         );
 
         // When

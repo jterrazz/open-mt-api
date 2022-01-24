@@ -1,3 +1,4 @@
+import { IDatabase } from '@application/contracts';
 import { IProductRepository } from '@domain/product/product.repository';
 import { ProductEntity } from '@domain/product/product.entity';
 
@@ -10,7 +11,9 @@ const mockResult: ProductEntity = {
     },
 };
 
-export const productRepositoryPrisma = (): IProductRepository => {
+export const productRepositoryPrisma = (
+    database: IDatabase,
+): IProductRepository => {
     return {
         findById: async (id) => {
             return mockResult;

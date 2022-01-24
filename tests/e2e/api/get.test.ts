@@ -1,9 +1,9 @@
-import { getProjectDependencies } from '~/configuration/project-dependencies';
+import { getDependencies } from '@configuration/dependencies';
 import request from 'supertest';
 
 const {
     webserver: { app },
-} = getProjectDependencies();
+} = getDependencies();
 
 beforeAll(() => {
     jest.useFakeTimers().setSystemTime(new Date('2020-01-01').getTime());

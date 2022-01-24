@@ -1,23 +1,22 @@
-import { IControllers } from '@adapters';
-import { IProjectDependencies, IWebServer } from '@application/contracts';
+import { IControllers } from '@adapters/controllers/controllers';
+import { IDependencies, IWebServer } from '@application/contracts';
 import { apiControllerFactory } from '@adapters/controllers/api.controller';
 import { configurationFactory } from '@configuration/configuration';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
-import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';
 import { mixpanelTrackerFactoryStrategy } from '@infrastructure/tracker/tracker-mixpanel';
 import { paymentRepositoryPrismaFactory } from '@infrastructure/repositories/payment-repository-prisma';
 import { prismaDatabaseFactory } from '@infrastructure/orm/prisma/prisma-database';
 import { productRepositoryPrisma } from '@infrastructure/repositories/product-repository-prisma';
+import { shopControllerFactory } from '@adapters/controllers/shop.controller';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop-repository-prisma';
-import { shopsControllerFactory } from '@adapters/controllers/shops.controller';
 import { trackerInMemoryFactory } from '@infrastructure/tracker/tracker-in-memory';
+import { userControllerFactory } from '@adapters/controllers/user.controller';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user-repository-prisma';
-import { usersControllerFactory } from '@adapters/controllers/users.controller';
+import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';
 
-export const getProjectDependencies = (): {
-    dependencies: IProjectDependencies;
+export const getDependencies = (): {
     webserver: IWebServer;
-} => {
+} & IDependencies => {
     const configuration = configurationFactory();
     const logger = winstonLoggerFactory(configuration);
     const database = prismaDatabaseFactory(configuration, logger);
@@ -33,13 +32,13 @@ export const getProjectDependencies = (): {
         throw new Error('a tracker dependency was not found');
     }
 
-    const dependencies: IProjectDependencies = {
+    const dependencies: IDependencies = {
         configuration,
         database,
         logger,
         repositories: {
             paymentRepository: paymentRepositoryPrismaFactory(database),
-            productRepository: productRepositoryPrisma(),
+            productRepository: productRepositoryPrisma(database),
             shopRepository: shopRepositoryPrismaFactory(database),
             userRepository: userRepositoryPrismaFactory(database),
         },
@@ -50,13 +49,13 @@ export const getProjectDependencies = (): {
 
     const controllers: IControllers = {
         api: apiControllerFactory(dependencies),
-        shops: shopsControllerFactory(dependencies),
-        users: usersControllerFactory(dependencies),
+        shops: shopControllerFactory(dependencies),
+        users: userControllerFactory(dependencies),
     };
 
     // Web server
 
     const webserver = koaServerFactory(dependencies, controllers);
 
-    return { dependencies, webserver };
+    return { ...dependencies, webserver };
 };

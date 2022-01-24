@@ -1,7 +1,7 @@
-import { createMockShopEntity } from '@domain/shop/shop-entity.mock';
+import { createMockOfShopEntity } from '@domain/shop/shop-entity.mock';
 
-export const createMockShopRepository = () => ({
-    findByHandle: jest.fn().mockResolvedValue(createMockShopEntity()),
-    merge: jest.fn().mockResolvedValue(createMockShopEntity()),
-    persist: jest.fn().mockResolvedValue(createMockShopEntity()),
+export const createMockOfShopRepository = () => ({
+    findByHandle: jest.fn().mockResolvedValue(createMockOfShopEntity()),
+    merge: jest.fn().mockResolvedValue(createMockOfShopEntity()),
+    persist: jest.fn().mockResolvedValue(createMockOfShopEntity()),
 });

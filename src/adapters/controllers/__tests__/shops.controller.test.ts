@@ -1,26 +1,27 @@
-import { createMockProjectDependencies } from '@configuration/project-dependencies.mock';
-import { createMockShopRepository } from '@domain/shop/shop-repository.mock';
-import { createNewShopFactory } from '@application/use-cases/shops/create-new-shop';
+import { createMockOfDependencies } from '@configuration/dependencies.mock';
+import { createMockOfShopRepository } from '@domain/shop/shop-repository.mock';
+import { createShopFactory } from '@application/use-cases/shop/create-shop';
 
-describe('shops controller', function () {
+describe('shop controller', function () {
     describe('createNewShop()', function () {
         test.concurrent('creates a new shop', async () => {
             // Given
-            const mockShopRepository = createMockShopRepository();
+            const mockShopRepository = createMockOfShopRepository();
             const givenParams = {
+                handle: '',
                 name: 'name',
             };
             const expectedResult = {
-                adminId: '',
-                bannerImageUrl: '',
-                description: '',
+                bannerImageUrl: undefined,
+                description: undefined,
+                handle: '',
                 name: 'name',
                 numberOfFollowers: 42,
             };
             mockShopRepository.persist.mockResolvedValue(expectedResult);
 
             // When
-            const createNewShop = createNewShopFactory(mockShopRepository);
+            const createNewShop = createShopFactory(mockShopRepository);
             const result = await createNewShop(givenParams);
 
             // Then

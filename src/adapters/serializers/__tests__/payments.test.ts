@@ -1,4 +1,4 @@
-import { serializeNewPayment } from '@adapters/serializers/payments';
+import { deserializeNewPayment } from '@adapters/serializers/payment-serializer';
 
 describe('serializeNewPayment()', function () {
     it('should serialize a payment', function () {

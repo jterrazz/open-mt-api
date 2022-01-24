@@ -1,7 +1,7 @@
-import { IProjectDependencies, ITracker } from '@application/contracts';
+import { IDependencies, ITracker } from '@application/contracts';
 
 export const getApiStateFactory = (
-    { configuration }: IProjectDependencies,
+    { configuration }: IDependencies,
     tracker: ITracker,
 ) => {
     return () => {
