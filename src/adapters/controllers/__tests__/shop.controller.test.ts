@@ -1,10 +1,19 @@
-import { createMockOfDependencies } from '@configuration/dependencies.mock';
+import { after, before } from 'lodash';
 import { createMockOfShopRepository } from '@domain/shop/shop-repository.mock';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
+import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+
+beforeAll(() => {
+    useFakeTimers();
+});
+
+afterAll(() => {
+    useRealTimers();
+});
 
 describe('shop controller', function () {
-    describe('createNewShop()', function () {
-        test.concurrent('creates a new shop', async () => {
+    describe('createShop()', function () {
+        test('create shop and send back public properties', async () => {
             // Given
             const mockShopRepository = createMockOfShopRepository();
             const givenParams = {
@@ -13,12 +22,12 @@ describe('shop controller', function () {
             };
             const expectedResult = {
                 bannerImageUrl: undefined,
+                creationDate: new Date(),
                 description: undefined,
                 handle: '',
                 name: 'name',
                 numberOfFollowers: 42,
             };
-            mockShopRepository.persist.mockResolvedValue(expectedResult);
 
             // When
             const createNewShop = createShopFactory(mockShopRepository);

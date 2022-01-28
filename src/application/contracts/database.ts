@@ -1,5 +1,7 @@
+import { PrismaClient } from '@prisma/client';
+
 export interface IDatabase {
-    client: any; // TODO How to pass client as dependency without using prisma ...
+    client: PrismaClient;
     connect: () => Promise<void>;
     disconnect: () => Promise<void>;
 }

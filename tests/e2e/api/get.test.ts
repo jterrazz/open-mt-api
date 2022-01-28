@@ -1,33 +1,31 @@
-import { getDependencies } from '@configuration/dependencies';
+import { createEndToEndApplication } from '../e2e-application.mock';
+import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
 import request from 'supertest';
 
-const {
-    webserver: { app },
-} = getDependencies();
+let app;
 
-beforeAll(() => {
-    jest.useFakeTimers().setSystemTime(new Date('2020-01-01').getTime());
+beforeAll(async () => {
+    app = await createEndToEndApplication();
+    useFakeTimers();
 });
 
 afterAll(function () {
-    jest.useRealTimers();
+    useRealTimers();
 });
 
-describe('END TO END - GET /', function () {
-    test.concurrent('returns the API status', (done) => {
+describe('END TO END - GET /api', function () {
+    test('returns the API status', async () => {
         // When
-        const ft = request(app.callback()).get('/');
+        const response = await request(app.callback()).get('/');
 
         // Then
-        ft.expect('Content-Type', /json/).expect(
-            200,
-            {
-                env: 'test',
-                state: 'OK',
-                time: '2020-01-01T00:00:00.000Z',
-                version: '1.0.0',
-            },
-            done,
-        );
+        expect(response.status).toEqual(200);
+        expect(response.body).toEqual({
+            env: 'test',
+            state: 'OK',
+            time: '2020-01-01T00:00:00.000Z',
+            version: '1.0.0',
+        });
+        expect(response.headers['content-type']).toContain('json');
     });
 });

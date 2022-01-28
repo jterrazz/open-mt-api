@@ -3,10 +3,10 @@ import {
     IRepositoryMerge,
     IRepositoryPersist,
 } from '@application/contracts';
-import ShopEntity from '@domain/shop/shop-entity';
+import { IShopEntity } from '@domain/shop/shop-entity';
 
 export interface IShopRepository {
-    persist: IRepositoryPersist<ShopEntity>;
-    findByHandle: IRepositoryFindByHandle<ShopEntity>;
-    merge: IRepositoryMerge<ShopEntity>;
+    persist: IRepositoryPersist<IShopEntity>;
+    findByHandle: IRepositoryFindByHandle<IShopEntity>;
+    merge: IRepositoryMerge<IShopEntity>;
 }

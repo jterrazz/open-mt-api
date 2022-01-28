@@ -1,24 +1,33 @@
 version: "3.9"
 services:
-    database_postgres:
-        container_name: database_postgres
-        image: postgres:12-alpine
+    postgres:
+        image: postgres:13-alpine
         restart: always
+#        network_mode: host
         ports:
-            - "5432:5432"
+            - '5432:5432'
         environment:
-            POSTGRES_DB: db_myonewallet
+            POSTGRES_DB: myopenmarket
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
-    app:
-        container_name: app
+
+    migration:
         build: .
-        links:
-            - database_postgres
-        command: sh -c "yarn test"
-        ports:
-            - "3000:3000"
+        command: sh -c "yarn db:migrate-deploy && tail -f /dev/null"
+#        network_mode: host
+#        depends_on:
+#            - postgres
         environment:
-            PORT: 3000
+            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?schema=myopenmarket
+
+    tests:
+        build: .
+#        network_mode: host
+        depends_on:
+            - migration
+            - postgres
+        command: sh -c "yarn test"
+        environment:
+            PORT: 9099
             DATABASE_HOST: database_postgres
             DATABASE_PORT: 5432

@@ -21,3 +21,10 @@ model User {
     lastName    String?
     profile  Profile?
 }
+
+model Shop {
+    id              Int      @id @default(autoincrement())
+    handle          String   @unique
+    name            String
+    description     String?
+}

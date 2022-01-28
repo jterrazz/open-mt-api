@@ -10,8 +10,9 @@ type CreateShopParams = {
 
 export const createShopFactory = (shopRepository: IShopRepository) => {
     return async (createShopParams: CreateShopParams): Promise<IShopEntity> => {
-        const newShop = {
+        const newShop: IShopEntity = {
             bannerImageUrl: createShopParams.bannerImageUrl,
+            creationDate: new Date(),
             description: createShopParams.description,
             handle: createShopParams.handle,
             name: createShopParams.name,
