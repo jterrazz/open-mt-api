@@ -1,16 +1,19 @@
-import { createEndToEndApplication } from '@tests/e2e/e2e-application.mock';
+import {
+    EndToEndApplication,
+    createEndToEndApplication,
+} from '@tests/e2e/e2e-application.mock';
 import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
-import exp from 'constants';
 import request from 'supertest';
 
-let app;
+let endToEndApplication: EndToEndApplication | undefined;
 
 beforeAll(async () => {
-    app = await createEndToEndApplication();
+    endToEndApplication = await createEndToEndApplication();
     useFakeTimers();
 });
 
-afterAll(function () {
+afterAll(async () => {
+    await endToEndApplication?.destroy();
     useRealTimers();
 });
 
@@ -23,7 +26,9 @@ describe('END TO END - POST /shops.ts', function () {
         };
 
         // When
-        const response = await request(app.callback())
+        const response = await request(
+            endToEndApplication?.webServerApplication.callback(),
+        )
             .post('/shops')
             .send(params);
 

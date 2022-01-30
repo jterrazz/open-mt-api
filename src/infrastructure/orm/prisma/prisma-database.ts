@@ -8,7 +8,27 @@ export const prismaDatabaseFactory = (
     // Passing database URL to prisma
     process.env['DATABASE_URL'] = URL;
 
-    const prismaClient = new PrismaClient();
+    // TODO TO check logs levels
+    const prismaClient = new PrismaClient({
+        log: [
+            {
+                emit: 'stdout',
+                level: 'query',
+            },
+            {
+                emit: 'stdout',
+                level: 'error',
+            },
+            {
+                emit: 'stdout',
+                level: 'info',
+            },
+            {
+                emit: 'stdout',
+                level: 'warn',
+            },
+        ],
+    });
 
     return {
         client: prismaClient,

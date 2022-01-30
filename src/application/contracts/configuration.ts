@@ -21,6 +21,7 @@ export const logConfigSchema = z.object({
 // DATABASE
 
 export const databaseConfigSchema = z.object({
+    GENERATED_DATABASE: z.string().optional(),
     URL: z.string(),
 });
 

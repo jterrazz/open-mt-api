@@ -12,7 +12,20 @@ export const shopRepositoryPrismaFactory = (
             return entity;
         },
         persist: async (entity) => {
-            return entity;
+            const persistedShop = await database.client.shop.create({
+                data: {
+                    description: entity.description,
+                    handle: entity.handle,
+                    name: entity.name,
+                },
+            });
+
+            return {
+                creationDate: new Date(),
+                handle: persistedShop.handle,
+                name: persistedShop.name,
+                numberOfFollowers: 0,
+            };
         },
     };
 };
