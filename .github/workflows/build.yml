@@ -7,16 +7,14 @@ jobs:
         runs-on: ubuntu-latest
         services:
             postgres:
-                image: postgres:12
+                image: postgres:13
                 env:
                     POSTGRES_USER: postgres
                     POSTGRES_PASSWORD: postgres
-                    POSTGRES_DB: db_myonewallet
+                    POSTGRES_DB: myopenmarket
                 ports:
                     - 5432/tcp
                 options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-                volumes:
-                    - ./scripts/postgres:/docker-entrypoint-initdb.d
 
         steps:
             - uses: actions/checkout@v2

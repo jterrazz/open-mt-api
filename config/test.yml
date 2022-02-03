@@ -5,4 +5,4 @@ LOG:
     LEVEL: 'error'
 
 DATABASE:
-    URL: 'postgresql://postgres:postgres@localhost:5432/myopenmarket?schema=myopenmarket'
+    URL: 'postgresql://postgres:postgres@postgres:5432/myopenmarket?schema=myopenmarket'
