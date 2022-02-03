@@ -8,8 +8,15 @@ type CreateShopParams = {
     bannerImageUrl?: string;
 };
 
+export type CreateShopResult = {
+    handle: string;
+    name: string;
+};
+
 export const createShopFactory = (shopRepository: IShopRepository) => {
-    return async (createShopParams: CreateShopParams): Promise<IShopEntity> => {
+    return async (
+        createShopParams: CreateShopParams,
+    ): Promise<CreateShopResult> => {
         const newShop: IShopEntity = {
             bannerImageUrl: createShopParams.bannerImageUrl,
             creationDate: new Date(),
@@ -19,6 +26,11 @@ export const createShopFactory = (shopRepository: IShopRepository) => {
             numberOfFollowers: 42,
         };
 
-        return shopRepository.persist(newShop);
+        const persistedShop = await shopRepository.persist(newShop);
+
+        return {
+            handle: persistedShop.handle,
+            name: persistedShop.name,
+        };
     };
 };

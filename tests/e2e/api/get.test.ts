@@ -1,22 +1,28 @@
-import { createEndToEndApplication } from '../e2e-application.mock';
+import {
+    EndToEndApplication,
+    createEndToEndApplication,
+} from '../end-to-end-application';
 import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
 import request from 'supertest';
 
-let app;
+let endToEndApplication: EndToEndApplication;
 
 beforeAll(async () => {
-    app = await createEndToEndApplication();
+    endToEndApplication = await createEndToEndApplication();
     useFakeTimers();
 });
 
-afterAll(function () {
+afterAll(async function () {
+    await endToEndApplication.destroy();
     useRealTimers();
 });
 
 describe('END TO END - GET /api', function () {
     test('returns the API status', async () => {
         // When
-        const response = await request(app.callback()).get('/');
+        const response = await request(
+            endToEndApplication.webServerApplication.callback(),
+        ).get('/');
 
         // Then
         expect(response.status).toEqual(200);

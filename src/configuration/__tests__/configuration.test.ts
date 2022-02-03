@@ -25,7 +25,7 @@ describe('configuration', function () {
         expect(configuration.DATABASE.GENERATED_DATABASE).toBeDefined();
         expect(configuration.DATABASE.URL).toMatch(
             new RegExp(
-                'postgresql:\\/\\/postgres:postgres@localhost:5432\\/[a-z0-9]{5}\\?schema=myopenmarket',
+                'postgresql:\\/\\/postgres:postgres@localhost:5432\\/[a-z0-9]{5}\\?schema=[a-z0-9]{5}',
             ),
         );
     });

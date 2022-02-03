@@ -1,6 +1,16 @@
+import { after } from 'lodash';
 import { createMockOfShopEntity } from '@domain/shop/shop-entity.mock';
 import { createMockOfShopRepository } from '@domain/shop/shop-repository.mock';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
+import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+
+beforeAll(() => {
+    useFakeTimers();
+});
+
+afterAll(() => {
+    useRealTimers();
+});
 
 describe('use-case - createShop()', function () {
     const mockOfANewShop = {
@@ -8,19 +18,23 @@ describe('use-case - createShop()', function () {
         name: 'the-shop-name',
     };
 
-    test.concurrent(
-        'save a shop and return its public properties',
-        async () => {
-            // When
-            const createShop = createShopFactory(createMockOfShopRepository());
-            const result = await createShop(mockOfANewShop);
+    test('save a shop and return its public properties', async () => {
+        // When
+        const createShop = createShopFactory(createMockOfShopRepository());
+        const result = await createShop(mockOfANewShop);
 
-            // Then
-            expect(result).toEqual(createMockOfShopEntity());
-        },
-    );
+        // Then
+        expect(result).toEqual({
+            bannerImageUrl: undefined,
+            creationDate: new Date(),
+            description: undefined,
+            handle: 'the-shop-handle',
+            name: 'the-shop-name',
+            numberOfFollowers: 42,
+        });
+    });
 
-    test.concurrent('doesnt save a shop if it cant save it', async () => {
+    test('doesnt save a shop if it cant save it', async () => {
         // Given
         const shopRepository = createMockOfShopRepository();
 

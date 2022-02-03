@@ -1,18 +1,19 @@
-import * as pgtools from 'pgtools';
 import * as util from 'util';
 import { IDatabase } from '@application/contracts';
 import { exec } from 'child_process';
+import pgtools from 'pgtools';
 
 const execAsync = util.promisify(exec);
 
 export async function createDatabase(connectionString: string, name: string) {
     return new Promise<void>((resolve, reject) => {
-        pgtools.createdb(connectionString, name, async function (err, res) {
+        console.debug(`creating new database ${name} - ${connectionString}`);
+
+        pgtools.createdb(connectionString, name, function (err, res) {
             if (err) {
                 reject(err);
             }
 
-            console.log('created new database');
             resolve();
         });
     });
@@ -20,6 +21,8 @@ export async function createDatabase(connectionString: string, name: string) {
 
 export async function dropDatabase(connectionString: string, name: string) {
     return new Promise<void>((resolve, reject) => {
+        console.debug(`dropping database ${name} - ${connectionString}`);
+
         pgtools.dropdb(connectionString, name, async function (err, res) {
             if (err) {
                 console.log(err);

@@ -38,11 +38,6 @@ export const configurationFactory = (): IConfiguration => {
         .filter((strategy) => strategy.isApplicable(ENVIRONMENT))
         .map((strategy) => strategy());
 
-    console.log('DATABASE');
-    console.log('DATABASE');
-    console.log('DATABASE');
-    console.log(DATABASE);
-
     return {
         API,
         DATABASE,
