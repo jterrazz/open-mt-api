@@ -1,8 +1,8 @@
-import { IDatabase } from '@application/contracts';
+import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
 import type { Shop } from '@prisma/client';
 
 export const createSeedOfShop = async (
-    database: IDatabase,
+    database: IPrismaDatabase,
     partialShopInformation: Partial<Shop> = {},
 ) => {
     const newShopInformation = {

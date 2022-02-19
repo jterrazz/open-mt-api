@@ -25,6 +25,7 @@ export interface IControllers {
         getState: IController<any, any>;
     };
     shops: {
-        createNewShop: IController<any, any>;
+        createShop: IController<any, any>;
+        getShop: IController<any, any>;
     };
 }

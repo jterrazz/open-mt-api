@@ -20,9 +20,9 @@ afterAll(async function () {
 describe('END TO END - GET /api', function () {
     test('returns the API status', async () => {
         // When
-        const response = await request(
-            endToEndApplication.webServerApplication.callback(),
-        ).get('/');
+        const response = await request(endToEndApplication.app.callback()).get(
+            '/',
+        );
 
         // Then
         expect(response.status).toEqual(200);

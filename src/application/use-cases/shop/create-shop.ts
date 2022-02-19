@@ -18,9 +18,9 @@ export const createShopFactory = (shopRepository: IShopRepository) => {
         createShopParams: CreateShopParams,
     ): Promise<CreateShopResult> => {
         const newShop: IShopEntity = {
-            bannerImageUrl: createShopParams.bannerImageUrl,
+            bannerImageUrl: createShopParams.bannerImageUrl || null,
             creationDate: new Date(),
-            description: createShopParams.description,
+            description: createShopParams.description || null,
             handle: createShopParams.handle,
             name: createShopParams.name,
             numberOfFollowers: 42,

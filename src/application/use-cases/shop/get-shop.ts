@@ -2,7 +2,7 @@ import { IShopRepository } from '@domain/shop/shop-repository';
 
 export type GetShopResult = {
     handle: string;
-    description: string | undefined;
+    description: string | null;
     name: string;
 };
 

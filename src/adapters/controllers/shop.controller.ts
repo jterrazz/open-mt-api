@@ -6,6 +6,7 @@ import {
 import { IController } from '@adapters/controllers/controllers';
 import { IDependencies } from '@application/contracts';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
+import { getShopFactory } from '@application/use-cases/shop/get-shop';
 
 export const shopControllerFactory = (dependencies: IDependencies) => {
     const createShop: IController<
@@ -28,5 +29,21 @@ export const shopControllerFactory = (dependencies: IDependencies) => {
         };
     };
 
-    return { createNewShop: createShop };
+    // Fixme
+    const getShop: IController<any, any> = async (ctx) => {
+        const getShop = getShopFactory(
+            dependencies.repositories.shopRepository,
+        );
+
+        const shopHandle = ctx.params.shopHandle;
+        const shopEntity = await getShop(shopHandle);
+
+        ctx.body = {
+            description: shopEntity.description,
+            handle: shopEntity.handle,
+            name: shopEntity.name,
+        };
+    };
+
+    return { createShop, getShop };
 };

@@ -5,4 +5,4 @@ API:
     PORT: '3000'
 
 DATABASE:
-    URL: 'postgresql://postgres:postgres@localhost:9000/db_myopenmarket?schema=public'
+    URL: 'postgresql://postgres:postgres@127.0.0.1:5432/myopenmarket?pool_timeout=30&connect_timeout=30'

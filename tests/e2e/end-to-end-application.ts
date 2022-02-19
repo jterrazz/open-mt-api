@@ -1,9 +1,10 @@
-import { IDatabase, IWebServer } from '@application/contracts';
+import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
+import { IWebServer } from '@application/contracts';
 import { getDependencies } from '@configuration/dependencies';
 
 export type EndToEndApplication = {
-    webServerApplication: IWebServer['app'];
-    database: IDatabase;
+    app: IWebServer['app'];
+    database: IPrismaDatabase;
 };
 
 export const createEndToEndApplication = (): EndToEndApplication => {
@@ -12,7 +13,7 @@ export const createEndToEndApplication = (): EndToEndApplication => {
     const { database, webserver } = getDependencies();
 
     return {
-        database,
-        webServerApplication: webserver.app,
+        app: webserver.app,
+        database: database as IPrismaDatabase,
     };
 };
