@@ -16,13 +16,13 @@ services:
         build: .
         command: sh -c "yarn db:migrate-deploy"
         environment:
-            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?pool_timeout=80&connect_timeout=80
+            DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
 
     tests:
         build: .
         command: sh -c "yarn db:migrate-deploy && yarn test"
         environment:
-            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?pool_timeout=80&connect_timeout=80
+            DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
         volumes:
             - ./src:/app/src
             - ./tests:/app/tests
