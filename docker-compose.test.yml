@@ -10,21 +10,19 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_PASSWORD: postgres
         volumes:
-            - ./scripts/postgres:/docker-entrypoint-initdb.d
+            - ./compose/postgres:/docker-entrypoint-initdb.d
 
     migration:
         build: .
         command: sh -c "yarn db:migrate-deploy"
         environment:
-            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?schema=myopenmarket
+            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?pool_timeout=30&connect_timeout=30
 
     tests:
         build: .
-        depends_on:
-            - migration
-            - postgres
-        command: sh -c "yarn test"
+        command: sh -c "yarn db:migrate-deploy && yarn test"
         environment:
-            PORT: 9099
-            DATABASE_HOST: database_postgres
-            DATABASE_PORT: 5432
+            DATABASE_URL: postgresql://postgres:postgres@host.docker.internal:5432/myopenmarket?pool_timeout=30&connect_timeout=30
+        volumes:
+            - ./src:/app/src
+            - ./tests:/app/tests

@@ -20,17 +20,22 @@ describe('use-case - createShop()', function () {
 
     test('save a shop and return its public properties', async () => {
         // When
-        const createShop = createShopFactory(createMockOfShopRepository());
+        const mockOfShopRepository = createMockOfShopRepository();
+        const createShop = createShopFactory(mockOfShopRepository);
         const result = await createShop(mockOfANewShop);
 
         // Then
-        expect(result).toEqual({
+        expect(mockOfShopRepository.persist).toHaveBeenCalledWith({
             bannerImageUrl: undefined,
             creationDate: new Date(),
             description: undefined,
             handle: 'the-shop-handle',
             name: 'the-shop-name',
             numberOfFollowers: 42,
+        });
+        expect(result).toEqual({
+            handle: 'the-shop-handle',
+            name: 'the-shop-name',
         });
     });
 

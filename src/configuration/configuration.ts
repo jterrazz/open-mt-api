@@ -5,38 +5,16 @@ import {
     databaseConfigSchema,
     environmentSchema,
     logConfigSchema,
-} from '@application/contracts/configuration';
-import config from 'config'; // .yml configuration
-const pgConnectionString = require('pg-connection-string');
+} from '@application/contracts/configuration'; // .yml configuration
+import config from 'config';
 
-const replaceConnectionStringWithRandomDatabaseFactory = (databaseSettings) => {
-    const strategy = () => {
-        databaseSettings.GENERATED_DATABASE = Math.random()
-            .toString(36)
-            .substr(2, 5);
-
-        const { user, password, port, host } = pgConnectionString.parse(
-            databaseSettings.URL,
-        );
-
-        databaseSettings.URL = `postgresql://${user}:${password}@${host}:${port}/${databaseSettings.GENERATED_DATABASE}?schema=${databaseSettings.GENERATED_DATABASE}`;
-    };
-
-    strategy.isApplicable = (environment: IConfiguration['ENVIRONMENT']) =>
-        ['test'].includes(environment);
-
-    return strategy;
-};
-
-export const configurationFactory = (): IConfiguration => {
-    const ENVIRONMENT = environmentSchema.parse(process.env.NODE_ENV);
+export const configurationFactory = (
+    nodeEnv = process.env.NODE_ENV,
+): IConfiguration => {
+    const ENVIRONMENT = environmentSchema.parse(nodeEnv);
     const API = apiConfigSchema.parse(config.get('API'));
     const LOG = logConfigSchema.parse(config.get('LOG'));
     const DATABASE = databaseConfigSchema.parse(config.get('DATABASE'));
-
-    [replaceConnectionStringWithRandomDatabaseFactory(DATABASE)]
-        .filter((strategy) => strategy.isApplicable(ENVIRONMENT))
-        .map((strategy) => strategy());
 
     return {
         API,

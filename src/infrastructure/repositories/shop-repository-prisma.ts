@@ -1,8 +1,8 @@
-import { IDatabase } from '@application/contracts';
 import { IShopRepository } from '@domain/shop/shop-repository';
+import { PrismaClient } from '@prisma/client';
 
 export const shopRepositoryPrismaFactory = (
-    database: IDatabase,
+    prismaClient: PrismaClient,
 ): IShopRepository => {
     return {
         findByHandle: async (handle) => {
@@ -12,7 +12,7 @@ export const shopRepositoryPrismaFactory = (
             return entity;
         },
         persist: async (entity) => {
-            const persistedShop = await database.client.shop.create({
+            const persistedShop = await prismaClient.shop.create({
                 data: {
                     description: entity.description,
                     handle: entity.handle,

@@ -19,7 +19,11 @@ export const getDependencies = (): {
 } & IDependencies => {
     const configuration = configurationFactory();
     const logger = winstonLoggerFactory(configuration);
-    const database = prismaDatabaseFactory(configuration, logger);
+
+    // Recreating this object would result in failure due to multiple Prisma clients
+    const prismaDatabase =
+        global.prismaDatabase || prismaDatabaseFactory(configuration, logger);
+    global.prismaDatabase = prismaDatabase;
 
     // Dependencies
 
@@ -34,13 +38,15 @@ export const getDependencies = (): {
 
     const dependencies: IDependencies = {
         configuration,
-        database,
+        database: prismaDatabase,
         logger,
         repositories: {
-            paymentRepository: paymentRepositoryPrismaFactory(database),
-            productRepository: productRepositoryPrisma(database),
-            shopRepository: shopRepositoryPrismaFactory(database),
-            userRepository: userRepositoryPrismaFactory(database),
+            paymentRepository: paymentRepositoryPrismaFactory(
+                prismaDatabase.client,
+            ),
+            productRepository: productRepositoryPrisma(prismaDatabase.client),
+            shopRepository: shopRepositoryPrismaFactory(prismaDatabase.client),
+            userRepository: userRepositoryPrismaFactory(prismaDatabase.client),
         },
         trackerFactory,
     };

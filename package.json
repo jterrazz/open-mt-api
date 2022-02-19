@@ -10,18 +10,17 @@
     "scripts": {
         "start": "node -r tsconfig-paths/register -r ts-node/register ./src/app.ts",
         "dev": "nodemon",
-        "dev:docker-up": "docker-compose -f docker-compose.dev.yml up -d postgres migration",
-        "dev:docker-down": "docker-compose -f docker-compose.dev.yml down",
         "test": "NODE_ENV=test jest --silent",
         "test:debug": "NODE_ENV=test jest --runInBand --detectOpenHandles",
         "test:coverage": "jest --coverage",
-        "test:docker": "docker-compose -f docker-compose.test.yml up --exit-code-from app",
+        "test:docker": "docker-compose -f docker-compose.test.yml up postgres tests --exit-code-from tests",
         "test:docker-up": "docker-compose -f docker-compose.test.yml up -d postgres migration",
         "test:docker-down": "docker-compose -f docker-compose.test.yml down",
+        "test:docker-tests": "docker-compose -f docker-compose.test.yml up tests",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
         "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
         "db:migrate": "npx prisma migrate dev --name",
-        "db:migrate-deploy": "npx prisma migrate deploy --preview-feature",
+        "db:migrate-deploy": "npx prisma migrate deploy",
         "db:revert": "#todo"
     },
     "devDependencies": {
@@ -47,12 +46,13 @@
         "pg-connection-string": "^2.5.0",
         "pgtools": "^0.3.2",
         "prettier": "^2.4.1",
-        "prisma": "^3.9.1",
+        "prisma": "^3.9.2",
+        "shelljs": "^0.8.5",
         "supertest": "^6.1.6",
         "ts-jest": "^27.0.7"
     },
     "dependencies": {
-        "@prisma/client": "^3.9.1",
+        "@prisma/client": "^3.9.2",
         "config": "^3.3.6",
         "dotenv": "^10.0.0",
         "http-status-codes": "^2.1.4",

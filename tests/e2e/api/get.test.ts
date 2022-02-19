@@ -10,10 +10,10 @@ let endToEndApplication: EndToEndApplication;
 beforeAll(async () => {
     endToEndApplication = await createEndToEndApplication();
     useFakeTimers();
-});
+}, 600000);
 
 afterAll(async function () {
-    await endToEndApplication.destroy();
+    // await endToEndApplication.destroy();
     useRealTimers();
 });
 
@@ -29,7 +29,7 @@ describe('END TO END - GET /api', function () {
         expect(response.body).toEqual({
             env: 'test',
             state: 'OK',
-            time: '2020-01-01T00:00:00.000Z',
+            time: '2000-01-01T00:00:00.000Z',
             version: '1.0.0',
         });
         expect(response.headers['content-type']).toContain('json');

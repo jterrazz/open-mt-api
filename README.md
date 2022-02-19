@@ -42,6 +42,9 @@ yarn test:debug
 
 Tests running in `test` environments will create a random postgres database, migrated to the latest schema. This allows for real testing of the flow.
 
+
+Integration tests must be tought as global, since multiple tests can run on same database
+
 ---
 ## Architecture
 

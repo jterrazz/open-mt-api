@@ -4,7 +4,7 @@ import { ILogger } from '@application/contracts/logger';
 import { IPaymentRepository } from '@domain/payment/payment.repository';
 import { IProductRepository } from '@domain/product/product.repository';
 import { IShopRepository } from '@domain/shop/shop-repository';
-import { ITracker } from '@application/contracts/tracker';
+import { ITracker, ITrackerFactory } from '@application/contracts/tracker';
 import { IUserRepository } from '@domain/user/user.repository';
 
 export * from './configuration';
@@ -18,7 +18,7 @@ export * from './web-server';
 export interface IDependencies {
     configuration: IConfiguration;
     logger: ILogger;
-    trackerFactory: () => ITracker;
+    trackerFactory: ITrackerFactory;
     database: IDatabase;
     repositories: {
         userRepository: IUserRepository;

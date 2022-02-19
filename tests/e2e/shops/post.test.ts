@@ -6,15 +6,13 @@ import { createSeedOfShop } from '@tests/seeds/shop';
 import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
 import request from 'supertest';
 
-let endToEndApplication: EndToEndApplication;
+const endToEndApplication = createEndToEndApplication();
 
-beforeAll(async () => {
-    endToEndApplication = await createEndToEndApplication();
+beforeAll(() => {
     useFakeTimers();
 });
 
-afterAll(async () => {
-    await endToEndApplication.destroy();
+afterAll(() => {
     useRealTimers();
 });
 

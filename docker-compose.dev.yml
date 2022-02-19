@@ -25,6 +25,5 @@ services:
             - postgres
         command: sh -c "yarn dev"
         environment:
-            PORT: 8080
-            DATABASE_HOST: database_postgres
+            DATABASE_HOST: host.docker.internal
             DATABASE_PORT: 5432
