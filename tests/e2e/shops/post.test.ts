@@ -48,19 +48,21 @@ describe('END TO END - POST /shops.ts', function () {
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
             description: null,
-            handle: 'the-shop-handle',
+            handle: shopSeed.handle,
             name: 'the-shop-name',
         });
     });
 
-    // test('get a missing shop', async () => {
-    //     // Given
-    //
-    //
-    //     // When
-    //
-    //
-    //     // Then
-    //
-    // })
+    test('get a missing shop', async () => {
+        // Given
+        const deadShopHandle = 'the-dead-shop-handle';
+
+        // When
+        const response = await request(app.callback()).get(
+            '/shops/' + deadShopHandle,
+        );
+
+        // Then
+        expect(response.status).toEqual(404);
+    });
 });

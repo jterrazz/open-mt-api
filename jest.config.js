@@ -12,4 +12,5 @@ module.exports = {
         prefix: '<rootDir>/',
     }),
     preset: 'ts-jest',
+    setupFilesAfterEnv: ['<rootDir>/tests/scripts/setup-files-after-env.ts'],
 };

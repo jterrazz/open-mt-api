@@ -1,4 +1,5 @@
 import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
+import { randomUUID } from 'crypto';
 import type { Shop } from '@prisma/client';
 
 export const createSeedOfShop = async (
@@ -6,7 +7,7 @@ export const createSeedOfShop = async (
     partialShopInformation: Partial<Shop> = {},
 ) => {
     const newShopInformation = {
-        handle: 'the-shop-handle',
+        handle: randomUUID(),
         name: 'the-shop-name',
         ...partialShopInformation,
     };

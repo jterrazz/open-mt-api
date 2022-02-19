@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 export enum UnauthorizedErrorName {
     IBAN_DOES_NOT_BELONG_TO_AUTHENTICATED_USER = 'iban_does_not_belong_to_authenticated_user',
 }
-
+// TODO To refacto
 export class UnauthorizedError extends Error {
     public identifier: UnauthorizedErrorName;
     public code: number;

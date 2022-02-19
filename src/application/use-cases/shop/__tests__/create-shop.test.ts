@@ -26,9 +26,9 @@ describe('use-case - createShop()', function () {
 
         // Then
         expect(mockOfShopRepository.persist).toHaveBeenCalledWith({
-            bannerImageUrl: undefined,
+            bannerImageUrl: null,
             creationDate: new Date(),
-            description: undefined,
+            description: null,
             handle: 'the-shop-handle',
             name: 'the-shop-name',
             numberOfFollowers: 42,

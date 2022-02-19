@@ -1,11 +1,11 @@
-import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
-
 import { IControllers } from '@adapters/controllers/controllers';
 import { IDependencies, IWebServer } from '@application/contracts';
 import { authenticationMiddleware } from '@infrastructure/webserver/middlewares/authentication';
+import { errorHandlerMiddleware } from '@infrastructure/webserver/middlewares/error-handler';
 import { routerFactory } from '@infrastructure/webserver/routes';
 import { trackerMiddlewareFactory } from '@infrastructure/webserver/middlewares/tracker';
+import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
 
 export const koaServerFactory = (
     dependencies: IDependencies,
@@ -25,6 +25,7 @@ export const koaServerFactory = (
      */
 
     app.use(bodyParser());
+    app.use(errorHandlerMiddleware);
     app.use(authenticationMiddleware);
     app.use(trackerMiddlewareFactory(dependencies));
 

@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-
+// TODO To refacto
 export class UnprocessableEntityError extends Error {
     public code: number;
 
