@@ -1,14 +1,13 @@
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
 
-import { createMockProjectDependencies } from '@configuration/project-dependencies.mock';
-import { createMockTracker } from '@application/contracts/tracker.mock';
+import { createMockOfDependencies } from '@configuration/dependencies.mock';
+import { createMockOfTracker } from '@application/contracts/tracker.mock';
 
 describe('use-case - get API state', function () {
-    it('should return the API state', function () {
+    test.concurrent('should return the API state', async () => {
         // Given
-        const { dependencies: mockDependencies } =
-            createMockProjectDependencies();
-        const mockTracker = createMockTracker();
+        const mockDependencies = createMockOfDependencies();
+        const mockTracker = createMockOfTracker();
         const getApiState = getApiStateFactory(mockDependencies, mockTracker);
 
         // When

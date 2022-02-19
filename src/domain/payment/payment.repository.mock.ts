@@ -1,6 +1,6 @@
 import { IPaymentRepository } from './payment.repository';
 
-export const createMockPaymentRepository = (): IPaymentRepository => {
+export const createMockOfPaymentRepository = (): IPaymentRepository => {
     return {
         merge: jest.fn(),
         persist: jest.fn(),

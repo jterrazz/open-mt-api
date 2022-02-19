@@ -4,7 +4,7 @@ import { IConfiguration, ILogger } from '@application/contracts';
 import { getCallerFile } from '@application/utils/node';
 import { winstonLocalFormat } from '@infrastructure/logger/winston/local-format';
 
-export const loggerFactory = (configuration: IConfiguration): ILogger => {
+export const winstonLoggerFactory = (configuration: IConfiguration): ILogger => {
     const winstonLogger = winston.createLogger({
         level: configuration.LOG.LEVEL,
     });

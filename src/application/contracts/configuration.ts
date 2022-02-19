@@ -1,34 +1,27 @@
 import * as z from 'zod';
 import { LoggerLevels } from '@application/contracts/logger';
 
-/**
- * ENVIRONMENT
- */
+// ENVIRONMENT
 
 export const environmentSchema = z.enum(['development', 'test', 'production']);
 
-/**
- * API
- */
+// API
 
 export const apiConfigSchema = z.object({
     PORT: z.string().regex(/^\d+$/).transform(Number),
     VERSION: z.string(),
 });
 
-/**
- * LOG
- */
+// LOG
 
 export const logConfigSchema = z.object({
     LEVEL: z.nativeEnum(LoggerLevels),
 });
 
-/**
- * DATABASE
- */
+// DATABASE
 
 export const databaseConfigSchema = z.object({
+    GENERATED_DATABASE: z.string().optional(),
     URL: z.string(),
 });
 

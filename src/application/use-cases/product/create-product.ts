@@ -1,8 +1,8 @@
-import { IProjectDependencies, ITracker } from '@application/contracts';
+import { IDependencies, ITracker } from '@application/contracts';
 import { ProductEntity } from '@domain/product/product.entity';
 
 export const createNewProductFactory = (
-    dependencies: IProjectDependencies,
+    dependencies: IDependencies,
     tracker: ITracker,
 ) => {
     return async (product: ProductEntity) => {

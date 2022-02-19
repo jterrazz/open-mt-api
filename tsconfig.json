@@ -15,7 +15,8 @@
             "@application/*": ["./src/application/*"],
             "@configuration/*": ["./src/configuration/*"],
             "@domain/*": ["./src/domain/*"],
-            "@infrastructure/*": ["./src/infrastructure/*"]
+            "@infrastructure/*": ["./src/infrastructure/*"],
+            "@tests/*": ["./tests/*"]
         },
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,

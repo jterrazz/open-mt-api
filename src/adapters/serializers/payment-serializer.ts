@@ -10,6 +10,7 @@ const paymentPropertySchemas = {
 
 const paymentSchemas = z.object(paymentPropertySchemas);
 
-export const serializeNewPayment = (rawBody: unknown) => {
+export const deserializeNewPayment = (rawBody: unknown) => {
+    // deserializeCreateShopRequest
     return paymentSchemas.parse(rawBody);
 };

@@ -1,5 +1,5 @@
 export interface IDatabase {
-    client: any;
+    client: unknown;
     connect: () => Promise<void>;
     disconnect: () => Promise<void>;
 }

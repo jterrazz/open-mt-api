@@ -1,14 +1,14 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 
-import { IControllers } from '@adapters';
-import { IProjectDependencies, IWebServer } from '@application/contracts';
+import { IControllers } from '@adapters/controllers/controllers';
+import { IDependencies, IWebServer } from '@application/contracts';
 import { authenticationMiddleware } from '@infrastructure/webserver/middlewares/authentication';
 import { routerFactory } from '@infrastructure/webserver/routes';
 import { trackerMiddlewareFactory } from '@infrastructure/webserver/middlewares/tracker';
 
 export const koaServerFactory = (
-    dependencies: IProjectDependencies,
+    dependencies: IDependencies,
     controllers: IControllers,
 ): IWebServer => {
     const {

@@ -1,12 +1,12 @@
-import { IDatabase } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user.repository';
+import { PrismaClient } from '@prisma/client';
 import { UserEntity } from '@domain/user/user.entity';
 
 export const userRepositoryPrismaFactory = (
-    database: IDatabase,
+    prismaClient: PrismaClient,
 ): IUserRepository => {
     return {
-        async getByHandle(handle: string): Promise<UserEntity> {
+        async getByHandle(handle) {
             return {
                 biography: '',
                 firstName: '',

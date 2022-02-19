@@ -1,4 +1,6 @@
+import { IDatabase } from '@application/contracts';
 import { IProductRepository } from '@domain/product/product.repository';
+import { PrismaClient } from '@prisma/client';
 import { ProductEntity } from '@domain/product/product.entity';
 
 const mockResult: ProductEntity = {
@@ -10,9 +12,11 @@ const mockResult: ProductEntity = {
     },
 };
 
-export const productRepositoryPrisma = (): IProductRepository => {
+export const productRepositoryPrisma = (
+    prismaClient: PrismaClient,
+): IProductRepository => {
     return {
-        findById: async (id: string) => {
+        findById: async (id) => {
             return mockResult;
         },
         merge: async (product) => {

@@ -1,11 +1,11 @@
-import { IControllers, IKoaContext } from '@adapters';
-import { IProjectDependencies } from '@application/contracts';
+import { IController, IControllers } from '@adapters/controllers/controllers';
+import { IDependencies } from '@application/contracts';
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
 
 export const apiControllerFactory = (
-    dependencies: IProjectDependencies,
+    dependencies: IDependencies,
 ): IControllers['api'] => {
-    const getState = async (ctx: IKoaContext<any, any>) => {
+    const getState: IController<any, any> = async (ctx) => {
         // TODO Replace any
         const getApiState = getApiStateFactory(
             dependencies,

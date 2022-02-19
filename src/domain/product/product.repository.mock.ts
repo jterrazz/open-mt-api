@@ -1,6 +1,6 @@
 import { IProductRepository } from './product.repository';
 
-export const createMockProductRepository = (): IProductRepository => {
+export const createMockOfProductRepository = (): IProductRepository => {
     return {
         findById: jest.fn(),
         merge: jest.fn(),
