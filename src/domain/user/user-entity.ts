@@ -4,4 +4,5 @@ export type UserEntity = {
     firstName: string;
     lastName: string;
     biography: string;
+    hashedPassword: string;
 };

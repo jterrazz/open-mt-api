@@ -12,4 +12,4 @@ export interface OpenService {
     smartContract: EthereumSmartContract;
 }
 
-export const getAllOpenServices = () => {};
+export const listOpenServices = () => {};

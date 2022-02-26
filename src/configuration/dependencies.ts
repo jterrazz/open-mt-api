@@ -19,8 +19,8 @@ import { prismaDatabaseFactory } from '@infrastructure/orm/prisma/prisma-databas
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product-repository-prisma';
 import { shopControllerFactory } from '@adapters/controllers/shop-controller';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop-repository-prisma';
-import { trackerRepositoryInMemoryFactory } from '@infrastructure/tracker/tracker-repository-in-memory';
-import { trackerRepositoryMixpanelFactory } from '@infrastructure/tracker/tracker-repository-mixpanel';
+import { trackerRepositoryInMemoryFactory } from '@infrastructure/repositories/tracker-repository-in-memory';
+import { trackerRepositoryMixpanelFactory } from '@infrastructure/repositories/tracker-repository-mixpanel';
 import { userControllerFactory } from '@adapters/controllers/user-controller';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user-repository-prisma';
 import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';

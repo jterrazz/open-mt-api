@@ -11,7 +11,7 @@ afterAll(() => {
     useRealTimers();
 });
 
-describe('use-case - get API state', function () {
+describe('use-case - getApiState()', function () {
     test('returns the API state', async () => {
         // Given
         const getApiState = getApiStateFactory(
