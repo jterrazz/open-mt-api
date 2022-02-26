@@ -13,14 +13,13 @@
         "test": "NODE_ENV=test jest --silent",
         "test:debug": "NODE_ENV=test jest --runInBand --detectOpenHandles",
         "test:coverage": "jest --coverage",
-        "test:docker": "docker compose -f docker-compose.test.yml up postgres tests --exit-code-from tests",
-        "test:docker-up": "docker compose -f docker-compose.test.yml up -d postgres migration",
-        "test:docker-down": "docker compose -f docker-compose.test.yml down",
-        "test:docker-tests": "docker compose -f docker-compose.test.yml up tests",
+        "docker:test": "docker compose -f compose/docker-compose.test.yml up postgres tests --exit-code-from tests",
+        "docker:up": "docker compose -f compose/docker-compose.test.yml up -d postgres migration",
+        "docker:down": "docker compose -f compose/docker-compose.test.yml down",
         "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
         "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
         "db:migrate": "npx prisma migrate dev --name",
-        "db:migrate-deploy": "npx prisma migrate deploy",
+        "db:deploy": "npx prisma migrate deploy",
         "db:revert": "#todo"
     },
     "devDependencies": {
