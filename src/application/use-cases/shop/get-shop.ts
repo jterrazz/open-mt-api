@@ -1,5 +1,5 @@
 import { IShopRepository } from '@domain/shop/shop-repository';
-import { NotFoundError } from '@domain/error/functional/not-found-error';
+import { NotFoundError } from '@domain/error/client/not-found-error';
 
 export type GetShopResult = {
     handle: string;

@@ -1,19 +1,14 @@
-import {
-    EndToEndApplication,
-    createEndToEndApplication,
-} from '../end-to-end-application';
+import { createEndToEndApplication } from '../create-end-to-end-application';
 import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
 import request from 'supertest';
 
-let endToEndApplication: EndToEndApplication;
+const endToEndApplication = createEndToEndApplication();
 
-beforeAll(async () => {
-    endToEndApplication = await createEndToEndApplication();
+beforeAll(() => {
     useFakeTimers();
-}, 600000);
+});
 
-afterAll(async function () {
-    // await endToEndApplication.destroy();
+afterAll(() => {
     useRealTimers();
 });
 

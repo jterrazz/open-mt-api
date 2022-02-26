@@ -1,6 +1,6 @@
 import { Context, Request } from 'koa';
 import { ITracker } from '@application/contracts';
-import { UserEntity } from '@domain/user/user.entity';
+import { UserEntity } from '@domain/user/user-entity';
 
 interface IKoaRequest<RequestBody> extends Request {
     body?: RequestBody;

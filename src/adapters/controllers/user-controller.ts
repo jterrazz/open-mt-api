@@ -1,4 +1,4 @@
-import { IControllers, IKoaContext } from '@adapters/controllers/controllers';
+import { IControllers, IKoaContext } from '@adapters/controllers/index';
 import { IDependencies } from '@application/contracts';
 import { getUserPublicProfileFactory } from '@application/use-cases/user/get-user-public-profile';
 import { serializeUserHandle } from '@adapters/serializers/user-serializer';

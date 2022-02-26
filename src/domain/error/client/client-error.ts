@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes';
 
-export class FunctionalError extends Error {
+export class ClientError extends Error {
     public httpCode: StatusCodes;
     public code: string | null;
 

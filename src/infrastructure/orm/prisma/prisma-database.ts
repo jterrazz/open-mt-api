@@ -1,5 +1,6 @@
 import { IConfiguration, IDatabase, ILogger } from '@application/contracts';
 import { PrismaClient } from '@prisma/client';
+import { sleep } from '@application/utils/async';
 
 export interface IPrismaDatabase extends IDatabase {
     client: PrismaClient;
@@ -35,9 +36,7 @@ export const prismaDatabaseFactory = (
     // Passing database URL to prisma
     process.env['DATABASE_URL'] = URL;
 
-    // TODO TO check logs levels
     const prismaClient = buildDatabaseClient();
-    const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
     const connect = async (remainingTries = 20) => {
         if (remainingTries <= 0) {
             return;
@@ -46,12 +45,12 @@ export const prismaDatabaseFactory = (
         try {
             logger.info('connecting to database');
             await prismaClient.$connect();
-            logger.info('connected to database');
+            logger.debug('connected to database');
         } catch (e) {
-            await sleep(500);
             logger.error(
-                'failed to connect to database, will retry connexion in 500 ms',
+                'failed to connect to database, will try again in 500 ms',
             );
+            await sleep(500);
             return connect(remainingTries - 1);
         }
     };
@@ -62,7 +61,7 @@ export const prismaDatabaseFactory = (
         disconnect: async () => {
             logger.info('disconnecting database');
             await prismaClient.$disconnect();
-            logger.info('disconnected database');
+            logger.debug('disconnected database');
         },
     };
 };

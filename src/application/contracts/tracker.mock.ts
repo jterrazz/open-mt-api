@@ -1,15 +1,12 @@
-import { ITracker } from '.';
+import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 
-export const createMockOfTracker = (): ITracker => {
+export const createMockOfTrackerRepository = (): ITrackerRepository => {
     return {
-        events: {
-            requested: {
-                createNewPayment: () => {},
-                createNewProduct: () => {},
-                getApiState: () => {},
-            },
-        },
-        start() {},
-        stop() {},
+        exportEvents: () => {},
+        requestedCreateNewPayment: () => {},
+        requestedCreateNewProduct: () => {},
+        requestedGetApiState: () => {},
+        start: () => {},
+        stop: () => {},
     };
 };

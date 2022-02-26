@@ -3,7 +3,7 @@ import {
     CreateShopJSONResponse,
     deserializeCreateShopRequest,
 } from '@adapters/serializers/shop-serializer';
-import { IController } from '@adapters/controllers/controllers';
+import { IController } from '@adapters/controllers/index';
 import { IDependencies } from '@application/contracts';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
 import { getShopFactory } from '@application/use-cases/shop/get-shop';

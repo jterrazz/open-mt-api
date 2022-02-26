@@ -1,5 +1,3 @@
-import { after } from 'lodash';
-import { createMockOfShopEntity } from '@domain/shop/shop-entity.mock';
 import { createMockOfShopRepository } from '@domain/shop/shop-repository.mock';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
 import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
@@ -39,17 +37,17 @@ describe('use-case - createShop()', function () {
         });
     });
 
-    test('doesnt save a shop if it cant save it', async () => {
+    test('throws when failing to save a shop', async () => {
         // Given
         const shopRepository = createMockOfShopRepository();
 
-        shopRepository.persist.mockRejectedValue(new Error());
+        shopRepository.persist.mockRejectedValue(new Error('persist-error'));
 
         // When
         const createShop = createShopFactory(shopRepository);
         const ft = () => createShop(mockOfANewShop);
 
         // Then
-        await expect(ft).rejects.toThrow();
+        await expect(ft).rejects.toThrow('persist-error');
     });
 });

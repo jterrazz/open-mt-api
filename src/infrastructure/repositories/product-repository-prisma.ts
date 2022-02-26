@@ -1,7 +1,6 @@
-import { IDatabase } from '@application/contracts';
-import { IProductRepository } from '@domain/product/product.repository';
+import { IProductRepository } from '@domain/product/product-repository';
 import { PrismaClient } from '@prisma/client';
-import { ProductEntity } from '@domain/product/product.entity';
+import { ProductEntity } from '@domain/product/product-entity';
 
 const mockResult: ProductEntity = {
     id: 'id',
@@ -12,7 +11,7 @@ const mockResult: ProductEntity = {
     },
 };
 
-export const productRepositoryPrisma = (
+export const productRepositoryPrismaFactory = (
     prismaClient: PrismaClient,
 ): IProductRepository => {
     return {

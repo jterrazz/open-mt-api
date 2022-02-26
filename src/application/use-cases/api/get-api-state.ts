@@ -1,11 +1,12 @@
-import { IDependencies, ITracker } from '@application/contracts';
+import { IDependencies } from '@application/contracts';
+import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 
 export const getApiStateFactory = (
     { configuration }: IDependencies,
-    tracker: ITracker,
+    tracker: ITrackerRepository,
 ) => {
     return () => {
-        tracker.events.requested.getApiState();
+        tracker.requestedGetApiState();
 
         return {
             env: configuration.ENVIRONMENT,

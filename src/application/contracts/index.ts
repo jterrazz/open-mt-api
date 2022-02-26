@@ -1,24 +1,21 @@
 import { IConfiguration } from '@application/contracts/configuration';
 import { IDatabase } from '@application/contracts/database';
 import { ILogger } from '@application/contracts/logger';
-import { IPaymentRepository } from '@domain/payment/payment.repository';
-import { IProductRepository } from '@domain/product/product.repository';
+import { IPaymentRepository } from '@domain/payment/payment-repository';
+import { IProductRepository } from '@domain/product/product-repository';
 import { IShopRepository } from '@domain/shop/shop-repository';
-import { ITracker, ITrackerFactory } from '@application/contracts/tracker';
-import { IUserRepository } from '@domain/user/user.repository';
+import { IUserRepository } from '@domain/user/user-repository';
 
 export * from './configuration';
 export * from './database';
 export * from './logger';
 export * from './repository';
 export * from './strategy';
-export * from './tracker';
 export * from './web-server';
 
 export interface IDependencies {
     configuration: IConfiguration;
     logger: ILogger;
-    trackerFactory: ITrackerFactory;
     database: IDatabase;
     repositories: {
         userRepository: IUserRepository;

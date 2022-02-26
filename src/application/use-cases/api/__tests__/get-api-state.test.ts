@@ -1,13 +1,21 @@
-import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
-
 import { createMockOfDependencies } from '@configuration/dependencies.mock';
-import { createMockOfTracker } from '@application/contracts/tracker.mock';
+import { createMockOfTrackerRepository } from '@application/contracts/tracker.mock';
+import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
+import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+
+beforeAll(() => {
+    useFakeTimers();
+});
+
+afterAll(() => {
+    useRealTimers();
+});
 
 describe('use-case - get API state', function () {
-    test.concurrent('should return the API state', async () => {
+    test('should return the API state', async () => {
         // Given
         const mockDependencies = createMockOfDependencies();
-        const mockTracker = createMockOfTracker();
+        const mockTracker = createMockOfTrackerRepository();
         const getApiState = getApiStateFactory(mockDependencies, mockTracker);
 
         // When
@@ -17,7 +25,7 @@ describe('use-case - get API state', function () {
         expect(result).toStrictEqual({
             env: 'test',
             state: 'OK',
-            time: expect.any(Date),
+            time: new Date(),
             version: '1.0.0',
         });
     });

@@ -1,4 +1,4 @@
-import { PriceEntity } from '@domain/price/price.entity';
+import { PriceEntity } from '@domain/price/price-entity';
 
 export interface ProductEntity {
     id: string;
