@@ -1,6 +1,6 @@
 import { createEndToEndApplication } from '@tests/e2e/create-end-to-end-application';
 import { createSeedOfShop } from '@tests/seeds/shop';
-import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+import { useFakeTimers, useRealTimers } from '@tests/utils/timers';
 import request from 'supertest';
 
 const { app, database } = createEndToEndApplication();

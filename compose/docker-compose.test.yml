@@ -1,6 +1,7 @@
 version: "3.9"
 services:
     postgres:
+        container_name: postgres
         image: postgres:13-alpine
         restart: always
         ports:
@@ -13,16 +14,20 @@ services:
             - ./compose/postgres:/docker-entrypoint-initdb.d
 
     migration:
+        container_name: migration
         build: ..
-        command: sh -c "yarn db:migrate-deploy"
+        command: sh -c "yarn db:deploy"
         environment:
             DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
 
     tests:
+        container_name: tests
+        depends_on:
+            - postgres
         build: ..
-        command: sh -c "yarn db:migrate-deploy && yarn test"
+        command: sh -c "yarn db:deploy && yarn test"
         environment:
             DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
         volumes:
-            - ./src:/app/src
-            - ./tests:/app/tests
+            - ../src:/app/src
+            - ../tests:/app/tests

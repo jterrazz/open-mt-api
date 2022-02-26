@@ -1,4 +1,4 @@
-import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+import { useFakeTimers, useRealTimers } from '@tests/utils/timers';
 
 beforeAll(() => {
     useFakeTimers();

@@ -1,6 +1,10 @@
 FROM node:16
 
 WORKDIR /app
-ADD . /app
 
+COPY ./package.json .
+COPY ./yarn.lock .
 RUN yarn --ci
+
+COPY . /app
+
