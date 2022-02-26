@@ -1,5 +1,5 @@
 import { NotFoundError } from '@domain/error/client/not-found-error';
-import { createMockOfLogger } from '@application/contracts/logger.mock';
+import { createMockOfLogger } from '@application/contracts/__tests__/logger.mock';
 import { handleRequestErrorsMiddlewareFactory } from '@adapters/middlewares/handle-request-errors';
 
 describe('handleRequestErrorsMiddleware()', () => {

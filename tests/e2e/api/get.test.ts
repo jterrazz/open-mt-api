@@ -23,7 +23,7 @@ describe('END TO END - GET /api', function () {
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
             env: 'test',
-            state: 'OK',
+            state: 'UP',
             time: '2000-01-01T00:00:00.000Z',
             version: '1.0.0',
         });

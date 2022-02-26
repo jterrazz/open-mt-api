@@ -13,4 +13,5 @@ module.exports = {
     }),
     preset: 'ts-jest',
     setupFilesAfterEnv: ['<rootDir>/tests/scripts/setup-files-after-env.ts'],
+    testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
 };

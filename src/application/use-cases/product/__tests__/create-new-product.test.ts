@@ -1,6 +1,6 @@
 import { ProductEntity } from '@domain/product/product-entity';
-import { createMockOfProductRepository } from '@domain/product/product-repository.mock';
-import { createMockOfTrackerRepository } from '@application/contracts/tracker.mock';
+import { createMockOfProductRepository } from '@domain/product/__tests__/product-repository.mock';
+import { createMockOfTrackerRepository } from '@application/contracts/__tests__/tracker.mock';
 import { createNewProductFactory } from '@application/use-cases/product/create-product';
 
 describe('use-case - create new product', function () {

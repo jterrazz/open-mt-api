@@ -1,4 +1,4 @@
-import { getDependencies } from '@configuration/dependencies';
+import { initDependencies } from '@configuration/dependencies';
 
 export const startApplication = async () => {
     const {
@@ -6,7 +6,7 @@ export const startApplication = async () => {
         configuration: { ENVIRONMENT },
         database,
         webserver,
-    } = getDependencies();
+    } = initDependencies();
 
     logger.info(`app is starting with environment: ${ENVIRONMENT}`);
 

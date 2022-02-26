@@ -1,5 +1,10 @@
+import {
+    IConfiguration,
+    IDatabase,
+    ILogger,
+    IWebServer,
+} from '@application/contracts';
 import { IControllers } from '@adapters/controllers';
-import { IDependencies, IWebServer } from '@application/contracts';
 import { IMiddlewares } from '@adapters/middlewares';
 import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 import { apiControllerFactory } from '@adapters/controllers/api-controller';
@@ -20,9 +25,12 @@ import { userControllerFactory } from '@adapters/controllers/user-controller';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user-repository-prisma';
 import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';
 
-export const getDependencies = (): {
+export const initDependencies = (): {
     webserver: IWebServer;
-} & IDependencies => {
+    logger: ILogger;
+    database: IDatabase;
+    configuration: IConfiguration;
+} => {
     const configuration = configurationFactory();
     const logger = winstonLoggerFactory(configuration);
 
@@ -47,28 +55,21 @@ export const getDependencies = (): {
 
     const initTracker = initTrackerForRequestFactory(trackerRepository);
 
-    const dependencies: IDependencies = {
-        configuration,
-        database: prismaDatabase,
-        logger,
-        repositories: {
-            paymentRepository: paymentRepositoryPrismaFactory(
-                prismaDatabase.client,
-            ),
-            productRepository: productRepositoryPrismaFactory(
-                prismaDatabase.client,
-            ),
-            shopRepository: shopRepositoryPrismaFactory(prismaDatabase.client),
-            userRepository: userRepositoryPrismaFactory(prismaDatabase.client),
-        },
-    };
+    const paymentRepository = paymentRepositoryPrismaFactory(
+        prismaDatabase.client,
+    );
+    const productRepository = productRepositoryPrismaFactory(
+        prismaDatabase.client,
+    );
+    const shopRepository = shopRepositoryPrismaFactory(prismaDatabase.client);
+    const userRepository = userRepositoryPrismaFactory(prismaDatabase.client);
 
     // Adapters - Controllers and middlewares
 
     const controllers: IControllers = {
-        api: apiControllerFactory(dependencies),
-        shops: shopControllerFactory(dependencies),
-        users: userControllerFactory(dependencies),
+        api: apiControllerFactory(configuration),
+        shops: shopControllerFactory(shopRepository),
+        users: userControllerFactory(logger, userRepository),
     };
 
     const middlewares: IMiddlewares = {
@@ -81,7 +82,12 @@ export const getDependencies = (): {
 
     // Web server
 
-    const webserver = koaServerFactory(dependencies, controllers, middlewares);
+    const webserver = koaServerFactory(
+        controllers,
+        middlewares,
+        logger,
+        configuration,
+    );
 
-    return { ...dependencies, webserver };
+    return { configuration, database: prismaDatabase, logger, webserver };
 };

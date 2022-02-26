@@ -1,8 +1,8 @@
-import { IDependencies } from '@application/contracts';
+import { IConfiguration } from '@application/contracts';
 import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 
 export const getApiStateFactory = (
-    { configuration }: IDependencies,
+    configuration: IConfiguration,
     tracker: ITrackerRepository,
 ) => {
     return () => {
@@ -10,7 +10,7 @@ export const getApiStateFactory = (
 
         return {
             env: configuration.ENVIRONMENT,
-            state: 'OK',
+            state: 'UP',
             time: new Date(),
             version: configuration.API.VERSION,
         };

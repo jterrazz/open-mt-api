@@ -1,4 +1,4 @@
-import { IProductRepository } from './product-repository';
+import { IProductRepository } from '../product-repository';
 
 export const createMockOfProductRepository = (): IProductRepository => {
     return {

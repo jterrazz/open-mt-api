@@ -1,6 +1,6 @@
 import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
 import { Prisma } from '@prisma/client';
-import { getDependencies } from '@configuration/dependencies';
+import { initDependencies } from '@configuration/dependencies';
 
 // @warning
 // Never activate this in production as the database would be
@@ -18,7 +18,7 @@ const dropAllDatabaseRows = async (database: IPrismaDatabase) => {
 };
 
 module.exports = async () => {
-    const { database, logger } = getDependencies();
+    const { database, logger } = initDependencies();
 
     logger.info('tests teardown - database');
     await dropAllDatabaseRows(database.client as IPrismaDatabase);

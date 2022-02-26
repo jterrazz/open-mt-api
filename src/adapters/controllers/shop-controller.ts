@@ -4,18 +4,16 @@ import {
     deserializeCreateShopRequest,
 } from '@adapters/serializers/shop-serializer';
 import { IController } from '@adapters/controllers/index';
-import { IDependencies } from '@application/contracts';
+import { IShopRepository } from '@domain/shop/shop-repository';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
 import { getShopFactory } from '@application/use-cases/shop/get-shop';
 
-export const shopControllerFactory = (dependencies: IDependencies) => {
+export const shopControllerFactory = (shopRepository: IShopRepository) => {
     const createShop: IController<
         CreateShopJSONRequest,
         CreateShopJSONResponse
     > = async (ctx) => {
-        const createNewShop = createShopFactory(
-            dependencies.repositories.shopRepository,
-        );
+        const createNewShop = createShopFactory(shopRepository);
 
         const request = deserializeCreateShopRequest(ctx.request.body);
         const savedShop = await createNewShop({
@@ -31,9 +29,7 @@ export const shopControllerFactory = (dependencies: IDependencies) => {
 
     // Fixme
     const getShop: IController<any, any> = async (ctx) => {
-        const getShop = getShopFactory(
-            dependencies.repositories.shopRepository,
-        );
+        const getShop = getShopFactory(shopRepository);
 
         const shopHandle = ctx.params.shopHandle;
         const shopEntity = await getShop(shopHandle);
