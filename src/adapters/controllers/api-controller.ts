@@ -1,11 +1,9 @@
 import { IConfiguration } from '@application/contracts';
-import { IControllers } from '@adapters/controllers/index';
+import { IInitiatedController } from '@adapters/contracts/controllers';
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
 
-export const apiControllerFactory = (
-    configuration: IConfiguration,
-): IControllers['api'] => {
-    const getState: IControllers['api']['getState'] = async (ctx) => {
+export const apiControllerFactory = (configuration: IConfiguration) => {
+    const getState: IInitiatedController<any, any, any> = async (ctx) => {
         const getApiState = getApiStateFactory(
             configuration,
             ctx.requestTracker,

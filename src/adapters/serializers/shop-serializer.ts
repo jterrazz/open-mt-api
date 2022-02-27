@@ -1,9 +1,12 @@
 import * as z from 'zod';
-import { Deserializer } from '@adapters/serializers/serializer';
+import { Deserializer } from '@adapters/contracts/serializers';
 import { Z_SHOP_HANDLE, Z_SHOP_NAME } from '@domain/shop/shop-entity';
 
 // CREATE SHOP
 
+export type CreateShopURLParams = {
+    test: string;
+};
 const createShopSchema = z.object({
     handle: Z_SHOP_HANDLE,
     name: Z_SHOP_NAME,

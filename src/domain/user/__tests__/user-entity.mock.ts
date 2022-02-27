@@ -1,10 +1,10 @@
 import { UserEntity } from '../user-entity';
 
 export const createMockOfUser = (): UserEntity => ({
-    biography: 'string',
+    email: 'string',
     firstName: 'string',
     handle: 'string',
     hashedPassword: 'string',
-    id: 'string',
+    id: 42,
     lastName: 'string',
 });

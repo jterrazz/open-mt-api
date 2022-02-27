@@ -1,4 +1,4 @@
-import { IControllers, IKoaContext } from '@adapters/controllers/index';
+import { IControllers, IKoaContext } from '@adapters/contracts/controllers';
 import { ILogger } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user-repository';
 import { getUserPublicProfileFactory } from '@application/use-cases/user/get-user-public-profile';
@@ -8,7 +8,7 @@ export const userControllerFactory = (
     logger: ILogger,
     userRepository: IUserRepository,
 ): IControllers['users'] => {
-    const getPublicProfile = async (ctx: IKoaContext<any, any>) => {
+    const getPublicProfile = async (ctx: IKoaContext<any, any, any>) => {
         // TODO replace any
         const getUserPublicProfile = getUserPublicProfileFactory(
             logger,

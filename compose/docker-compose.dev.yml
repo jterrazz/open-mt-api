@@ -13,19 +13,12 @@ services:
         volumes:
             - ./compose/postgres:/docker-entrypoint-initdb.d
 
-    migration:
-        container_name: migration
-        build: ..
-        command: sh -c "yarn db:deploy-prod"
-        environment:
-            DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
-
-    tests:
-        container_name: tests
+    dev-api:
+        container_name: dev-api
         depends_on:
             - postgres
         build: ..
-        command: sh -c "yarn db:deploy-prod && yarn test"
+        command: sh -c "yarn db:deploy-prod && yarn dev"
         environment:
             DATABASE_URL: postgresql://postgres:postgres@postgres:5432/myopenmarket?pool_timeout=80&connect_timeout=80
         volumes:

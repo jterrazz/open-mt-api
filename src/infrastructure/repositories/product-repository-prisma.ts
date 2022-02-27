@@ -13,16 +13,14 @@ const mockResult: ProductEntity = {
 
 export const productRepositoryPrismaFactory = (
     prismaClient: PrismaClient,
-): IProductRepository => {
-    return {
-        findById: async (id) => {
-            return mockResult;
-        },
-        merge: async (product) => {
-            return product;
-        },
-        persist: async (product) => {
-            return product;
-        },
-    };
-};
+): IProductRepository => ({
+    findById: async (id) => {
+        return mockResult;
+    },
+    merge: async (product) => {
+        return product;
+    },
+    persist: async (product) => {
+        return product;
+    },
+});

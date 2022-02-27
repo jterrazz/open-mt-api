@@ -1,5 +1,5 @@
 import { createEndToEndApplication } from '@tests/e2e/create-end-to-end-application';
-import { createSeedOfShop } from '@tests/seeds/shop';
+import { seedDatabaseWithShop } from '@tests/seeds/shop';
 import { useFakeTimers, useRealTimers } from '@tests/utils/timers';
 import request from 'supertest';
 
@@ -37,7 +37,7 @@ describe('END TO END - POST /shops.ts', function () {
 
     test('get an existing shop', async () => {
         // Given
-        const shopSeed = await createSeedOfShop(database);
+        const shopSeed = await seedDatabaseWithShop(database);
 
         // When
         const response = await request(app.callback()).get(

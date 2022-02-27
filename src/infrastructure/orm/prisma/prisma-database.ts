@@ -33,6 +33,12 @@ export const prismaDatabaseFactory = (
     { DATABASE: { URL } }: IConfiguration,
     logger: ILogger,
 ): IPrismaDatabase => {
+    // Recreating this object would result in failure due to multiple Prisma clients
+    // The global variable keeps one object for all unit tests
+    if (global.prismaDatabase) {
+        return global.prismaDatabase;
+    }
+
     // Passing database URL to prisma
     process.env['DATABASE_URL'] = URL;
 
@@ -55,7 +61,7 @@ export const prismaDatabaseFactory = (
         }
     };
 
-    return {
+    global.prismaDatabase = {
         client: prismaClient,
         connect,
         disconnect: async () => {
@@ -64,4 +70,6 @@ export const prismaDatabaseFactory = (
             logger.debug('disconnected database');
         },
     };
+
+    return global.prismaDatabase;
 };

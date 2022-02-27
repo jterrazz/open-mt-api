@@ -1,27 +1,38 @@
 import { AuthenticationRequiredError } from '@domain/error/authentication-required-error';
-import { ICheckPasswordAgainstUser } from '@domain/user/check-password-against-user';
+import { ICheckPassword } from '@domain/encryption/check-password';
 import { ILogger } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user-repository';
 
 export const authenticateUserWithEmailFactory = (
     logger: ILogger,
     userRepository: IUserRepository,
-    checkPasswordAgainstUser: ICheckPasswordAgainstUser,
+    checkPassword: ICheckPassword,
 ) => {
     return async (email: string, password: string) => {
-        logger.debug(`authenticating user with email ${email}`);
+        logger.debug(`authenticating user ${email}`);
 
-        const userEntity = await userRepository.getByEmail(email);
+        const userEntity = await userRepository.findByEmail(email);
 
         if (!userEntity) {
+            logger.debug(
+                `failed to authenticate user ${email} because its email does not exist`,
+            );
             throw new AuthenticationRequiredError();
         }
 
-        const passwordIsValid = checkPasswordAgainstUser(password, userEntity);
+        const passwordIsValid = checkPassword(
+            password,
+            userEntity.hashedPassword,
+        );
 
         if (!passwordIsValid) {
+            logger.debug(
+                `failed to authenticate user ${email} because its password is wrong`,
+            );
             throw new AuthenticationRequiredError();
         }
+
+        logger.debug(`successfully authenticated user ${email}`);
 
         return userEntity;
     };

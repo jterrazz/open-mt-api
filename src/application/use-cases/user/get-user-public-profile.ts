@@ -6,6 +6,6 @@ export const getUserPublicProfileFactory = (
     userRepository: IUserRepository,
 ) => {
     return (userHandle: string) => {
-        return userRepository.getByHandle(userHandle);
+        return userRepository.findByHandle(userHandle);
     };
 };

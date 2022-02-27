@@ -24,7 +24,7 @@ describe('use-case - authenticateUserWithEmail()', () => {
     test('rejects a bad email with an unauthorized error', async () => {
         // Given
         const mockOfUserRepository = createMockOfUserRepository();
-        mockOfUserRepository.getByEmail.mockResolvedValue(undefined);
+        mockOfUserRepository.findByEmail.mockResolvedValue(null);
         const authenticateUserWithEmail = authenticateUserWithEmailFactory(
             createMockOfLogger(),
             mockOfUserRepository,

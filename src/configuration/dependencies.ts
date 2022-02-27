@@ -1,11 +1,10 @@
+import { IConfiguration, ILogger, IWebServer } from '@application/contracts';
+import { IControllers } from '@adapters/contracts/controllers';
+import { IMiddlewares } from '@adapters/contracts/middlewares';
 import {
-    IConfiguration,
-    IDatabase,
-    ILogger,
-    IWebServer,
-} from '@application/contracts';
-import { IControllers } from '@adapters/controllers';
-import { IMiddlewares } from '@adapters/middlewares';
+    IPrismaDatabase,
+    prismaDatabaseFactory,
+} from '@infrastructure/orm/prisma/prisma-database';
 import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 import { apiControllerFactory } from '@adapters/controllers/api-controller';
 import { authenticateUserMiddlewareFactory } from '@adapters/middlewares/authenticate-user';
@@ -15,7 +14,6 @@ import { initRequestTrackerMiddlewareFactory } from '@adapters/middlewares/init-
 import { initTrackerForRequestFactory } from '@domain/tracker/init-tracker-for-request';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
 import { paymentRepositoryPrismaFactory } from '@infrastructure/repositories/payment-repository-prisma';
-import { prismaDatabaseFactory } from '@infrastructure/orm/prisma/prisma-database';
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product-repository-prisma';
 import { shopControllerFactory } from '@adapters/controllers/shop-controller';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop-repository-prisma';
@@ -28,17 +26,12 @@ import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-log
 export const initDependencies = (): {
     webserver: IWebServer;
     logger: ILogger;
-    database: IDatabase;
+    database: IPrismaDatabase;
     configuration: IConfiguration;
 } => {
     const configuration = configurationFactory();
     const logger = winstonLoggerFactory(configuration);
-
-    // Recreating this object would result in failure due to multiple Prisma clients
-    // The global variable keeps one object on all unit tests
-    const prismaDatabase =
-        global.prismaDatabase || prismaDatabaseFactory(configuration, logger);
-    global.prismaDatabase = prismaDatabase;
+    const prismaDatabase = prismaDatabaseFactory(configuration, logger);
 
     // Dependencies
 

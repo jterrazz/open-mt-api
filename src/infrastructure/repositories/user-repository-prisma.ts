@@ -1,18 +1,44 @@
 import { IUserRepository } from '@domain/user/user-repository';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 import { UserEntity } from '@domain/user/user-entity';
-import { createMockOfUser } from '@domain/user/__tests__/user-entity.mock';
+
+const mapPersistedUserToUser = (persistedUser: User): UserEntity => ({
+    email: persistedUser.email,
+    firstName: persistedUser.firstName,
+    handle: persistedUser.handle,
+    hashedPassword: persistedUser.hashedPassword,
+    id: persistedUser.id,
+    lastName: persistedUser.lastName,
+});
 
 export const userRepositoryPrismaFactory = (
     prismaClient: PrismaClient,
-): IUserRepository => {
-    return {
-        async getByEmail(handle) {
-            return createMockOfUser(); // TODO
-        },
-        async getByHandle(handle) {
-            return createMockOfUser(); // TODO
-        },
-        async persist(user: UserEntity): Promise<void> {},
-    };
-};
+): IUserRepository => ({
+    async findByEmail(email) {
+        const persistedUser = await prismaClient.user.findFirst({
+            where: { email },
+        });
+
+        return persistedUser && mapPersistedUserToUser(persistedUser);
+    },
+    async findByHandle(handle) {
+        const persistedUser = await prismaClient.user.findFirst({
+            where: { handle },
+        });
+
+        return persistedUser && mapPersistedUserToUser(persistedUser);
+    },
+    async persist(user) {
+        const persistedUser = await prismaClient.user.create({
+            data: {
+                email: user.email,
+                firstName: user.firstName,
+                handle: user.handle,
+                hashedPassword: user.hashedPassword,
+                lastName: user.lastName,
+            },
+        });
+
+        return persistedUser && mapPersistedUserToUser(persistedUser);
+    },
+});

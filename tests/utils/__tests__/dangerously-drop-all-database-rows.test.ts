@@ -1,5 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { dangerouslyDropAllDatabaseRows } = require('../global-teardown');
+import { dangerouslyDropAllDatabaseRows } from '@tests/utils/dangerously-drop-all-database-rows';
 
 afterAll(() => {
     process.env.NODE_ENV = 'test';
@@ -11,7 +10,8 @@ describe('dangerouslyDropAllDatabaseRows()', () => {
         process.env.NODE_ENV = 'development';
 
         // When
-        const ft = () => dangerouslyDropAllDatabaseRows();
+        // @ts-ignore
+        const ft = () => dangerouslyDropAllDatabaseRows({});
 
         // Then
         await expect(ft).rejects.toThrow(
