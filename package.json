@@ -22,7 +22,8 @@
         "db:migrate": "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myopenmarket npx prisma migrate dev --name",
         "db:deploy": "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myopenmarket npx prisma migrate deploy",
         "db:deploy-prod": "npx prisma migrate deploy",
-        "db:revert": "#todo"
+        "db:revert": "#todo",
+        "db:studio": "DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myopenmarket npx prisma studio"
     },
     "devDependencies": {
         "@types/config": "^0.0.40",

@@ -13,18 +13,14 @@ export const koaServerFactory = (
 ): IWebServer => {
     const app = new Koa();
 
-    /**
-     * Middlewares
-     */
+    // Middlewares
 
     app.use(bodyParser());
     app.use(middlewares.initRequestTrackerMiddleware);
     app.use(middlewares.handleRequestErrorsMiddleware);
     app.use(middlewares.authenticateUserMiddleware);
 
-    /**
-     * Router
-     */
+    // Router
 
     const router = routerFactory(controllers);
     app.use(router.routes()).use(router.allowedMethods());

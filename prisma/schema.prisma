@@ -1,32 +1,48 @@
 generator client {
-    provider =      "prisma-client-js"
+    provider =        "prisma-client-js"
 }
 
 datasource db {
-    provider =      "postgresql"
-    url =           env("DATABASE_URL")
-}
-
-model Profile {
-    id              Int     @id @default(autoincrement())
-    biography       String?
-    user            User    @relation(fields: [userId], references: [id])
-    userId          Int     @unique
+    provider =        "postgresql"
+    url =             env("DATABASE_URL")
 }
 
 model User {
-    id              Int      @id @default(autoincrement())
-    email           String   @unique
-    hashedPassword  String
-    firstName        String
-    lastName        String
-    profile          Profile?
-    handle          String   @unique
+    id                Int        @id @default(autoincrement())
+    email             String     @unique
+    hashedPassword    String
+    firstName          String
+    lastName          String
+    avatarImage       Image?     @relation(fields: [avatarImageId], references: [id])
+    avatarImageId     Int?       @unique
+    handle            String     @unique
+}
+
+model Product {
+    id                Int        @id @default(autoincrement())
+    name              String
+    description       String?
+    priceCentsAmount  Int
+    priceCurrency     String
+    shop              Shop       @relation(fields: [shopId], references: [id])
+    shopId            Int        @unique
 }
 
 model Shop {
-    id              Int      @id @default(autoincrement())
-    handle          String   @unique
-    name            String
-    description     String?
+    id                Int        @id @default(autoincrement())
+    createdAt         DateTime   @default(now())
+    handle            String     @unique
+    name              String
+    description       String?
+    bannerImage       Image      @relation(fields: [bannerImageId], references: [id])
+    bannerImageId     Int        @unique
+    countOfFollowers  Int
+    products          Product[]
+}
+
+model Image {
+    id                Int        @id @default(autoincrement())
+    filename           String     @unique
+    user              User?
+    shop              Shop?
 }

@@ -15,12 +15,12 @@ export const shopRepositoryPrismaFactory = (
 
         return {
             bannerImageUrl: null,
+            countFollowers: 0,
             creationDate: new Date(),
             // TODO replace
             description: persistedShop.description,
             handle: persistedShop.handle,
             name: persistedShop.name,
-            numberOfFollowers: 0,
             // TODO replace
         };
     },
@@ -38,11 +38,11 @@ export const shopRepositoryPrismaFactory = (
 
         return {
             bannerImageUrl: null,
+            countFollowers: 0,
             creationDate: new Date(),
             description: null,
             handle: persistedShop.handle,
             name: persistedShop.name,
-            numberOfFollowers: 0,
         };
     },
 });

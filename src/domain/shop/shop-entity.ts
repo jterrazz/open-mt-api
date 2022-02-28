@@ -10,11 +10,11 @@ export const Z_SHOP_NUMBER_OF_FOLLOWERS = z.number();
 
 const shopEntitySchema = z.object({
     bannerImageUrl: Z_SHOP_BANNER_IMAGE_URL.nullable(),
+    countFollowers: Z_SHOP_NUMBER_OF_FOLLOWERS,
     creationDate: Z_SHOP_CREATION_DATE,
     description: Z_SHOP_DESCRIPTION.nullable(),
     handle: Z_SHOP_HANDLE,
     name: Z_SHOP_NAME,
-    numberOfFollowers: Z_SHOP_NUMBER_OF_FOLLOWERS,
 });
 
 export type IShopEntity = z.infer<typeof shopEntitySchema>;
