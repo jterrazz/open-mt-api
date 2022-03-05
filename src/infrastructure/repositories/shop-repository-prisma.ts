@@ -6,6 +6,9 @@ export const shopRepositoryPrismaFactory = (
 ): IShopRepository => ({
     findByHandle: async (handle) => {
         const persistedShop = await prismaClient.shop.findFirst({
+            include: {
+                bannerImage: true,
+            },
             where: {
                 handle,
             },
@@ -14,14 +17,12 @@ export const shopRepositoryPrismaFactory = (
         if (!persistedShop) return null;
 
         return {
-            bannerImageUrl: null,
-            countFollowers: 0,
-            creationDate: new Date(),
-            // TODO replace
+            bannerImageUrl: persistedShop.bannerImage?.filename || null, // TODO replace by URL
+            countFollowers: persistedShop.countOfFollowers,
+            creationDate: persistedShop.createdAt,
             description: persistedShop.description,
             handle: persistedShop.handle,
             name: persistedShop.name,
-            // TODO replace
         };
     },
     merge: async (entity) => {

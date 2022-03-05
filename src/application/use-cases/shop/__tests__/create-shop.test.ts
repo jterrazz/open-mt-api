@@ -1,6 +1,6 @@
 import { createMockOfShopRepository } from '@domain/shop/__tests__/shop-repository.mock';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
-import { useFakeTimers, useRealTimers } from '@tests/utils/timers';
+import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
 
 beforeAll(() => {
     useFakeTimers();

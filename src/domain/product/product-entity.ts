@@ -1,5 +1,5 @@
 export interface ProductEntity {
-    id: string;
+    id?: number;
     name: string;
     priceCentsAmount: number;
     priceCurrency: 'EUR' | 'USD';

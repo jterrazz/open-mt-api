@@ -7,7 +7,6 @@ describe('use-case - create new product', function () {
     it('create a new product for the authenticated user', async function () {
         // Given
         const product: ProductEntity = {
-            id: 'the-product-id',
             name: 'the-product-name',
             priceCentsAmount: 4200,
             priceCurrency: 'EUR',

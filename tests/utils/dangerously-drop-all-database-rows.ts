@@ -13,11 +13,21 @@ export const dangerouslyDropAllDatabaseRows = async (
         );
     }
 
-    const modelNames = Prisma.dmmf.datamodel.models.map((model) => model.name);
+    const dropAllRows = () => {
+        const modelNames = Prisma.dmmf.datamodel.models.map(
+            (model) => model.name,
+        );
 
-    return Promise.all(
-        modelNames.map((modelName) =>
-            database[modelName.toLowerCase()].deleteMany(),
-        ),
-    );
+        return Promise.all(
+            modelNames.map((modelName) =>
+                database[modelName.toLowerCase()]?.deleteMany(),
+            ),
+        );
+    };
+
+    try {
+        await dropAllRows();
+    } catch (e) {
+        await dropAllRows(); // Retrying rows that couldn't drop first time due to constraints
+    }
 };

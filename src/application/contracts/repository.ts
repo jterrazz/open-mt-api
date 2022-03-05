@@ -2,7 +2,7 @@ export type IRepositoryPersist<EntityType> = (
     entity: EntityType,
 ) => Promise<EntityType>;
 export type IRepositoryFindByString<EntityType> = (
-    id: string,
+    id: number,
 ) => Promise<EntityType | null>;
 export type IRepositoryFindByHandle<EntityType> = (
     handle: string,

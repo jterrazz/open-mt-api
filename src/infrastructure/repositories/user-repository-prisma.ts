@@ -29,15 +29,31 @@ export const userRepositoryPrismaFactory = (
         return persistedUser && mapPersistedUserToUser(persistedUser);
     },
     async persist(user) {
-        const persistedUser = await prismaClient.user.create({
-            data: {
-                email: user.email,
-                firstName: user.firstName,
-                handle: user.handle,
-                hashedPassword: user.hashedPassword,
-                lastName: user.lastName,
+        const { persistedUser } = await prismaClient.$transaction(
+            async (prismaTransactionClient) => {
+                const persistedSettings =
+                    await prismaTransactionClient.userSettings.create({
+                        data: {
+                            language: 'FR',
+                        },
+                    });
+
+                const persistedUser = await prismaTransactionClient.user.create(
+                    {
+                        data: {
+                            email: user.email,
+                            firstName: user.firstName,
+                            handle: user.handle,
+                            hashedPassword: user.hashedPassword,
+                            lastName: user.lastName,
+                            userSettingsId: persistedSettings.id,
+                        },
+                    },
+                );
+
+                return { persistedUser };
             },
-        });
+        );
 
         return persistedUser && mapPersistedUserToUser(persistedUser);
     },
