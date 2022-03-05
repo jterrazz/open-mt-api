@@ -123,7 +123,7 @@ infrastructure <=> configuration/dependencies.ts
                                           <=> domain
 ```
 
----
+--- 
 
 [***Open.MT - Wiki***](https://github.com/jterrazz/app.open-mt)
 
