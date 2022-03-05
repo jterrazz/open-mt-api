@@ -1,36 +1,26 @@
+import { IConfiguration, ILogger, IWebServer } from '@application/contracts';
+import { IControllers } from '@adapters/contracts/controllers';
+import { IMiddlewares } from '@adapters/contracts/middlewares';
+import { routerFactory } from '@infrastructure/webserver/routes';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 
-import { IControllers } from '@adapters/controllers/controllers';
-import { IDependencies, IWebServer } from '@application/contracts';
-import { authenticationMiddleware } from '@infrastructure/webserver/middlewares/authentication';
-import { routerFactory } from '@infrastructure/webserver/routes';
-import { trackerMiddlewareFactory } from '@infrastructure/webserver/middlewares/tracker';
-
 export const koaServerFactory = (
-    dependencies: IDependencies,
     controllers: IControllers,
+    middlewares: IMiddlewares,
+    logger: ILogger,
+    configuration: IConfiguration,
 ): IWebServer => {
-    const {
-        logger,
-        configuration: {
-            API: { PORT },
-        },
-    } = dependencies;
-
     const app = new Koa();
 
-    /**
-     * Middlewares
-     */
+    // Middlewares
 
     app.use(bodyParser());
-    app.use(authenticationMiddleware);
-    app.use(trackerMiddlewareFactory(dependencies));
+    app.use(middlewares.initRequestTrackerMiddleware);
+    app.use(middlewares.handleRequestErrorsMiddleware);
+    app.use(middlewares.authenticateUserMiddleware);
 
-    /**
-     * Router
-     */
+    // Router
 
     const router = routerFactory(controllers);
     app.use(router.routes()).use(router.allowedMethods());
@@ -38,8 +28,10 @@ export const koaServerFactory = (
     return {
         app,
         start: () =>
-            app.listen(PORT, () => {
-                logger.info(`app is listening on port: ${PORT}`);
+            app.listen(configuration.API.PORT, () => {
+                logger.info(
+                    `app is listening on port: ${configuration.API.PORT}`,
+                );
             }),
     };
 };

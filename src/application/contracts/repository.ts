@@ -1,10 +1,13 @@
 export type IRepositoryPersist<EntityType> = (
     entity: EntityType,
 ) => Promise<EntityType>;
-export type IRepositoryFindById<EntityType> = (
-    id: string,
+export type IRepositoryFindByString<EntityType> = (
+    id: number,
 ) => Promise<EntityType | null>;
 export type IRepositoryFindByHandle<EntityType> = (
+    handle: string,
+) => Promise<EntityType | null>;
+export type IRepositoryFindByEmail<EntityType> = (
     handle: string,
 ) => Promise<EntityType | null>;
 export type IRepositoryMerge<EntityType> = (

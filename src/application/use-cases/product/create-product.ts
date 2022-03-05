@@ -1,16 +1,13 @@
-import { IDependencies, ITracker } from '@application/contracts';
-import { ProductEntity } from '@domain/product/product.entity';
+import { IProductRepository } from '@domain/product/product-repository';
+import { ITrackerRepository } from '@domain/tracker/tracker-repository';
+import { ProductEntity } from '@domain/product/product-entity';
 
 export const createNewProductFactory = (
-    dependencies: IDependencies,
-    tracker: ITracker,
+    productRepository: IProductRepository,
+    tracker: ITrackerRepository,
 ) => {
     return async (product: ProductEntity) => {
-        const {
-            repositories: { productRepository },
-        } = dependencies;
-
-        tracker.events.requested.createNewProduct();
+        tracker.requestedCreateNewProduct();
 
         return productRepository.persist(product);
     };

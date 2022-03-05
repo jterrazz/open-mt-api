@@ -1,14 +1,23 @@
+import { createMockOfConfiguration } from '@configuration/__tests__/configuration.mock';
+import { createMockOfTrackerRepository } from '@application/contracts/__tests__/tracker.mock';
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
+import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
 
-import { createMockOfDependencies } from '@configuration/dependencies.mock';
-import { createMockOfTracker } from '@application/contracts/tracker.mock';
+beforeAll(() => {
+    useFakeTimers();
+});
 
-describe('use-case - get API state', function () {
-    test.concurrent('should return the API state', async () => {
+afterAll(() => {
+    useRealTimers();
+});
+
+describe('use-case - getApiState()', function () {
+    test('returns the API state', async () => {
         // Given
-        const mockDependencies = createMockOfDependencies();
-        const mockTracker = createMockOfTracker();
-        const getApiState = getApiStateFactory(mockDependencies, mockTracker);
+        const getApiState = getApiStateFactory(
+            createMockOfConfiguration(),
+            createMockOfTrackerRepository(),
+        );
 
         // When
         const result = getApiState();
@@ -16,9 +25,26 @@ describe('use-case - get API state', function () {
         // Then
         expect(result).toStrictEqual({
             env: 'test',
-            state: 'OK',
-            time: expect.any(Date),
+            state: 'UP',
+            time: new Date(),
             version: '1.0.0',
         });
+    });
+
+    test('calls its tracker events', async () => {
+        // Given
+        const mockOfTrackerRepository = createMockOfTrackerRepository();
+        const getApiState = getApiStateFactory(
+            createMockOfConfiguration(),
+            mockOfTrackerRepository,
+        );
+
+        // When
+        getApiState();
+
+        // Then
+        expect(
+            mockOfTrackerRepository.requestedGetApiState,
+        ).toHaveBeenCalledTimes(1);
     });
 });

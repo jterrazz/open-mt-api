@@ -1,4 +1,4 @@
-describe('shop-repository - prisma', function () {
+describe('ShopRepositoryPrisma', function () {
     describe('persist()', function () {
         test.concurrent('persist a shop to database', async () => {
             // Given

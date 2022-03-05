@@ -1,8 +1,6 @@
-import { after } from 'lodash';
-import { createMockOfShopEntity } from '@domain/shop/shop-entity.mock';
-import { createMockOfShopRepository } from '@domain/shop/shop-repository.mock';
+import { createMockOfShopRepository } from '@domain/shop/__tests__/shop-repository.mock';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
-import { useFakeTimers, useRealTimers } from '@tests/utils/jest';
+import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
 
 beforeAll(() => {
     useFakeTimers();
@@ -14,8 +12,8 @@ afterAll(() => {
 
 describe('use-case - createShop()', function () {
     const mockOfANewShop = {
-        handle: 'the-shop-handle',
-        name: 'the-shop-name',
+        handle: 'the_new_shop_handle',
+        name: 'the_new_shop_name',
     };
 
     test('save a shop and return its public properties', async () => {
@@ -26,30 +24,30 @@ describe('use-case - createShop()', function () {
 
         // Then
         expect(mockOfShopRepository.persist).toHaveBeenCalledWith({
-            bannerImageUrl: undefined,
+            bannerImageUrl: null,
+            countFollowers: 0,
             creationDate: new Date(),
-            description: undefined,
-            handle: 'the-shop-handle',
-            name: 'the-shop-name',
-            numberOfFollowers: 42,
+            description: null,
+            handle: 'the_new_shop_handle',
+            name: 'the_new_shop_name',
         });
         expect(result).toEqual({
-            handle: 'the-shop-handle',
-            name: 'the-shop-name',
+            handle: 'the_new_shop_handle',
+            name: 'the_new_shop_name',
         });
     });
 
-    test('doesnt save a shop if it cant save it', async () => {
+    test('throws when failing to save a shop', async () => {
         // Given
         const shopRepository = createMockOfShopRepository();
 
-        shopRepository.persist.mockRejectedValue(new Error());
+        shopRepository.persist.mockRejectedValue(new Error('persist-error'));
 
         // When
         const createShop = createShopFactory(shopRepository);
         const ft = () => createShop(mockOfANewShop);
 
         // Then
-        await expect(ft).rejects.toThrow();
+        await expect(ft).rejects.toThrow('persist-error');
     });
 });

@@ -1,124 +1,129 @@
-# My Open Market - API
+# Open.MT - Open Market API
 
-> A marketplace for the people by the people. Open, social and direct.
+> [Open.MT](https://open.mt) is a marketplace that allows customers to discover and transact with their communities.
 
-Find out more about us on [our blog](https://blog.myopen.market/) !
-
-## Dependencies
-
-```
-node 16
-yarn
-docker
-```
+Learn more about us on [our blog](https://blog.open.mt/) !
 
 ## Get started
 
-```
-# for one time start
-yarn dev:docker
+### 🌱 Dependencies
 
-# for fast local development
-yarn # install packages
-yarn dev:docker-up
-yarn dev
+```sh
+docker
+node 16
+yarn
 ```
 
-
-## Testing
-
-```
-# For a one time test
-yarn test:docker
-
-# For fast local development
-yarn test:docker-up # start the test services
-yarn test:docker-down # stop the test services
-
-yarn test
-// or for tests with detailed debug information
-yarn test:debug
+### 🍋 Start the project !
+#### Docker
+```sh
+yarn docker:dev
 ```
 
-Tests running in `test` environments will create a random postgres database, migrated to the latest schema. This allows for real testing of the flow.
+#### Local
+```sh
+# 1. Install local packages
+yarn
 
+# 2. Spawn external services
+yarn docker:up
 
-Integration tests must be tought as global, since multiple tests can run on same database
+# 3. Develop with the project
+yarn dev # Start API with hot reload
+yarn test # Run API tests
+```
 
----
+### 🏗 Testing your code
+
+The **`jest` framework** is used to run both **integration** (`/tests/e2e/*.test.ts`) and **unit** tests (`__tests__/*.test.ts`).
+
+**The test flow starts by connecting to a Prisma database**.
+The database is formatted with its latest schema (migrations from `prisma/migrations`).
+A unique `PrismaClient` client is used, so that real postgres tests can be performed efficiently.
+
+⚠️ Warnings:
+- All data tested against the database can interfere with each other. Therefore, each test using the database must be thought **globally**.
+- **Before and after** all tests have be processed, **the database is flushed of all its data.**
+
 ## Architecture
 
-This project try to follow the **clean architecture** concepts.
+It follows this structure:
 
-A guide for separation of concerns:
-- Move the definitions here
-
-```
-app 
- └ lib                              → Application sources 
-    └ application                   → Application services layer
-       └ security                   → Security tools interfaces (ex: AccessTokenManager.js, to generate and decode OAuth access token)
-       └ use_cases                  → Application business rules 
-    └ domain                        → Enterprise core business layer such as domain model objects (Aggregates, Entities, Value Objects) and repository interfaces
-    └ infrastructure                → Frameworks, drivers and tools such as Database, the Web Framework, mailing/logging/glue code etc.
-       └ config                     → Application configuration files, modules and services
-          └ service-locator.js      → Module that manage service implementations by environment
-       └ orm                        → Database ORMs middleware (Sequelize for SQLite3 or PostgreSQL, Mongoose for MongoDB)
-          └ mongoose                → Mongoose client and schemas
-          └ sequelize               → Sequelize client and models
-       └ repositories               → Implementation of domain repository interfaces
-       └ security                   → Security tools implementations (ex: JwtAccessTokenManager)
-       └ webserver                  → Hapi.js Web server configuration (server, routes, plugins, etc.)
-          └ oauth                   → Hapi.js authentication strategies and schemas
-          └ server.js               → Hapi.js server definition
-    └ interfaces                    → Adapters and formatters for use cases and entities to external agency such as Database or the Web
-       └ controllers                → Hapi.js route handlers
-       └ routes                     → Hapi.js route definitions
-       └ serializers                → Converter objects that transform outside objects (ex: HTTP request payload) to inside objects (ex: Use Case request object)
- └ node_modules (generated)         → NPM dependencies
- └ test                             → Source folder for unit or functional tests
- └ index.js                         → Main application entry point
+```bash
+<root>
+└ compose # docker compose configuration
+└ config # configuration values
+└ prisma # database schema
+└ src # the application
+└ tests # integrations tests
 ```
 
-ADAPTERS
-controller => application (use-cases) => entities
-Connects the use case to the exterior. Is is like adapter / presenter / controller
-=> validates the data
-=> modify it for the use-case
-=> thats all
+### Clean architecture
 
-This parts connects to koa,
+The project follows **clean architecture** concepts.
+Because of that, we benefit from a better separation of concerns:
+the application is developed on solid abstracted interfaces and methods, and the technical implementation of this code is pushed to the side of the project.
 
-This section can also be a presenter / gateway
+#### The clean architecture structure
 
-APPLICATION
+```bash
+src
+└ adapters
+  # links the application to the external world
+└ application
+  # the abstracted use cases of the application
+└ configuration
+  # injects dependencies (technical implementations) to the abstracted application
+└ domain
+  # core objects of the application
+└ infrastructure
+  # technical implementations
+```
 
-Use cases => Entities
+##### 1. Adapters
 
-(domain logic == what does the application do: example we register a student to our app)
-Can communicate to the higher levels (DB, repositories, web) only by using interfaces.
-The implementations are injected only after !!!
+It links the abstracted application to the external world. They can be of multiple types:
+- presenter (for frontend applications)
+- controllers (links an HTTP library to its handlers for example)
+- middlewares (intermediate steps of an HTTP library)
 
-ENTITIES
+Its role is only to receive and validate the received data, format the output, and orchestrate the calls to use cases. That's all.
 
-Entities => nothing
-This layer is independent, which means that you will not see any “require (‘…’)” in the entity’s JS files.
+For example here, we connect the `koa` controllers and middlewares to our abstracted application.
+
+##### 2. Application
+
+The base of the applications is at the `contracts` level.
+These contracts represent abstract methods of the higher levels of the application (database, external services, etc). Meaning that the implementations are never found here, but are injected at the application runtime.
+The `use-cases` section will describe the behaviour of what our application can concretely do.
+
+For example, we can:
+- Register a user
+- Get the details of a user
+- Add a product to a shop
+
+So it can communicate to the higher levels (DB, repositories, web) only by using interfaces.
+The implementations are injected at the runtime. It can only create this logic based on the injected interfaces, and it can require the lower level: the domain.
+
+##### 3. Domain
+This layer is independent, you will never see any “require (‘…’)” to another part of the application
 This layer wouldn’t be affected by external changes like routing or controllers.
 
-INFRASTRUCTURE
-cf https://github.com/jbuget/nodejs-clean-architecture-app/tree/master/lib/infrastructure
+##### 4. Infrastructure
+This is the technical implementation of our application contracts.
 
-This is the infrastructure folder. Contains the details of the behaviors
+> "This layer is where all the details go. The web is a detail. The database is a detail. We keep these things on the outside where they can do little harm"
 
-"This layer is where all the details go. The web is a detail. The database is a detail. We keep these things on the outside where they can do little harm"
+##### ℹ️ The injection flow
 
-## My Open Market Wiki
+```sh
+infrastructure <=> configuration/dependencies.ts
+                                  <=> adapters
+                                      <=> application
+                                          <=> domain
+```
 
-My Open Market is an application that enable open, social and direct interactions between merchants and clients.
+---
 
-[<img align="left" alt="website" src="https://img.shields.io/badge/website-%2305A8AA.svg?&style=for-the-badge&logo=safari&logoColor=white" />](https://jterrazz.com)
-
-[<img align="left" alt="medium" src="https://img.shields.io/badge/blog-%23353535.svg?&style=for-the-badge&logo=medium&logoColor=white" />](https://blog.jterrazz.com)
-
-[<img align="left" alt="github" src="https://img.shields.io/badge/github-%23284B63.svg?&style=for-the-badge&logo=github&logoColor=white" />](https://github.com/myonewallet)
+[***Open.MT - Wiki***](https://github.com/jterrazz/app.open-mt)
 

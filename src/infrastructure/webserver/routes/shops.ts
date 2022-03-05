@@ -1,10 +1,11 @@
-import { IControllers } from '@adapters/controllers/controllers';
+import { IControllers } from '@adapters/contracts/controllers';
 import Router from 'koa-router';
 
 export const shopsRouterFactory = (controllers: IControllers) => {
     const shopsRouter = new Router();
 
-    shopsRouter.post('/', controllers.shops.createNewShop);
+    shopsRouter.post('/', controllers.shops.createShop);
+    shopsRouter.get('/:shopHandle', controllers.shops.getShop);
 
     return shopsRouter;
 };

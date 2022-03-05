@@ -1,26 +1,12 @@
-import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
-import { Prisma } from '@prisma/client';
-import { getDependencies } from '@configuration/dependencies';
-
-// @warning
-// Never activate this in production as the database would be
-// @todo make unit test that this function is not triggered in production
-// And isolate this function to do so !!!
-
-const dropAllDatabaseRows = async (database: IPrismaDatabase) => {
-    const modelNames = Prisma.dmmf.datamodel.models.map((model) => model.name);
-
-    return Promise.all(
-        modelNames.map((modelName) =>
-            database[modelName.toLowerCase()].deleteMany(),
-        ),
-    );
-};
+import { dangerouslyDropAllDatabaseRows } from '@tests/utils/dangerously-drop-all-database-rows';
+import { initDependencies } from '@configuration/dependencies';
 
 module.exports = async () => {
-    const { database, logger } = getDependencies();
+    const { database, logger } = initDependencies();
 
-    logger.info('tests teardown - database');
-    await dropAllDatabaseRows(database.client as IPrismaDatabase);
+    logger.info('ending all tests');
+    logger.info('will drop all database data and disconnect');
+
+    await dangerouslyDropAllDatabaseRows(database.client);
     await database.disconnect();
 };

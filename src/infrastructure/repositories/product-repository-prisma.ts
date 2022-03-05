@@ -1,29 +1,31 @@
-import { IDatabase } from '@application/contracts';
-import { IProductRepository } from '@domain/product/product.repository';
+import { IProductRepository } from '@domain/product/product-repository';
 import { PrismaClient } from '@prisma/client';
-import { ProductEntity } from '@domain/product/product.entity';
 
-const mockResult: ProductEntity = {
-    id: 'id',
-    name: '',
-    price: {
-        amount: 42,
-        currency: 'EUR',
-    },
-};
-
-export const productRepositoryPrisma = (
+export const productRepositoryPrismaFactory = (
     prismaClient: PrismaClient,
-): IProductRepository => {
-    return {
-        findById: async (id) => {
-            return mockResult;
-        },
-        merge: async (product) => {
-            return product;
-        },
-        persist: async (product) => {
-            return product;
-        },
-    };
-};
+): IProductRepository => ({
+    findById: async (id) => {
+        const persistedProduct = await prismaClient.product.findFirst({
+            where: {
+                id,
+            },
+        });
+
+        if (!persistedProduct) {
+            return null;
+        }
+
+        return {
+            id: persistedProduct.id,
+            name: persistedProduct.name,
+            priceCentsAmount: persistedProduct.priceCentsAmount,
+            priceCurrency: persistedProduct.priceCurrency,
+        };
+    },
+    merge: async (product) => {
+        return product;
+    },
+    persist: async (product) => {
+        return product;
+    },
+});

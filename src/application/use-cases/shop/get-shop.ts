@@ -1,8 +1,9 @@
 import { IShopRepository } from '@domain/shop/shop-repository';
+import { NotFoundError } from '@domain/error/client/not-found-error';
 
 export type GetShopResult = {
     handle: string;
-    description: string | undefined;
+    description: string | null;
     name: string;
 };
 
@@ -11,7 +12,7 @@ export const getShopFactory = (shopRepository: IShopRepository) => {
         const shop = await shopRepository.findByHandle(shopHandle);
 
         if (!shop) {
-            throw new Error('missing shop'); // TODO Replace by HTTP error
+            throw new NotFoundError(`shop '${shopHandle}' does not exist`);
         }
 
         return {

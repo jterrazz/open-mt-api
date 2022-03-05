@@ -1,22 +1,19 @@
-import { ProductEntity } from '@domain/product/product.entity';
-import { createMockOfDependencies } from '@configuration/dependencies.mock';
-import { createMockOfTracker } from '@application/contracts/tracker.mock';
+import { ProductEntity } from '@domain/product/product-entity';
+import { createMockOfProductRepository } from '@domain/product/__tests__/product-repository.mock';
+import { createMockOfTrackerRepository } from '@application/contracts/__tests__/tracker.mock';
 import { createNewProductFactory } from '@application/use-cases/product/create-product';
 
 describe('use-case - create new product', function () {
-    it('should create a new product for a given user', async function () {
+    it('create a new product for the authenticated user', async function () {
         // Given
         const product: ProductEntity = {
-            id: 'the-product-id',
             name: 'the-product-name',
-            price: {
-                amount: 42,
-                currency: 'EUR',
-            },
+            priceCentsAmount: 4200,
+            priceCurrency: 'EUR',
         };
         const createNewProduct = createNewProductFactory(
-            createMockOfDependencies(),
-            createMockOfTracker(),
+            createMockOfProductRepository(),
+            createMockOfTrackerRepository(),
         );
 
         // When

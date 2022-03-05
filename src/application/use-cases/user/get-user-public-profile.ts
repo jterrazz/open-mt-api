@@ -1,11 +1,11 @@
 import { ILogger } from '@application/contracts';
-import { IUserRepository } from '@domain/user/user.repository';
+import { IUserRepository } from '@domain/user/user-repository';
 
 export const getUserPublicProfileFactory = (
     logger: ILogger,
     userRepository: IUserRepository,
 ) => {
     return (userHandle: string) => {
-        return userRepository.getByHandle(userHandle);
+        return userRepository.findByHandle(userHandle);
     };
 };

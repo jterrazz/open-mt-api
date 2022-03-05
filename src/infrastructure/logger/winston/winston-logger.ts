@@ -4,17 +4,18 @@ import { IConfiguration, ILogger } from '@application/contracts';
 import { getCallerFile } from '@application/utils/node';
 import { winstonLocalFormat } from '@infrastructure/logger/winston/local-format';
 
-export const winstonLoggerFactory = (configuration: IConfiguration): ILogger => {
+export const winstonLoggerFactory = (
+    configuration: IConfiguration,
+): ILogger => {
     const winstonLogger = winston.createLogger({
         level: configuration.LOG.LEVEL,
     });
 
     winstonLogger.add(
         new winston.transports.Console({
-            format:
-                configuration.ENVIRONMENT === 'development'
-                    ? winstonLocalFormat
-                    : winston.format.json(),
+            format: ['development', 'test'].includes(configuration.ENVIRONMENT)
+                ? winstonLocalFormat
+                : winston.format.json(),
         }),
     );
 

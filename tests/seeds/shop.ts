@@ -1,19 +1,28 @@
-import { IDatabase } from '@application/contracts';
+import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
+import { generateRandomId } from '@tests/utils/math';
+import { randomUUID } from 'crypto';
 import type { Shop } from '@prisma/client';
 
-export const createSeedOfShop = async (
-    database: IDatabase,
-    partialShopInformation: Partial<Shop> = {},
+export const seedDatabaseWithShop = async (
+    databaseClient: IPrismaDatabase['client'],
+    partialShop: Partial<Shop> = {},
 ) => {
-    const newShopInformation = {
-        handle: 'the-shop-handle',
-        name: 'the-shop-name',
-        ...partialShopInformation,
-    };
-
-    await database.client.shop.create({
-        data: newShopInformation,
+    const shop = await databaseClient.shop.create({
+        data: {
+            bannerImageId: null,
+            countOfFollowers: 42,
+            createdAt: new Date(),
+            description: 'the_shop_description',
+            handle: randomUUID(),
+            id: Math.floor(generateRandomId()),
+            name: 'the_shop_name',
+            ...partialShop,
+        },
     });
 
-    return newShopInformation;
+    return {
+        createdAt: shop.createdAt,
+        handle: shop.handle,
+        id: shop.id,
+    };
 };
