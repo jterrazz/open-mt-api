@@ -9,10 +9,8 @@ describe('use-case - create new product', function () {
         const product: ProductEntity = {
             id: 'the-product-id',
             name: 'the-product-name',
-            price: {
-                amount: 42,
-                currency: 'EUR',
-            },
+            priceCentsAmount: 4200,
+            priceCurrency: 'EUR',
         };
         const createNewProduct = createNewProductFactory(
             createMockOfProductRepository(),

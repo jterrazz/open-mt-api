@@ -19,11 +19,11 @@ export const createShopFactory = (shopRepository: IShopRepository) => {
     ): Promise<CreateShopResult> => {
         const newShop: IShopEntity = {
             bannerImageUrl: createShopParams.bannerImageUrl || null,
+            countFollowers: 0,
             creationDate: new Date(),
             description: createShopParams.description || null,
             handle: createShopParams.handle,
             name: createShopParams.name,
-            numberOfFollowers: 42,
         };
 
         const persistedShop = await shopRepository.persist(newShop);

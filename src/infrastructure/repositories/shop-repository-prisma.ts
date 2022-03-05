@@ -30,6 +30,7 @@ export const shopRepositoryPrismaFactory = (
     persist: async (entity) => {
         const persistedShop = await prismaClient.shop.create({
             data: {
+                countOfFollowers: entity.countFollowers,
                 description: entity.description,
                 handle: entity.handle,
                 name: entity.name,

@@ -1,8 +1,8 @@
-# open.mt - Open Market API
+# Open.MT - Open Market API
 
-> A marketplace for the people by the people. Open, social and direct.
+> [Open.MT](https://open.mt) is a marketplace that allows customers to discover and transact with their communities.
 
-Find out more about us on [our blog](https://blog.myopen.market/) !
+Learn more about us on [our blog](https://blog.open.mt/) !
 
 ## Get started
 
@@ -125,10 +125,5 @@ infrastructure <=> configuration/dependencies.ts
 
 ---
 
-***open.mt - Open Market Wiki***
+[***Open.MT - Wiki***](https://github.com/jterrazz/app.open-mt)
 
-[<img align="left" alt="website" src="https://img.shields.io/badge/website-%2305A8AA.svg?&style=for-the-badge&logo=safari&logoColor=white" />](https://jterrazz.com)
-
-[<img align="left" alt="medium" src="https://img.shields.io/badge/blog-%23353535.svg?&style=for-the-badge&logo=medium&logoColor=white" />](https://blog.jterrazz.com)
-
-[<img align="left" alt="github" src="https://img.shields.io/badge/github-%23284B63.svg?&style=for-the-badge&logo=github&logoColor=white" />](https://github.com/myonewallet)

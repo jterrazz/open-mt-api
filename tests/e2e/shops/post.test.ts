@@ -47,9 +47,9 @@ describe('END TO END - POST /shops.ts', function () {
         // Then
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
-            description: null,
+            description: 'the_shop_description',
             handle: shopSeed.handle,
-            name: 'the-shop-name',
+            name: 'the_shop_name',
         });
     });
 

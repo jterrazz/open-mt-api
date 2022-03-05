@@ -12,8 +12,8 @@ afterAll(() => {
 
 describe('use-case - createShop()', function () {
     const mockOfANewShop = {
-        handle: 'the-shop-handle',
-        name: 'the-shop-name',
+        handle: 'the_new_shop_handle',
+        name: 'the_new_shop_name',
     };
 
     test('save a shop and return its public properties', async () => {
@@ -25,15 +25,15 @@ describe('use-case - createShop()', function () {
         // Then
         expect(mockOfShopRepository.persist).toHaveBeenCalledWith({
             bannerImageUrl: null,
+            countFollowers: 0,
             creationDate: new Date(),
             description: null,
-            handle: 'the-shop-handle',
-            name: 'the-shop-name',
-            numberOfFollowers: 42,
+            handle: 'the_new_shop_handle',
+            name: 'the_new_shop_name',
         });
         expect(result).toEqual({
-            handle: 'the-shop-handle',
-            name: 'the-shop-name',
+            handle: 'the_new_shop_handle',
+            name: 'the_new_shop_name',
         });
     });
 
