@@ -1,5 +1,5 @@
 import { AuthenticationRequiredError } from '@domain/error/authentication-required-error';
-import { ICheckPassword } from '@domain/encryption/check-password';
+import { ICheckPassword } from '../../contracts/encryption/check-password';
 import { ILogger } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user-repository';
 

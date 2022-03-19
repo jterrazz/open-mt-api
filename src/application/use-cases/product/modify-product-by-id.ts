@@ -1,25 +1,36 @@
-import { IProductRepository } from '@application/contracts/repositories/ProductRepository';
-import { Product } from '@entities/product';
-import { merge } from 'lodash';
+import { Currency } from '@domain/currency/currency';
+import { IProductRepository } from '@domain/product/product-repository';
+import { NotFoundError } from '@domain/error/client/not-found-error';
+import { ProductEntity } from '@domain/product/product-entity';
 
-export const modifyProductById = async (
-    productId: string,
-    partialProduct: Partial<Product>,
+type ModifyProductParams = {
+    name?: string;
+    priceCentsAmount?: number;
+    priceCurrency?: Currency;
+};
+
+export const modifyProductByIdFactory = (
     productRepository: IProductRepository,
-): Promise<Product> => {
-    const prod = await productRepository.findById(productId);
+) => {
+    return async (
+        userAsking: 1,
+        productId: number,
+        modifyProductParams: ModifyProductParams,
+    ): Promise<ProductEntity> => {
+        const productEntity = await productRepository.findById(productId);
 
-    const product: Product = {
-        id: 'id',
-        name: 'name',
-        price: {
-            amount: 123,
-            currency: 'EUR',
-        },
+        // TODO Only if user is the owner
+
+        if (!productEntity) {
+            throw new NotFoundError('unknown product');
+        }
+
+        if (modifyProductParams.name) {
+            productEntity.name = modifyProductParams.name;
+        }
+
+        // TODO Test no modification by ID.
+
+        return productRepository.merge(productEntity);
     };
-
-    // TODO Disable modification by ID.
-    merge(product, partialProduct);
-
-    return productRepository.merge(product);
 };

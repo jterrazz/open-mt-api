@@ -4,13 +4,16 @@ import {
     CreateShopURLParams,
     deserializeCreateShopRequest,
 } from '@adapters/serializers/shop-serializer';
-import { IController } from '@adapters/contracts/controllers';
+import {
+    IController,
+    IInitiatedController,
+} from '@adapters/contracts/controllers';
 import { IShopRepository } from '@domain/shop/shop-repository';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
 import { getShopFactory } from '@application/use-cases/shop/get-shop';
 
 export const shopControllerFactory = (shopRepository: IShopRepository) => {
-    const createShop: IController<
+    const createShop: IInitiatedController<
         CreateShopURLParams,
         CreateShopJSONRequest,
         CreateShopJSONResponse

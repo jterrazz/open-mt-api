@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcrypt';
-import { ICheckPassword } from '@domain/encryption/check-password';
+import { ICheckPassword } from '@application/contracts/encryption/check-password';
 
 export const checkBcryptPassword: ICheckPassword = (
     password,

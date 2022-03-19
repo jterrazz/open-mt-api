@@ -40,4 +40,7 @@ export interface IControllers {
         createShop: IController<unknown, unknown, unknown>;
         getShop: IController<unknown, unknown, unknown>;
     };
+    products: {
+        modifyProduct: IController<unknown, unknown, unknown>;
+    };
 }
