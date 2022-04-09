@@ -1,17 +1,23 @@
 import { StatusCodes } from 'http-status-codes';
 
+type ClientErrorMeta = {
+    fields: string[];
+};
+
 export class ClientError extends Error {
     public httpCode: StatusCodes;
-    public code: string | null;
+    public publicMessage: string;
+    public publicMeta?: ClientErrorMeta;
 
     constructor(
         httpCode: StatusCodes,
-        code: string | null,
-        publicMessage?: string,
+        publicMessage: string,
+        publicMeta?: ClientErrorMeta,
     ) {
-        super(publicMessage);
+        super();
 
         this.httpCode = httpCode;
-        this.code = code;
+        this.publicMessage = publicMessage;
+        this.publicMeta = publicMeta;
     }
 }

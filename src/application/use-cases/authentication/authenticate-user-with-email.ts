@@ -1,4 +1,4 @@
-import { AuthenticationRequiredError } from '@domain/error/authentication-required-error';
+import { AuthenticationRequiredError } from '@domain/error/client/authentication-required-error';
 import { ICheckPassword } from '../../contracts/encryption/check-password';
 import { ILogger } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user-repository';

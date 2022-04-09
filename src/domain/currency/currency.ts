@@ -1,4 +1,5 @@
 export const Currency = {
+    // TODO Refacto to reflect prisma
     EUR: 'EUR',
     USD: 'USD',
 };

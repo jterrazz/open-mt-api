@@ -1,4 +1,4 @@
-import { getCallerFile } from '~/application/utils/node';
+import { getCallerFile } from '@application/utils/node/node';
 
 describe('utils/node.js', function () {
     describe('getCallerFile()', function () {

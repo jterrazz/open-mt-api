@@ -1,4 +1,4 @@
-import { AuthenticationRequiredError } from '@domain/error/authentication-required-error';
+import { AuthenticationRequiredError } from '@domain/error/client/authentication-required-error';
 import { authenticateUserWithEmailFactory } from '@application/use-cases/authentication/authenticate-user-with-email';
 import { createMockOfLogger } from '@application/contracts/__tests__/logger.mock';
 import { createMockOfUser } from '@domain/user/__tests__/user-entity.mock';

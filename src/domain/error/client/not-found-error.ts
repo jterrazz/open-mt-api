@@ -3,6 +3,8 @@ import { StatusCodes } from 'http-status-codes';
 
 export class NotFoundError extends ClientError {
     constructor(publicMessage?: string) {
-        super(StatusCodes.NOT_FOUND, null, publicMessage);
+        publicMessage ||= 'not found';
+
+        super(StatusCodes.NOT_FOUND, publicMessage);
     }
 }

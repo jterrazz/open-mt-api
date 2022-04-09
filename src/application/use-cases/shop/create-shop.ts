@@ -1,5 +1,7 @@
+import { DuplicatedFieldError } from '@domain/error/technical/duplicated-field-error';
 import { IShopEntity } from '@domain/shop/shop-entity';
 import { IShopRepository } from '@domain/shop/shop-repository';
+import { UnprocessableEntityError } from '@domain/error/client/unprocessable-entity-error';
 
 type CreateShopParams = {
     name: string;
@@ -26,7 +28,17 @@ export const createShopFactory = (shopRepository: IShopRepository) => {
             name: createShopParams.name,
         };
 
-        const persistedShop = await shopRepository.persist(newShop);
+        const persistedShop = await shopRepository
+            .persist(newShop)
+            .catch((error) => {
+                if (
+                    error instanceof DuplicatedFieldError &&
+                    error.field === 'handle'
+                ) {
+                    throw new UnprocessableEntityError(['handle']);
+                }
+                throw error;
+            });
 
         return {
             handle: persistedShop.handle,

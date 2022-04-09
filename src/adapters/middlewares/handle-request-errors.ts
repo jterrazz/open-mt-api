@@ -8,16 +8,20 @@ export const handleRequestErrorsMiddlewareFactory = (
     return async (ctx, next) => {
         try {
             await next();
-        } catch (e) {
-            if (e instanceof ClientError) {
-                ctx.response.status = e.httpCode;
+        } catch (error) {
+            if (error instanceof ClientError) {
+                ctx.response.status = error.httpCode;
                 ctx.response.body = {
-                    message: e.message,
+                    message: error.publicMessage,
+                    meta: error.publicMeta,
                 };
-            } // TODO else if (e instanceof TechnicalError)
-            else {
-                logger.error(`unknown error ${e}`);
-                throw e;
+            } else {
+                logger.error(`unknown error ${error}`);
+
+                ctx.response.status = 500;
+                ctx.response.body = {
+                    message: 'Internal Server Error',
+                };
             }
         }
     };

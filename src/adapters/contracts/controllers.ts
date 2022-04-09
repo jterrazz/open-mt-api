@@ -1,46 +1,34 @@
-import { Context, Request } from 'koa';
+import { Context } from 'koa';
 import { ITrackerRepository } from '@domain/tracker/tracker-repository';
 import { UserEntity } from '@domain/user/user-entity';
 
-interface IKoaRequest<RequestBody> extends Request {
-    body?: RequestBody;
-}
-
-export interface IKoaContext<RequestParams, RequestBody, ResponseBody>
-    extends Context {
-    request: IKoaRequest<RequestBody>;
-    params: RequestParams;
-    body: ResponseBody;
+export interface IKoaContext extends Context {
     requestTracker?: ITrackerRepository;
     authenticatedUser?: UserEntity;
 }
 
-export interface IInitiatedKoaContext<RequestParams, RequestBody, ResponseBody>
-    extends IKoaContext<RequestParams, RequestBody, ResponseBody> {
+export interface IInitiatedKoaContext extends Context {
     requestTracker: ITrackerRepository;
-    authenticatedUser: UserEntity;
+    authenticatedUser?: UserEntity;
 }
 
-export type IController<RequestParams, RequestBody, ResponseBody> = (
-    ctx: IKoaContext<RequestParams, RequestBody, ResponseBody>,
-) => Promise<void>;
-
-export type IInitiatedController<RequestParams, RequestBody, ResponseBody> = (
-    ctx: IInitiatedKoaContext<RequestParams, RequestBody, ResponseBody>,
+export type IKoaController = (ctx: IKoaContext) => Promise<void>;
+export type IInitiatedKoaController = (
+    ctx: IInitiatedKoaContext,
 ) => Promise<void>;
 
 export interface IControllers {
     users: {
-        getPublicProfile: IController<unknown, unknown, unknown>;
+        getPublicProfile: IKoaController;
     };
     api: {
-        getState: IController<unknown, unknown, unknown>;
+        getState: IKoaController;
     };
     shops: {
-        createShop: IController<unknown, unknown, unknown>;
-        getShop: IController<unknown, unknown, unknown>;
+        createShop: IKoaController;
+        getShop: IKoaController;
     };
     products: {
-        modifyProduct: IController<unknown, unknown, unknown>;
+        modifyProduct: IKoaController;
     };
 }

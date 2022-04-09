@@ -1,24 +1,30 @@
-import { IControllers, IKoaContext } from '@adapters/contracts/controllers';
+import { GetUserKoaSerializer } from '@adapters/serializers/user/get-user-koa-serializer';
+import { IInitiatedKoaController } from '@adapters/contracts/controllers';
 import { ILogger } from '@application/contracts';
 import { IUserRepository } from '@domain/user/user-repository';
+import { NotFoundError } from '@domain/error/client/not-found-error';
 import { getUserPublicProfileFactory } from '@application/use-cases/user/get-user-public-profile';
-import { serializeUserHandle } from '@adapters/serializers/user-serializer';
+
+const getUserKoaSerializer = new GetUserKoaSerializer();
 
 export const userControllerFactory = (
     logger: ILogger,
     userRepository: IUserRepository,
-): IControllers['users'] => {
-    const getPublicProfile = async (ctx: IKoaContext<any, any, any>) => {
-        // TODO replace any
+) => {
+    const getPublicProfile: IInitiatedKoaController = async (ctx) => {
+        const { handle } = getUserKoaSerializer.deserializeRequest(ctx);
         const getUserPublicProfile = getUserPublicProfileFactory(
             logger,
             userRepository,
         );
 
-        // @ts-ignore // TODO COMEBACK ON THAT
-        const handle = serializeUserHandle(ctx.body.handle);
+        const userPublicProfile = await getUserPublicProfile(handle);
 
-        ctx.body = await getUserPublicProfile(handle);
+        if (!userPublicProfile) {
+            throw new NotFoundError();
+        }
+
+        ctx.body = getUserKoaSerializer.serializeResponse(userPublicProfile);
     };
 
     return { getPublicProfile };
