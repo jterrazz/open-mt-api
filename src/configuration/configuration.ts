@@ -4,8 +4,8 @@ import {
     databaseConfigSchema,
     environmentSchema,
     logConfigSchema,
-} from '@application/contracts/configuration'; // .yml configuration
-import config from 'config';
+} from '@application/contracts/configuration';
+import config from 'config'; // .yml configuration
 
 export const configurationFactory = (
     nodeEnv = process.env.NODE_ENV,

@@ -1,17 +1,17 @@
 import Router from 'koa-router';
 
 import { IControllers } from '@adapters/contracts/controllers';
-import { shopsRouterFactory } from '@infrastructure/webserver/routes/shops';
-// import { paymentsRouter } from './payments';
-// import { userRouter } from './user';
-// import { usersRouter } from './users';
+import { shopRouterFactory } from '@infrastructure/webserver/routes/shop';
+import { userRouterFactory } from './user';
 
 export const routerFactory = (controllers: IControllers): Router => {
     const router = new Router();
-    const shopsRouter = shopsRouterFactory(controllers);
+    const shopRouter = shopRouterFactory(controllers);
+    const userRouter = userRouterFactory(controllers);
 
     router.get('/', controllers.api.getState);
-    router.use('/shops', shopsRouter.routes(), shopsRouter.allowedMethods());
+    router.use('/shop', shopRouter.routes(), shopRouter.allowedMethods());
+    router.use('/user', userRouter.routes(), userRouter.allowedMethods());
 
     return router;
 };

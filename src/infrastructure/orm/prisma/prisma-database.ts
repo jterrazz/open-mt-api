@@ -1,6 +1,6 @@
 import { IConfiguration, IDatabase, ILogger } from '@application/contracts';
 import { PrismaClient } from '@prisma/client';
-import { sleep } from '@application/utils/async';
+import { sleep } from '@application/utils/node/async';
 
 export interface IPrismaDatabase extends IDatabase {
     client: PrismaClient;
@@ -60,15 +60,16 @@ export const prismaDatabaseFactory = (
             return connect(remainingTries - 1);
         }
     };
+    const disconnect = async () => {
+        logger.info('disconnecting database');
+        await prismaClient.$disconnect();
+        logger.debug('disconnected database');
+    };
 
     global.prismaDatabase = {
         client: prismaClient,
         connect,
-        disconnect: async () => {
-            logger.info('disconnecting database');
-            await prismaClient.$disconnect();
-            logger.debug('disconnected database');
-        },
+        disconnect,
     };
 
     return global.prismaDatabase;

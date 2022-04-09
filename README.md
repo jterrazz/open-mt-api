@@ -107,7 +107,7 @@ The implementations are injected at the runtime. It can only create this logic b
 
 ##### 3. Domain
 This layer is independent, you will never see any “require (‘…’)” to another part of the application
-This layer wouldn’t be affected by external changes like routing or controllers.
+This layer is not be affected by external changes like routing or controllers.
 
 ##### 4. Infrastructure
 This is the technical implementation of our application contracts.

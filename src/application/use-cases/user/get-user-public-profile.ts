@@ -5,7 +5,19 @@ export const getUserPublicProfileFactory = (
     logger: ILogger,
     userRepository: IUserRepository,
 ) => {
-    return (userHandle: string) => {
-        return userRepository.findByHandle(userHandle);
+    return async (
+        userHandle: string,
+    ): Promise<{
+        firstName: string;
+        lastName: string;
+    } | null> => {
+        const user = await userRepository.findByHandle(userHandle);
+
+        return (
+            user && {
+                firstName: user.firstName,
+                lastName: user.lastName,
+            }
+        );
     };
 };

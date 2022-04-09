@@ -3,7 +3,7 @@ import { createMockOfLogger } from '@application/contracts/__tests__/logger.mock
 import { handleRequestErrorsMiddlewareFactory } from '@adapters/middlewares/handle-request-errors';
 
 describe('handleRequestErrorsMiddleware()', () => {
-    test('passes the error details to the response', async () => {
+    test('respond with client errors details', async () => {
         // Given
         const ctx = { response: { body: null, status: null } };
         const next = async () => {
@@ -24,7 +24,7 @@ describe('handleRequestErrorsMiddleware()', () => {
         });
     });
 
-    test('throws errors any random error', async () => {
+    test('respond with internal errors for any random error', async () => {
         // Given
         const ctx = { response: { body: null, status: null } };
         const next = async () => {
@@ -32,14 +32,16 @@ describe('handleRequestErrorsMiddleware()', () => {
         };
 
         // When
-        const ft = () =>
-            handleRequestErrorsMiddlewareFactory(createMockOfLogger())(
-                // @ts-ignore
-                ctx,
-                next,
-            );
+        await handleRequestErrorsMiddlewareFactory(createMockOfLogger())(
+            // @ts-ignore
+            ctx,
+            next,
+        );
 
         // Then
-        await expect(ft).rejects.toThrow();
+        expect(ctx.response.status).toEqual(500);
+        expect(ctx.response.body).toEqual({
+            message: 'Internal Server Error',
+        });
     });
 });

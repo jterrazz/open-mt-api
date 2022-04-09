@@ -1,5 +1,5 @@
 import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
-import { generateRandomId } from '@tests/utils/math';
+import { generateRandomId } from '@application/utils/math';
 import { randomUUID } from 'crypto';
 import type { Shop } from '@prisma/client';
 

@@ -13,8 +13,8 @@ export const startApplication = async () => {
     try {
         await database.connect();
         await webserver.start();
-    } catch (e) {
-        logger.error(e);
+    } catch (error) {
+        logger.error(error);
     }
 };
 

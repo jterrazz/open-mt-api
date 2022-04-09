@@ -14,6 +14,7 @@ import { initRequestTrackerMiddlewareFactory } from '@adapters/middlewares/init-
 import { initTrackerForRequestFactory } from '@domain/tracker/init-tracker-for-request';
 import { koaServerFactory } from '@infrastructure/webserver/koa-server';
 import { paymentRepositoryPrismaFactory } from '@infrastructure/repositories/payment-repository-prisma';
+import { productControllerFactory } from '@adapters/controllers/product-controller';
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product-repository-prisma';
 import { shopControllerFactory } from '@adapters/controllers/shop-controller';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop-repository-prisma';
@@ -61,6 +62,7 @@ export const initDependencies = (): {
 
     const controllers: IControllers = {
         api: apiControllerFactory(configuration),
+        products: productControllerFactory(productRepository),
         shops: shopControllerFactory(shopRepository),
         users: userControllerFactory(logger, userRepository),
     };

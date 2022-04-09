@@ -1,6 +1,6 @@
 import { createEndToEndApplication } from '@tests/e2e/create-end-to-end-application';
 import { seedDatabaseWithShop } from '@tests/seeds/shop';
-import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
+import { useFakeTimers, useRealTimers } from '@application/utils/node/timer';
 import request from 'supertest';
 
 const {
@@ -16,35 +16,14 @@ afterAll(() => {
     useRealTimers();
 });
 
-describe('END TO END - POST /shops.ts', function () {
-    test('creates a new shop', async () => {
-        // Given
-        const params = {
-            handle: 'the_new_shop_handle',
-            name: 'the_new_shop_name',
-        };
-
-        // When
-        const response = await request(app.callback())
-            .post('/shops')
-            .send(params);
-
-        // Then
-        expect(response.status).toEqual(200);
-        expect(response.body).toEqual({
-            handle: 'the_new_shop_handle',
-            name: 'the_new_shop_name',
-        });
-        expect(response.headers['content-type']).toContain('json');
-    });
-
+describe('END TO END - GET /shop', function () {
     test('get an existing shop', async () => {
         // Given
         const shopSeed = await seedDatabaseWithShop(databaseClient);
 
         // When
         const response = await request(app.callback()).get(
-            '/shops/' + shopSeed.handle,
+            '/shop/' + shopSeed.handle,
         );
 
         // Then
@@ -56,13 +35,13 @@ describe('END TO END - POST /shops.ts', function () {
         });
     });
 
-    test('get a missing shop', async () => {
+    test('does not get a missing shop', async () => {
         // Given
         const deadShopHandle = 'the_dead_shop_handle';
 
         // When
         const response = await request(app.callback()).get(
-            '/shops/' + deadShopHandle,
+            '/shop/' + deadShopHandle,
         );
 
         // Then

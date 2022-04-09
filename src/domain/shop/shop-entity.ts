@@ -1,6 +1,5 @@
 import * as z from 'zod';
 
-// TODO Check how to not interfere with database if param is updated here
 export const Z_SHOP_NAME = z.string().min(3).max(80);
 export const Z_SHOP_HANDLE = z.string().min(3).max(40);
 export const Z_SHOP_CREATION_DATE = z.date();
