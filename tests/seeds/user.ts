@@ -8,20 +8,11 @@ export const seedDatabaseWithUser = async (
 ) => {
     const { user } = await database.$transaction(
         async (prismaTransactionClient) => {
-            console.log('sbeforeettings');
-            console.log('sbeforeettings');
-            console.log('sbeforeettings');
-
             const settings = await prismaTransactionClient.userSettings.create({
                 data: {
                     language: 'FR',
                 },
             });
-
-            console.log('settings');
-            console.log('settings');
-            console.log('settings');
-            console.log(settings);
 
             const user = await prismaTransactionClient.user.create({
                 data: {
@@ -36,18 +27,15 @@ export const seedDatabaseWithUser = async (
                 },
             });
 
-            console.log('user');
-            console.log('user');
-            console.log('user');
-            console.log(user);
-
             return { settings, user };
         },
     );
 
     return {
         email: user.email,
+        firstName: user.firstName,
         handle: user.handle,
         id: user.id,
+        lastName: user.lastName,
     };
 };

@@ -1,67 +1,85 @@
 import { CreateShopKoaSerializer } from '@adapters/serializers/shop/create-shop-koa-serializer';
-import { GetShopKoaSerializer } from '@adapters/serializers/shop/get-shop-koa-serializer';
 import { UnprocessableEntityError } from '@domain/error/client/unprocessable-entity-error';
+import { createMockOfInitiatedKoaContext } from '@adapters/contracts/__tests__/initiated-koa-context.mock';
 
-const getValidCreateShopBody = () => ({
-    handle: 'thehandle',
-    name: 'the_name',
-});
+describe('CreateShopKoaSerializer', () => {
+    const createShopKoaSerializer = new CreateShopKoaSerializer();
 
-describe('createShopKoaSerializer()', () => {
-    test('succeed if the request is valid', async () => {
-        // Given
-        const createShopKoaSerializer = new CreateShopKoaSerializer();
-        const ctx = {
-            request: {
-                body: getValidCreateShopBody(),
-            },
-        };
+    describe('serializeResponse()', () => {
+        test('with basic response', async () => {
+            // Given
+            const ctx = createMockOfInitiatedKoaContext();
+            const params = {
+                handle: 'the_handle',
+                name: 'the_name',
+            };
 
-        // When
-        // @ts-ignore
-        const result = createShopKoaSerializer.deserializeRequest(ctx);
+            // When
+            createShopKoaSerializer.serializeResponse(ctx, params);
 
-        // Then
-        expect(result).toEqual({ handle: 'thehandle', name: 'the_name' });
+            // Then
+            expect(ctx.body).toEqual({
+                handle: 'the_handle',
+                name: 'the_name',
+            });
+        });
     });
 
-    test('fails if no shop handle is provided', async () => {
-        // Given
-        const getShopKoaSerializer = new GetShopKoaSerializer();
-        const ctx = {
-            request: {
-                body: {
-                    ...getValidCreateShopBody(),
-                    handle: undefined,
+    describe('deserializeRequest()', () => {
+        const getValidCreateShopBody = () => ({
+            handle: 'the_handle',
+            name: 'the_name',
+        });
+
+        test('succeeds if the request is valid', async () => {
+            // Given
+            const ctx = createMockOfInitiatedKoaContext({
+                request: {
+                    body: getValidCreateShopBody(),
                 },
-            },
-        };
+            });
 
-        // When
-        // @ts-ignore
-        const ft = () => getShopKoaSerializer.deserializeRequest(ctx);
+            // When
+            const result = createShopKoaSerializer.deserializeRequest(ctx);
 
-        // Then
-        expect(ft).toThrow(UnprocessableEntityError);
-    });
+            // Then
+            expect(result).toEqual({ handle: 'the_handle', name: 'the_name' });
+        });
 
-    test('fails if no shop name is provided', async () => {
-        // Given
-        const getShopKoaSerializer = new GetShopKoaSerializer();
-        const ctx = {
-            request: {
-                body: {
-                    ...getValidCreateShopBody(),
-                    name: undefined,
+        test('fails if no shop handle is provided', async () => {
+            // Given
+            const ctx = createMockOfInitiatedKoaContext({
+                request: {
+                    body: {
+                        ...getValidCreateShopBody(),
+                        handle: undefined,
+                    },
                 },
-            },
-        };
+            });
 
-        // When
-        // @ts-ignore
-        const ft = () => getShopKoaSerializer.deserializeRequest(ctx);
+            // When
+            const ft = () => createShopKoaSerializer.deserializeRequest(ctx);
 
-        // Then
-        expect(ft).toThrow(UnprocessableEntityError);
+            // Then
+            expect(ft).toThrow(UnprocessableEntityError);
+        });
+
+        test('fails if no shop name is provided', async () => {
+            // Given
+            const ctx = createMockOfInitiatedKoaContext({
+                request: {
+                    body: {
+                        ...getValidCreateShopBody(),
+                        name: undefined,
+                    },
+                },
+            });
+
+            // When
+            const ft = () => createShopKoaSerializer.deserializeRequest(ctx);
+
+            // Then
+            expect(ft).toThrow(UnprocessableEntityError);
+        });
     });
 });

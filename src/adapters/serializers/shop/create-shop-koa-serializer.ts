@@ -1,5 +1,8 @@
 import * as z from 'zod';
-import { IKoaContext } from '@adapters/contracts/controllers';
+import {
+    IInitiatedKoaContext,
+    IKoaContext,
+} from '@adapters/contracts/controllers';
 import { IKoaSerializer } from '@adapters/serializers/koa-serializer';
 import { Z_SHOP_HANDLE, Z_SHOP_NAME } from '@domain/shop/shop-entity';
 import { mapZodErrorToUnprocessableEntityError } from '@application/utils/zod/map-unprocessable-entity-error';
@@ -16,7 +19,13 @@ export class CreateShopKoaSerializer implements IKoaSerializer {
         );
     }
 
-    serializeResponse(response: { handle: string; name: string }) {
-        return response;
+    serializeResponse(
+        ctx: IInitiatedKoaContext,
+        response: { handle: string; name: string },
+    ) {
+        ctx.body = {
+            handle: response.handle,
+            name: response.name,
+        };
     }
 }

@@ -12,19 +12,19 @@ export const userControllerFactory = (
     userRepository: IUserRepository,
 ) => {
     const getPublicProfile: IInitiatedKoaController = async (ctx) => {
-        const { handle } = getUserKoaSerializer.deserializeRequest(ctx);
+        const { userHandle } = getUserKoaSerializer.deserializeRequest(ctx);
         const getUserPublicProfile = getUserPublicProfileFactory(
             logger,
             userRepository,
         );
 
-        const userPublicProfile = await getUserPublicProfile(handle);
+        const userPublicProfile = await getUserPublicProfile(userHandle);
 
         if (!userPublicProfile) {
             throw new NotFoundError();
         }
 
-        ctx.body = getUserKoaSerializer.serializeResponse(userPublicProfile);
+        getUserKoaSerializer.serializeResponse(ctx, userPublicProfile);
     };
 
     return { getPublicProfile };

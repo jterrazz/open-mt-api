@@ -12,7 +12,7 @@ export const apiControllerFactory = (configuration: IConfiguration) => {
             ctx.requestTracker,
         );
 
-        ctx.body = getApiStateKoaSerializer.serializeResponse(getApiState());
+        getApiStateKoaSerializer.serializeResponse(ctx, getApiState());
     };
 
     return { getState };

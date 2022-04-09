@@ -12,6 +12,6 @@ export const createEndToEndApplication = (): CreateEndToEndApplication => {
 
     return {
         app: webserver.app,
-        database: database as IPrismaDatabase,
+        database,
     };
 };

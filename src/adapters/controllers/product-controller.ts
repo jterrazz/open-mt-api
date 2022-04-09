@@ -9,9 +9,6 @@ export const productControllerFactory = (
         // TODO Serialize
         const modifyProductById = modifyProductByIdFactory(productRepository);
         const modifiedProduct = await modifyProductById(1, 1, {});
-
-        // TODO Serialize
-        ctx.body = modifiedProduct;
     };
 
     return { modifyProduct };

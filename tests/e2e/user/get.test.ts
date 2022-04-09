@@ -1,6 +1,5 @@
 import { createEndToEndApplication } from '@tests/e2e/create-end-to-end-application';
 import { seedDatabaseWithUser } from '@tests/seeds/user';
-import { useFakeTimers, useRealTimers } from '@application/utils/node/timer';
 import request from 'supertest';
 
 const {
@@ -8,46 +7,40 @@ const {
     database: { client: databaseClient },
 } = createEndToEndApplication();
 
-beforeAll(() => {
-    useFakeTimers();
-});
-
-afterAll(() => {
-    useRealTimers();
-});
-
 describe('END TO END - GET /user', function () {
     test('get an existing user', async () => {
         // Given
-        console.log(1);
-        console.log(1);
-        console.log(1);
-        const userSeed = await seedDatabaseWithUser(databaseClient);
-        console.log(2);
-        console.log(2);
-        console.log(2);
+        const seededUserHandle = 'seeded_user_handle';
+        const seededUser = await seedDatabaseWithUser(databaseClient, {
+            handle: seededUserHandle,
+        });
+
         // When
         const response = await request(app.callback()).get(
-            '/user/' + userSeed.handle,
+            '/user/' + seededUserHandle,
         );
 
         // Then
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
-            name: 'the_shop_name',
+            firstName: seededUser.firstName,
+            lastName: seededUser.lastName,
         });
     });
 
     test('does not get a missing user', async () => {
-        // // Given
-        // const deadShopHandle = 'the_dead_shop_handle';
-        //
-        // // When
-        // const response = await request(app.callback()).get(
-        //     '/shop/' + deadShopHandle,
-        // );
-        //
-        // // Then
-        // expect(response.status).toEqual(404);
+        // Given
+        const deadUserHandle = 'dead_user_handle';
+
+        // When
+        const response = await request(app.callback()).get(
+            '/user/' + deadUserHandle,
+        );
+
+        // Then
+        expect(response.status).toEqual(404);
+        expect(response.body).toEqual({
+            message: 'not found',
+        });
     });
 });

@@ -11,6 +11,7 @@ export const getShopFactory = (shopRepository: IShopRepository) => {
     return async (shopHandle: string): Promise<GetShopResult> => {
         const shop = await shopRepository.findByHandle(shopHandle);
 
+        // TODO Move up i guess
         if (!shop) {
             throw new NotFoundError(`shop '${shopHandle}' does not exist`);
         }
