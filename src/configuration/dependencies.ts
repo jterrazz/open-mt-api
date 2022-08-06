@@ -11,11 +11,11 @@ import { createProductControllerFactory } from '@adapters/controllers/product/cr
 import { createProductFactory } from '@application/use-cases/product/create-product';
 import { createShopControllerFactory } from '@adapters/controllers/shop/create-shop.controller';
 import { createShopFactory } from '@application/use-cases/shop/create-shop';
-import { deserializeCreateProductKoaRequest } from '@adapters/serializers/routes/product/deserialize-create-product-koa-request';
-import { deserializeCreateShopKoaRequest } from '@adapters/serializers/routes/shop/deserialize-create-shop-koa-request';
-import { deserializeGetShopKoaRequest } from '@adapters/serializers/routes/shop/deserialize-get-shop-koa-request';
-import { deserializeGetUserPublicProfileKoaRequest } from '@adapters/serializers/routes/user/deserialize-get-user-public-profile-koa-request';
-import { deserializeModifyProductKoaRequest } from '@adapters/serializers/routes/product/deserialize-modify-product-koa-request';
+import { deserializeCreateProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-create-product-koa-request';
+import { deserializeCreateShopKoaRequest } from '@adapters/serializers/requests/shop/deserialize-create-shop-koa-request';
+import { deserializeGetShopKoaRequest } from '@adapters/serializers/requests/shop/deserialize-get-shop-koa-request';
+import { deserializeGetUserPublicProfileKoaRequest } from '@adapters/serializers/requests/user/deserialize-get-user-public-profile-koa-request';
+import { deserializeModifyProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-modify-product-koa-request';
 import { getApiStateControllerFactory } from '@adapters/controllers/api/get-api-state.controller';
 import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
 import { getProductControllerFactory } from '@adapters/controllers/product/get-product.controller';
@@ -39,14 +39,13 @@ import { modifyProductFactory } from '@application/use-cases/product/modify-prod
 import { passportDeserializerFactory } from '@adapters/serializers/authentication/passport-deserializer';
 import { passportSerializer } from '@adapters/serializers/authentication/passport-serializer';
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product.prisma-repository';
-import { serializeCreateProductKoaResponse } from '@adapters/serializers/routes/product/serialize-create-product-koa-response';
-import { serializeCreateShopKoaResponse } from '@adapters/serializers/routes/shop/serialize-create-shop-koa-response';
-import { serializeGetApiStateKoaResponse } from '@adapters/serializers/routes/api/serialize-get-api-state-koa-response';
-import { serializeGetShopKoaResponse } from '@adapters/serializers/routes/shop/serialize-get-shop-koa-response';
-import { serializeGetUserPublicProfileKoaResponse } from '@adapters/serializers/routes/user/serialize-get-user-public-profile-koa-response';
-import { serializeLoginKoaResponse } from '@adapters/serializers/routes/authentication/serialize-login-koa-response';
-import { serializeLogoutKoaResponse } from '@adapters/serializers/routes/authentication/serialize-logout-koa-response';
-import { serializeModifyProductKoaResponse } from '@adapters/serializers/routes/product/serialize-modify-product-koa-response';
+import { serializeCreateProductKoaResponse } from '@adapters/serializers/requests/product/serialize-create-product-koa-response';
+import { serializeCreateShopKoaResponse } from '@adapters/serializers/requests/shop/serialize-create-shop-koa-response';
+import { serializeGetShopKoaResponse } from '@adapters/serializers/requests/shop/serialize-get-shop-koa-response';
+import { serializeGetUserPublicProfileKoaResponse } from '@adapters/serializers/requests/user/serialize-get-user-public-profile-koa-response';
+import { serializeLoginKoaResponse } from '@adapters/serializers/requests/authentication/serialize-login-koa-response';
+import { serializeLogoutKoaResponse } from '@adapters/serializers/requests/authentication/serialize-logout-koa-response';
+import { serializeModifyProductKoaResponse } from '@adapters/serializers/requests/product/serialize-modify-product-koa-response';
 import { setResponseHeadersMiddlewareFactory } from '@adapters/middlewares/set-response-headers.middleware';
 import { setupPassportStrategiesFactory } from '@infrastructure/webserver/setup-passport-strategies';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop.prisma-repository';
@@ -107,10 +106,7 @@ export const getDependencies = (): {
 
     const controllers: IAdapterControllers = {
         api: {
-            getState: getApiStateControllerFactory(
-                getApiState,
-                serializeGetApiStateKoaResponse,
-            ),
+            getState: getApiStateControllerFactory(getApiState),
         },
         authentication: {
             logIn: logInControllerFactory(serializeLoginKoaResponse),

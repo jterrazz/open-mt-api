@@ -4,14 +4,13 @@ import { getApiStateControllerFactory } from '@adapters/controllers/api/get-api-
 describe('getApiStateController()', () => {
     test('calls a tracker event', async () => {
         // Given
-        const mockOfGetApiState = jest.fn();
+        const mockOfGetApiState = jest.fn().mockResolvedValue({
+            time: new Date('2000-01-01'),
+        });
         const mockOfCtx = createMockOfInitiatedKoaContext();
 
         // When
-        await getApiStateControllerFactory(
-            mockOfGetApiState,
-            jest.fn(),
-        )(mockOfCtx);
+        await getApiStateControllerFactory(mockOfGetApiState)(mockOfCtx);
 
         // Then
         expect(

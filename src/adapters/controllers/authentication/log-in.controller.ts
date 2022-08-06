@@ -1,5 +1,5 @@
 import { IInitiatedKoaController } from '@adapters/controllers/koa-controller';
-import { SerializeLoginKoaResponse } from '@adapters/serializers/routes/authentication/serialize-login-koa-response';
+import { SerializeLoginKoaResponse } from '@adapters/serializers/requests/authentication/serialize-login-koa-response';
 
 export const logInControllerFactory = (
     serializeLoginKoaResponse: SerializeLoginKoaResponse,

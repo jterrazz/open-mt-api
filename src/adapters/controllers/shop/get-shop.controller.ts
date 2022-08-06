@@ -1,8 +1,8 @@
-import { DeserializeGetShopKoaRequest } from '@adapters/serializers/routes/shop/deserialize-get-shop-koa-request';
+import { DeserializeGetShopKoaRequest } from '@adapters/serializers/requests/shop/deserialize-get-shop-koa-request';
 import { GetShop } from '@application/use-cases/shop/get-shop';
 import { IInitiatedKoaController } from '@adapters/controllers/koa-controller';
 import { NotFoundClientError } from '@domain/error/client/not-found-client-error';
-import { SerializeGetShopKoaResponse } from '@adapters/serializers/routes/shop/serialize-get-shop-koa-response';
+import { SerializeGetShopKoaResponse } from '@adapters/serializers/requests/shop/serialize-get-shop-koa-response';
 
 export const getShopControllerFactory = (
     getShop: GetShop,

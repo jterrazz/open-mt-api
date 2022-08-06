@@ -1,5 +1,5 @@
 import { IInitiatedKoaController } from '@adapters/controllers/koa-controller';
-import { SerializeLogoutKoaResponse } from '@adapters/serializers/routes/authentication/serialize-logout-koa-response';
+import { SerializeLogoutKoaResponse } from '@adapters/serializers/requests/authentication/serialize-logout-koa-response';
 
 export const logOutControllerFactory = (
     serializeLogoutKoaResponse: SerializeLogoutKoaResponse,
