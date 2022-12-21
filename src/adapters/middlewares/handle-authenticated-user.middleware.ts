@@ -1,4 +1,4 @@
-import { ILogger } from '@application/contracts';
+import { ILogger } from '~/domain';
 import { Middleware } from 'koa';
 
 export const handleAuthenticatedUserMiddlewareFactory = (

@@ -1,4 +1,4 @@
-import { ProductEntity } from '@domain/product/product.entity';
+import { ProductEntity } from '@domain/use-cases/product/product.entity';
 
 export const serializeProductForPublic = (product: ProductEntity) => {
     return {

@@ -1,5 +1,5 @@
 import { createMockOfConfiguration } from '@configuration/__mocks__/configuration.mock';
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { setResponseHeadersMiddlewareFactory } from '@adapters/middlewares/set-response-headers.middleware';
 
 const setResponseHeadersMiddleware = setResponseHeadersMiddlewareFactory(

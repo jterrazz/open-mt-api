@@ -1,4 +1,4 @@
-import { Currency } from '@domain/price/currency';
+import { Currency } from '@domain/use-cases/price/currency';
 import { getDependencies } from '@configuration/dependencies';
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product.prisma-repository';
 import { seedDatabaseWithProduct } from '@tests/seeds/seed-database-with-product';

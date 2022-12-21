@@ -1,6 +1,6 @@
-import { BrokenOneToOneRelationServerError } from '@domain/error/server/broken-one-to-one-relation-server-error';
-import { DuplicatedFieldServerError } from '@domain/error/server/duplicated-field-server-error';
-import { NotFoundServerError } from '@domain/error/server/not-found-server-error';
+import { BrokenOneToOneRelationServerError } from '@domain/use-cases/error/server/broken-one-to-one-relation-server-error';
+import { DuplicatedFieldServerError } from '@domain/use-cases/error/server/duplicated-field-server-error';
+import { NotFoundServerError } from '@domain/use-cases/error/server/not-found-server-error';
 import { getDependencies } from '@configuration/dependencies';
 import { seedDatabaseWithShop } from '@tests/seeds/seed-database-with-shop';
 import { seedDatabaseWithUser } from '@tests/seeds/seed-database-with-user';

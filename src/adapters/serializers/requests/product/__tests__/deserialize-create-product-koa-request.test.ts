@@ -1,5 +1,5 @@
-import { UnprocessableEntityClientError } from '@domain/error/client/unprocessable-entity-client-error';
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { UnprocessableEntityClientError } from '@domain/use-cases/error/client/unprocessable-entity-client-error';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { deserializeCreateProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-create-product-koa-request';
 
 describe('deserializeCreateProductKoaRequest()', () => {

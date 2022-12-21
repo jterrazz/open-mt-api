@@ -1,7 +1,7 @@
-import { Applicable } from '@application/utils/applicable';
-import { EventIdentifiers } from '@domain/tracker/events';
-import { IConfiguration } from '@application/contracts';
-import { ITrackerRepository } from '@domain/tracker/tracker.repository';
+import { Applicable } from '@application/../../domain/utils/applicable';
+import { EventIdentifiers } from '@domain/use-cases/tracker/events';
+import { IConfiguration } from '~/domain';
+import { ITrackerRepository } from '@domain/use-cases/tracker/tracker.repository';
 
 export type EventInMemory = {
     event: string;

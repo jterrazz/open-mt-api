@@ -1,4 +1,4 @@
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { serializeCreateShopKoaResponse } from '@adapters/serializers/requests/shop/serialize-create-shop-koa-response';
 
 describe('serializeCreateShopKoaResponse()', () => {

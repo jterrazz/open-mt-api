@@ -1,4 +1,4 @@
-import { GetApiState } from '@application/use-cases/api/get-api-state';
+import { GetApiState } from '@application/../../../domain/api/get-api-state';
 import { IInitiatedKoaController } from '@adapters/controllers/koa-controller';
 import { serializeApiState } from '@adapters/serializers/api/serialize-api-state';
 

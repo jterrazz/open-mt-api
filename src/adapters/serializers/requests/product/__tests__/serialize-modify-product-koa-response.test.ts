@@ -1,6 +1,6 @@
 // Create tests for serializeModifyProductKoaResponse
-import { ProductEntity } from '@domain/product/product.entity';
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { ProductEntity } from '@domain/use-cases/product/product.entity';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { serializeModifyProductKoaResponse } from '@adapters/serializers/requests/product/serialize-modify-product-koa-response';
 
 describe('serializeModifyProductKoaResponse', () => {

@@ -3,7 +3,7 @@ import {
     apiConfigSchema,
     environmentSchema,
     servicesConfigSchema,
-} from '@application/contracts/configuration';
+} from '@domain/configuration';
 import config from 'config'; // .yml configuration
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const versionFromPackageJson = require('../../package.json').version;

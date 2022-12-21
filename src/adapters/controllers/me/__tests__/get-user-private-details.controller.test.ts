@@ -1,4 +1,4 @@
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { getUserPrivateDetailsControllerFactory } from '@adapters/controllers/me/get-user-private-details.controller';
 
 const getUserPrivateDetailsController =

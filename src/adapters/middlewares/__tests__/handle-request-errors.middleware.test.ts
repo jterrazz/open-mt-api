@@ -1,6 +1,6 @@
-import { NotFoundClientError } from '@domain/error/client/not-found-client-error';
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
-import { createMockOfLogger } from '@application/contracts/__mocks__/logger.mock';
+import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../application/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfLogger } from '@application/../../../domain/__mocks__/logger.mock';
 import { handleRequestErrorsMiddlewareFactory } from '@adapters/middlewares/handle-request-errors.middleware';
 
 describe('handleRequestErrorsMiddleware()', () => {

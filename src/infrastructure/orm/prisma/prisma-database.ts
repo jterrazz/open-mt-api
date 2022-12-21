@@ -1,6 +1,6 @@
-import { IConfiguration, IDatabase, ILogger } from '@application/contracts';
+import { IConfiguration, IDatabase, ILogger } from '~/domain';
 import { PrismaClient } from '@prisma/client';
-import { sleep } from '@application/utils/node/async';
+import { sleep } from '@application/../../../domain/utils/node/async';
 
 export interface IPrismaDatabase extends IDatabase {
     client: PrismaClient;

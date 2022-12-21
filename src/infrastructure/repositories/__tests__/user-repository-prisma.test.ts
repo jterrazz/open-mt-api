@@ -1,5 +1,5 @@
-import { DuplicatedFieldServerError } from '@domain/error/server/duplicated-field-server-error';
-import { LANGUAGE } from '@domain/user/language';
+import { DuplicatedFieldServerError } from '@domain/use-cases/error/server/duplicated-field-server-error';
+import { LANGUAGE } from '@domain/use-cases/user/language';
 import { getDependencies } from '@configuration/dependencies';
 import { seedDatabaseWithUser } from '@tests/seeds/seed-database-with-user';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user.prisma-repository';

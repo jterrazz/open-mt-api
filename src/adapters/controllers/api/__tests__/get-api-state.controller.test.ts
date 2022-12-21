@@ -1,4 +1,4 @@
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../application/webserver/__tests__/initiated-koa-context.mock';
 import { getApiStateControllerFactory } from '@adapters/controllers/api/get-api-state.controller';
 
 describe('getApiStateController()', () => {

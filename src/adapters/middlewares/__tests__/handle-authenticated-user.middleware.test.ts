@@ -1,5 +1,5 @@
-import { createMockOfInitiatedKoaContext } from '../../../infrastructure/webserver/__tests__/initiated-koa-context.mock';
-import { createMockOfLogger } from '../../../application/contracts/__mocks__/logger.mock';
+import { createMockOfInitiatedKoaContext } from '../../../application/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfLogger } from '../../../domain/__mocks__/logger.mock';
 import { handleAuthenticatedUserMiddlewareFactory } from '../handle-authenticated-user.middleware';
 
 const handleAuthenticatedUserMiddleware =

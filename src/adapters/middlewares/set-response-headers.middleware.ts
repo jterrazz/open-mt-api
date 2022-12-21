@@ -1,4 +1,4 @@
-import { IConfiguration } from '@application/contracts';
+import { IConfiguration } from '~/domain';
 import { Middleware } from 'koa';
 
 export const setResponseHeadersMiddlewareFactory = (

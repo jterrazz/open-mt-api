@@ -1,6 +1,6 @@
-import { EventIdentifiers } from '@domain/tracker/events';
-import { IConfiguration } from '@application/contracts';
-import { ITrackerRepository } from '@domain/tracker/tracker.repository';
+import { EventIdentifiers } from '@domain/use-cases/tracker/events';
+import { IConfiguration } from '~/domain';
+import { ITrackerRepository } from '@domain/use-cases/tracker/tracker.repository';
 import Mixpanel from 'mixpanel';
 
 export const trackerRepositoryMixpanelFactory = (

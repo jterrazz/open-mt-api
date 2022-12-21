@@ -1,41 +1,41 @@
 import { IAdapterControllers, IAdapterMiddlewares } from '@adapters/types';
-import { IConfiguration, ILogger, IWebServer } from '@application/contracts';
+import { IConfiguration, ILogger, IWebServer } from '~/domain';
 import {
     IPrismaDatabase,
     prismaDatabaseFactory,
 } from '@infrastructure/orm/prisma/prisma-database';
-import { authenticateUserWithEmailFactory } from '@application/use-cases/authentication/authenticate-user-with-email';
-import { checkBcryptPassword } from '@infrastructure/encryption/check-bcrypt-password';
+import { authenticateUserWithEmailFactory } from '@application/../domain/use-cases/authentication/authenticate-user-with-email';
+import { checkBcryptPassword } from '@infrastructure/../domain/utils/encryption/check-bcrypt-password';
 import { configurationFactory } from '@configuration/configuration';
 import { createProductControllerFactory } from '@adapters/controllers/product/create-product.controller';
-import { createProductFactory } from '@application/use-cases/product/create-product';
+import { createProductFactory } from '@domain/use-cases/product/create-product';
 import { createShopControllerFactory } from '@adapters/controllers/shop/create-shop.controller';
-import { createShopFactory } from '@application/use-cases/shop/create-shop';
+import { createShopFactory } from '@domain/use-cases/shop/create-shop';
 import { deserializeCreateProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-create-product-koa-request';
 import { deserializeCreateShopKoaRequest } from '@adapters/serializers/requests/shop/deserialize-create-shop-koa-request';
 import { deserializeGetShopKoaRequest } from '@adapters/serializers/requests/shop/deserialize-get-shop-koa-request';
 import { deserializeGetUserPublicProfileKoaRequest } from '@adapters/serializers/requests/user/deserialize-get-user-public-profile-koa-request';
 import { deserializeModifyProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-modify-product-koa-request';
 import { getApiStateControllerFactory } from '@adapters/controllers/api/get-api-state.controller';
-import { getApiStateFactory } from '@application/use-cases/api/get-api-state';
+import { getApiStateFactory } from '@application/../domain/use-cases/api/get-api-state';
 import { getProductControllerFactory } from '@adapters/controllers/product/get-product.controller';
 import { getShopControllerFactory } from '@adapters/controllers/shop/get-shop.controller';
-import { getShopFactory } from '@application/use-cases/shop/get-shop';
-import { getUserDetailsFactory } from '@application/use-cases/user/get-user-details';
+import { getShopFactory } from '@domain/use-cases/shop/get-shop';
+import { getUserDetailsFactory } from '@domain/use-cases/user/get-user-details';
 import { getUserListOfFollowedShopsControllerFactory } from '@adapters/controllers/me/get-user-followed-shops.controller';
-import { getUserListOfFollowedShopsFactory } from '@application/use-cases/user/get-user-list-of-followed-shops';
+import { getUserListOfFollowedShopsFactory } from '@domain/use-cases/user/get-user-list-of-followed-shops';
 import { getUserPublicProfileControllerFactory } from '@adapters/controllers/user/get-user-public-profile.controller';
 import { handleAuthenticatedUserMiddlewareFactory } from '@adapters/middlewares/handle-authenticated-user.middleware';
 import { handleRequestErrorsMiddlewareFactory } from '@adapters/middlewares/handle-request-errors.middleware';
 import { handleRequestTrackerMiddlewareFactory } from '@adapters/middlewares/handle-request-tracker.middleware';
 import { initTrackerForRequestInMemoryFactory } from '@infrastructure/tracker/init-tracker-for-request.in-memory';
 import { initTrackerForRequestMixpanelFactory } from '@infrastructure/tracker/init-tracker-for-request.mixpanel';
-import { koaServerFactory } from '@infrastructure/webserver/koa-server';
+import { koaServerFactory } from '@infrastructure/../application/webserver/koa-server';
 import { localPassportStrategyFactory } from '@adapters/middlewares/passport/local.passport-strategy';
 import { logInControllerFactory } from '@adapters/controllers/authentication/log-in.controller';
 import { logOutControllerFactory } from '@adapters/controllers/authentication/log-out.controller';
 import { modifyProductControllerFactory } from '@adapters/controllers/product/modify-product.controller';
-import { modifyProductFactory } from '@application/use-cases/product/modify-product';
+import { modifyProductFactory } from '@domain/use-cases/product/modify-product';
 import { passportDeserializerFactory } from '@adapters/serializers/authentication/passport-deserializer';
 import { passportSerializer } from '@adapters/serializers/authentication/passport-serializer';
 import { productRepositoryPrismaFactory } from '@infrastructure/repositories/product.prisma-repository';
@@ -47,10 +47,10 @@ import { serializeLoginKoaResponse } from '@adapters/serializers/requests/authen
 import { serializeLogoutKoaResponse } from '@adapters/serializers/requests/authentication/serialize-logout-koa-response';
 import { serializeModifyProductKoaResponse } from '@adapters/serializers/requests/product/serialize-modify-product-koa-response';
 import { setResponseHeadersMiddlewareFactory } from '@adapters/middlewares/set-response-headers.middleware';
-import { setupPassportStrategiesFactory } from '@infrastructure/webserver/setup-passport-strategies';
+import { setupPassportStrategiesFactory } from '@infrastructure/../application/webserver/setup-passport-strategies';
 import { shopRepositoryPrismaFactory } from '@infrastructure/repositories/shop.prisma-repository';
 import { userRepositoryPrismaFactory } from '@infrastructure/repositories/user.prisma-repository';
-import { winstonLoggerFactory } from '@infrastructure/logger/winston/winston-logger';
+import { winstonLoggerFactory } from '@infrastructure/../application/logger/winston/winston-logger';
 
 export const getDependencies = (): {
     webserver: IWebServer;

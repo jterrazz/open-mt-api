@@ -1,5 +1,5 @@
-import { AuthenticateUserWithEmail } from '@application/use-cases/authentication/authenticate-user-with-email';
-import { AuthenticationRequiredClientError } from '@domain/error/client/authentication-required-client-error';
+import { AuthenticateUserWithEmail } from '@application/../../../domain/authentication/authenticate-user-with-email';
+import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
 import { Strategy } from 'passport-local';
 
 // Call this strategy with passport.authenticate('local');

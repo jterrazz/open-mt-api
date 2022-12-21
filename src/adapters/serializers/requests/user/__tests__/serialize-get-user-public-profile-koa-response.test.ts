@@ -1,5 +1,5 @@
-import { createMockOfInitiatedKoaContext } from '@infrastructure/webserver/__tests__/initiated-koa-context.mock';
-import { createMockOfUserEntity } from '@domain/user/__mocks__/user-entity.mock';
+import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/webserver/__tests__/initiated-koa-context.mock';
+import { createMockOfUserEntity } from '@domain/use-cases/user/__mocks__/user-entity.mock';
 import { serializeGetUserPublicProfileKoaResponse } from '@adapters/serializers/requests/user/serialize-get-user-public-profile-koa-response';
 
 describe('serializeGetUserPublicProfileKoaResponse()', () => {

@@ -1,9 +1,9 @@
-import { AuthenticationRequiredClientError } from '@domain/error/client/authentication-required-client-error';
-import { CreateProduct } from '@application/use-cases/product/create-product';
+import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
+import { CreateProduct } from '@domain/use-cases/product/create-product';
 import { DeserializeCreateProductKoaRequest } from '@adapters/serializers/requests/product/deserialize-create-product-koa-request';
-import { ForbiddenClientError } from '@domain/error/client/forbidden-client-error';
+import { ForbiddenClientError } from '@domain/use-cases/error/client/forbidden-client-error';
 import { IInitiatedKoaController } from '@adapters/controllers/koa-controller';
-import { IShopRepository } from '@domain/shop/shop.repository';
+import { IShopRepository } from '@domain/use-cases/shop/shop.repository';
 import { SerializeCreateProductKoaResponse } from '@adapters/serializers/requests/product/serialize-create-product-koa-response';
 import { StatusCodes } from 'http-status-codes';
 import { serializeProductForPublic } from '@adapters/serializers/product/serialize-product-for-public';

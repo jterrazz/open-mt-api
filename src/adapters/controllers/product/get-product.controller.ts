@@ -2,8 +2,8 @@ import {
     IInitiatedKoaContext,
     IInitiatedKoaController,
 } from '@adapters/controllers/koa-controller';
-import { IProductRepository } from '@domain/product/product.repository';
-import { NotFoundClientError } from '@domain/error/client/not-found-client-error';
+import { IProductRepository } from '@domain/use-cases/product/product.repository';
+import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
 import { serializeProductForPublic } from '@adapters/serializers/product/serialize-product-for-public';
 
 export const deserializeGetProductKoaRequest = (

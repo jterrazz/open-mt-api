@@ -1,5 +1,5 @@
 import { IKoaSerializer } from '@adapters/serializers/requests/koa-serializer';
-import { UserEntity } from '@domain/user/user.entity';
+import { UserEntity } from '@domain/use-cases/user/user.entity';
 
 export type SerializeGetUserKoaResponse = IKoaSerializer<UserEntity>;
 

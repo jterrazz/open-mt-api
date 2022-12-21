@@ -1,6 +1,6 @@
 import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
 import { Shop, User } from '@prisma/client';
-import { generateRandomId } from '@application/utils/math';
+import { generateRandomId } from '@application/../../src/domain/utils/maths/maths';
 import { seedDatabaseWithShop } from '@tests/seeds/seed-database-with-shop';
 import type { Product } from '@prisma/client';
 

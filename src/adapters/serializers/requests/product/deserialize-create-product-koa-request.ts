@@ -1,8 +1,8 @@
 import * as z from 'zod';
-import { Currency, currencySchema } from '@domain/price/currency';
+import { Currency, currencySchema } from '@domain/use-cases/price/currency';
 import { IKoaDeserializer } from '@adapters/serializers/requests/koa-serializer';
-import { UserEntity } from '@domain/user/user.entity';
-import { zodErrorToUnprocessableEntityErrorWrapper } from '@application/utils/zod/zod-error-to-unprocessable-entity-error-wrapper';
+import { UserEntity } from '@domain/use-cases/user/user.entity';
+import { zodErrorToUnprocessableEntityErrorWrapper } from '@application/../../../../domain/utils/zod/zod-error-to-unprocessable-entity-error-wrapper';
 
 export type DeserializeCreateProductKoaRequest = IKoaDeserializer<{
     authenticatedUser?: UserEntity;

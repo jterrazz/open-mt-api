@@ -16,3 +16,4 @@ config/local.yml
 *.log*
 node_modules/
 .yarn
+yarn-error*

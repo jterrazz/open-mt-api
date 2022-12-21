@@ -1,6 +1,6 @@
 import { IPrismaDatabase } from '@infrastructure/orm/prisma/prisma-database';
 import { User } from '@prisma/client';
-import { generateRandomId } from '@application/utils/math';
+import { generateRandomId } from '@application/../../src/domain/utils/maths/maths';
 import { randomUUID } from 'crypto';
 import { seedDatabaseWithUser } from '@tests/seeds/seed-database-with-user';
 import type { Shop } from '@prisma/client';

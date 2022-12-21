@@ -1,5 +1,5 @@
-import { ClientError } from '@domain/error/client/client-error';
-import { ILogger } from '@application/contracts';
+import { ClientError } from '@domain/use-cases/error/client/client-error';
+import { ILogger } from '~/domain';
 import { Middleware } from 'koa';
 
 export const handleRequestErrorsMiddlewareFactory = (
