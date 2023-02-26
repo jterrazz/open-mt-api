@@ -6,8 +6,7 @@ describe('configuration', () => {
         const nodeEnv = null;
 
         // When
-        // @ts-ignore
-        const ft = () => configurationFactory(nodeEnv);
+        const ft = () => configurationFactory(nodeEnv as unknown as string);
 
         // Then
         expect(ft).toThrow();

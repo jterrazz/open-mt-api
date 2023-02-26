@@ -52,7 +52,7 @@ It follows this structure:
 ```bash
 <root>
 └ compose # docker compose configuration
-└ config # configuration values
+└ values # configuration values
 └ prisma # database schema
 └ src # the application
 └ tests # integrations tests

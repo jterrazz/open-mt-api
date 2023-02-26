@@ -9,7 +9,6 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "paths": {
-      "~/*": ["./src/*"],
       "@adapters/*": ["./src/adapters/*"],
       "@application/*": ["./src/application/*"],
       "@configuration/*": ["./src/configuration/*"],

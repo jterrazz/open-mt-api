@@ -7,7 +7,7 @@
 .DS_Store
 
 # Configuration
-config/local.yml
+src/configuration/values/local.yml
 .env
 .env.test
 .env.production

@@ -5,8 +5,7 @@ ARG npm_token
 # Step 1: Install dependencies only
 COPY ./package.json .
 COPY ./yarn.lock .
-COPY ./.npmrc .
-RUN NPM_TOKEN=$npm_token yarn --ci
+RUN yarn install --frozen-lockfile
 
 # Step 2: Copy application files
 COPY . .

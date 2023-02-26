@@ -29,7 +29,7 @@ services:
       volumes:
         - ../../src:/app/src
         - ../../tests:/app/tests
-        - ../../config:/app/config
+        - ../../values:/app/values
 
   open-market-api--migrate-database:
     <<: *default

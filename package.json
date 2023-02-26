@@ -1,5 +1,5 @@
 {
-  "name": "open-market-api",
+  "name": "open-mt-api",
   "version": "1.0.0",
   "engines": {
     "node": "16.x"
@@ -7,7 +7,7 @@
   "author": "Jean-Baptiste TERRAZZONI",
   "private": true,
   "scripts": {
-    "start": "node -r tsconfig-paths/register -r ts-node/register/transpile-only src/start-app.ts",
+    "start": "node -r tsconfig-paths/register -r ts-node/register/transpile-only src/start.ts",
     "dev": "nodemon",
     "test": "jest --silent",
     "test:debug": "jest --runInBand --detectOpenHandles",
@@ -15,7 +15,7 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
   },
   "devDependencies": {
-    "@jterrazz/eslint-config-common": "1.4.1",
+    "@jterrazz/eslint-config-common": "2.0.3",
     "@shopify/jest-koa-mocks": "^3.1.5",
     "@types/config": "^0.0.41",
     "@types/jest": "^27.0.2",
