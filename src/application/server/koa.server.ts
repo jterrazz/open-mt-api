@@ -1,9 +1,10 @@
 import Koa from 'koa';
-
-import { koaRouterFactory } from '@application/server/koa.router';
+import Router from 'koa-router';
 
 import { Logger } from '@ports/logger';
 import { Server } from '@ports/server';
+
+import { apiVersionKoaMiddleware } from '@adapters/api/api-version.koa-middleware';
 
 // import bodyParser from 'koa-bodyparser';
 // import passport from 'koa-passport';
@@ -13,7 +14,7 @@ interface KoaServer extends Server {
     koa: Koa;
 }
 
-export const koaServerFactory = (logger: Logger): KoaServer => {
+export const koaServerFactory = (logger: Logger, router: Router): KoaServer => {
     logger.debug('initializing koa server');
     const koa = new Koa();
 
@@ -32,7 +33,8 @@ export const koaServerFactory = (logger: Logger): KoaServer => {
     // app.use(middlewares.setResponseHeadersMiddleware);
     // app.use(middlewares.handleRequestTrackerMiddleware);
 
-    const router = koaRouterFactory();
+    koa.use(apiVersionKoaMiddleware);
+
     koa.use(router.routes()).use(router.allowedMethods());
 
     return {

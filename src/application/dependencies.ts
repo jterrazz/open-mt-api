@@ -1,6 +1,7 @@
 import { Configuration, configurationFactory } from '@configuration/configuration';
 
 import { loggerFactory } from '@application/logger/logger';
+import { koaRouterFactory } from '@application/server/koa.router';
 import { koaServerFactory } from '@application/server/koa.server';
 
 import { Database } from '@ports/database';
@@ -27,6 +28,6 @@ export const applicationDependenciesFactory = (): ApplicationDependencies => {
         configuration,
         database,
         logger,
-        server: koaServerFactory(logger),
+        server: koaServerFactory(logger, koaRouterFactory()),
     };
 };
