@@ -1,8 +1,10 @@
-import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
-import { CreateShop } from '@domain/use-cases/shop/create-shop';
+import { AuthenticationRequiredClientError } from '@domain/../../../domain/use-cases/error/client/authentication-required-client-error';
+import { CreateShop } from '@domain/../../../domain/use-cases/shop/create-shop';
+
 import { DeserializeCreateShopKoaRequest } from '@adapters/../../serializers/requests/shop/deserialize-create-shop-koa-request';
-import { IInitiatedKoaController } from '../koa-controller';
 import { SerializeCreateShopKoaResponse } from '@adapters/../../serializers/requests/shop/serialize-create-shop-koa-response';
+
+import { IInitiatedKoaController } from '../koa-controller';
 
 export const createShopControllerFactory = (
     createShop: CreateShop,

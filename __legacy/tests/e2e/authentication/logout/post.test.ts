@@ -1,6 +1,6 @@
-import { endToEndApplication } from '../../end-to-end-application';
+import { e2eClient } from '../../e2e-client';
 
-const { createAuthenticatedRequestAgent } = endToEndApplication();
+const { createAuthenticatedRequestAgent } = e2eClient();
 
 describe('END TO END - POST /authentication/logout', () => {
     test('log out a user', async () => {

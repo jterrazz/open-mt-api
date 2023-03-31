@@ -1,9 +1,12 @@
-import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/prisma/prisma-database';
-import { User } from '@prisma/client';
-import { generateRandomId } from '@domain/utils/maths/maths';
-import { randomUUID } from 'crypto';
-import { seedDatabaseWithUser } from './seed-database-with-user';
 import type { Shop } from '@prisma/client';
+import { User } from '@prisma/client';
+import { randomUUID } from 'crypto';
+
+import { generateRandomId } from '@domain/../../src/domain/utils/maths/maths';
+
+import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
+
+import { seedDatabaseWithUser } from './seed-database-with-user';
 
 export const seedDatabaseWithShop = async (
     databaseClient: IPrismaDatabase['client'],

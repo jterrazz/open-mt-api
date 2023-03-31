@@ -1,5 +1,7 @@
-import { UnprocessableEntityClientError } from '@domain/use-cases/error/client/unprocessable-entity-client-error';
+import { UnprocessableEntityClientError } from '@domain/../../../../../domain/use-cases/error/client/unprocessable-entity-client-error';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/server/__tests__/initiated-koa-context.mock';
+
 import { deserializeGetUserPublicProfileKoaRequest } from '../deserialize-get-user-public-profile-koa-request';
 
 describe('deserializeGetUserPublicProfileKoaRequest()', () => {

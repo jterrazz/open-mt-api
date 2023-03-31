@@ -1,4 +1,4 @@
-import { UserEntity } from '@domain/use-cases/user/user.entity';
+import { UserEntity } from '@domain/../../../domain/use-cases/user/user.entity';
 
 export const passportSerializer = (
     user: UserEntity,

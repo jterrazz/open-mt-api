@@ -1,7 +1,8 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import { seedDatabaseWithShopsFollowers } from '@tests/../../../seeds/seed-database-with-shop-followers';
 
-const { createAuthenticatedRequestAgent, database, requestAgent } = endToEndApplication();
+import { e2eClient } from '../../e2e-client';
+
+const { createAuthenticatedRequestAgent, database, requestAgent } = e2eClient();
 
 describe('END TO END - GET /me/followed-shops', () => {
     test('returns the array of shops that a user is following', async () => {

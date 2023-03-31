@@ -1,5 +1,7 @@
-import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/prisma/prisma-database';
 import { Shop, User } from '@prisma/client';
+
+import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
+
 import { seedDatabaseWithShop } from './seed-database-with-shop';
 import { seedDatabaseWithUser } from './seed-database-with-user';
 

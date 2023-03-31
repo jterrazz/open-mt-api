@@ -1,6 +1,8 @@
-import { IKoaContext } from '../controllers/koa-controller';
-import { InitTrackerForRequest } from '@domain/use-cases/tracker/init-tracker-for-request';
 import { Middleware } from 'koa';
+
+import { InitTrackerForRequest } from '@domain/../../domain/use-cases/tracker/init-tracker-for-request';
+
+import { IKoaContext } from '../controllers/koa-controller';
 
 export const handleRequestTrackerMiddlewareFactory = (
     initTrackerForRequest: InitTrackerForRequest,

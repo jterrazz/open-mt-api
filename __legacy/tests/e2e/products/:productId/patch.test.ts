@@ -1,8 +1,9 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import { seedDatabaseWithProduct } from '@tests/../../../seeds/seed-database-with-product';
 import { seedDatabaseWithShop } from '@tests/../../../seeds/seed-database-with-shop';
 
-const { database, createAuthenticatedRequestAgent, requestAgent } = endToEndApplication();
+import { e2eClient } from '../../e2e-client';
+
+const { database, createAuthenticatedRequestAgent, requestAgent } = e2eClient();
 
 const createSeedOfProduct = async () => {
     const { authenticatedRequestAgent, seededUser } = await createAuthenticatedRequestAgent();

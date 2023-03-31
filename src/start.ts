@@ -1,18 +1,12 @@
-import { getDependencies } from '~/dependencies';
+import { applicationDependenciesFactory } from '@application/dependencies';
+import { applicationFactory } from './application';
 
 export const start = async () => {
-    const {
-        logger,
-        configuration: { ENVIRONMENT },
-        database,
-        webserver,
-    } = getDependencies();
-
-    logger.info(`app is starting with environment: ${ENVIRONMENT}`);
+    const { logger, configuration, database, server } = applicationDependenciesFactory();
+    const application = applicationFactory(configuration, logger, database, server);
 
     try {
-        await database.connect();
-        await webserver.start();
+        await application.start();
     } catch (error) {
         logger.error(error);
     }

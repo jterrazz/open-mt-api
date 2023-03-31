@@ -1,6 +1,8 @@
-import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
+import { NotFoundClientError } from '@domain/../../../../domain/use-cases/error/client/not-found-client-error';
+import { createMockOfProductRepository } from '@domain/../../../../domain/use-cases/product/__mocks__/product.repository.mock';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../application/server/__tests__/initiated-koa-context.mock';
-import { createMockOfProductRepository } from '@domain/use-cases/product/__mocks__/product.repository.mock';
+
 import {
     deserializeGetProductKoaRequest,
     getProductControllerFactory,

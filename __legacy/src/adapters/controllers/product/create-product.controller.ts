@@ -1,12 +1,15 @@
-import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
-import { CreateProduct } from '@domain/use-cases/product/create-product';
-import { DeserializeCreateProductKoaRequest } from '@adapters/../../serializers/requests/product/deserialize-create-product-koa-request';
-import { ForbiddenClientError } from '@domain/use-cases/error/client/forbidden-client-error';
-import { IInitiatedKoaController } from '../koa-controller';
-import { IShopRepository } from '@domain/use-cases/shop/shop.repository';
-import { SerializeCreateProductKoaResponse } from '@adapters/../../serializers/requests/product/serialize-create-product-koa-response';
 import { StatusCodes } from 'http-status-codes';
+
+import { AuthenticationRequiredClientError } from '@domain/../../../domain/use-cases/error/client/authentication-required-client-error';
+import { ForbiddenClientError } from '@domain/../../../domain/use-cases/error/client/forbidden-client-error';
+import { CreateProduct } from '@domain/../../../domain/use-cases/product/create-product';
+import { IShopRepository } from '@domain/../../../domain/use-cases/shop/shop.repository';
+
 import { serializeProductForPublic } from '@adapters/../../serializers/product/serialize-product-for-public';
+import { DeserializeCreateProductKoaRequest } from '@adapters/../../serializers/requests/product/deserialize-create-product-koa-request';
+import { SerializeCreateProductKoaResponse } from '@adapters/../../serializers/requests/product/serialize-create-product-koa-response';
+
+import { IInitiatedKoaController } from '../koa-controller';
 
 export const createProductControllerFactory = (
     createProduct: CreateProduct,

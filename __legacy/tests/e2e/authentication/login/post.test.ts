@@ -1,10 +1,11 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import {
     seedDatabaseWithUser,
     seedExampleOfValidPassword,
 } from '@tests/../../../seeds/seed-database-with-user';
 
-const { requestAgent, database } = endToEndApplication();
+import { e2eClient } from '../../e2e-client';
+
+const { requestAgent, database } = e2eClient();
 
 beforeAll(async () => {
     await seedDatabaseWithUser(database.client, {

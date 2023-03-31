@@ -1,7 +1,10 @@
 import * as z from 'zod';
-import { IKoaDeserializer } from '../koa-serializer';
-import { UserEntity } from '@domain/use-cases/user/user.entity';
+
 import { zodErrorToUnprocessableEntityErrorWrapper } from '@application/../../../../domain/utils/zod/zod-error-to-unprocessable-entity-error-wrapper';
+
+import { UserEntity } from '@domain/../../../../domain/use-cases/user/user.entity';
+
+import { IKoaDeserializer } from '../koa-serializer';
 
 export type DeserializeModifyProductKoaRequest = IKoaDeserializer<{
     authenticatedUser?: UserEntity;

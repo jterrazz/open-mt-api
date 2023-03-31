@@ -6,13 +6,11 @@ Learn more about us on [our blog](https://blog.open.mt/) !
 
 ## Get started
 
-### 🌱 Dependencies
+### Dependencies
 
-```sh
-docker
-node 16
-yarn
-```
+- Docker
+- Node.JS
+- Yarn
 
 ### 🍋 Start the project !
 #### Docker
@@ -53,7 +51,7 @@ It follows this structure:
 <root>
 └ compose # docker compose configuration
 └ values # configuration values
-└ prisma # database schema
+└ database # database schema
 └ src # the application
 └ tests # integrations tests
 ```

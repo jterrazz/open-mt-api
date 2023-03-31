@@ -1,7 +1,8 @@
-import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
-import { GetUserListOfFollowedShops } from '@domain/use-cases/user/get-user-list-of-followed-shops';
+import { AuthenticationRequiredClientError } from '@domain/../../../domain/use-cases/error/client/authentication-required-client-error';
+import { ShopEntity } from '@domain/../../../domain/use-cases/shop/shop.entity';
+import { GetUserListOfFollowedShops } from '@domain/../../../domain/use-cases/user/get-user-list-of-followed-shops';
+
 import { IInitiatedKoaController } from '../koa-controller';
-import { ShopEntity } from '@domain/use-cases/shop/shop.entity';
 
 // TODO Move
 const serializeShop = (shop: ShopEntity) => ({

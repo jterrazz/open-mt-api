@@ -1,7 +1,8 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import { seedDatabaseWithUser } from '@tests/../../../seeds/seed-database-with-user';
 
-const { database, requestAgent } = endToEndApplication();
+import { e2eClient } from '../../e2e-client';
+
+const { database, requestAgent } = e2eClient();
 
 describe('END TO END - GET /users', function () {
     test('get an existing user', async () => {

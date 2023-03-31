@@ -1,7 +1,8 @@
-import { endToEndApplication } from '../end-to-end-application';
 import { seedDatabaseWithShop } from '@tests/../../seeds/seed-database-with-shop';
 
-const { createAuthenticatedRequestAgent, database, requestAgent } = endToEndApplication();
+import { e2eClient } from '../e2e-client';
+
+const { createAuthenticatedRequestAgent, database, requestAgent } = e2eClient();
 
 describe('END TO END - POST /products', () => {
     test('creates a product', async () => {

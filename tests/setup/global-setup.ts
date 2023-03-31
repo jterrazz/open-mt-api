@@ -1,6 +1,6 @@
 require('tsconfig-paths/register');
 
-// import { dangerouslyDropAllDatabaseRows } from '@infrastructure/../../__legacy/src/infra/orm/prisma/dangerously-drop-all-database-rows';
+// import { dangerouslyDropAllDatabaseRows } from '@infrastructure/../../__legacy/src/infra/orm/database/dangerously-drop-all-database-rows';
 // import { getDependencies } from '~/dependencies';
 
 module.exports = async () => {

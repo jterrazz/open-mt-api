@@ -1,10 +1,13 @@
-import { BrokenOneToOneRelationServerError } from '@domain/use-cases/error/server/broken-one-to-one-relation-server-error';
-import { DuplicatedFieldServerError } from '@domain/use-cases/error/server/duplicated-field-server-error';
-import { NotFoundServerError } from '@domain/use-cases/error/server/not-found-server-error';
-import { getDependencies } from '~/dependencies';
 import { seedDatabaseWithShop } from '@tests/../../../../__legacy/tests/seeds/seed-database-with-shop';
 import { seedDatabaseWithUser } from '@tests/../../../../__legacy/tests/seeds/seed-database-with-user';
+
+import { BrokenOneToOneRelationServerError } from '@domain/../../../domain/use-cases/error/server/broken-one-to-one-relation-server-error';
+import { DuplicatedFieldServerError } from '@domain/../../../domain/use-cases/error/server/duplicated-field-server-error';
+import { NotFoundServerError } from '@domain/../../../domain/use-cases/error/server/not-found-server-error';
+
 import { shopRepositoryPrismaFactory } from '../shop.prisma-repository';
+
+import { getDependencies } from '~/dependencies';
 
 const databaseClient = getDependencies().database.client;
 const repository = shopRepositoryPrismaFactory(databaseClient);

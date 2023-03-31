@@ -1,0 +1,96 @@
+// Client settings
+
+generator client {
+    provider =        "database-client-js"
+    previewFeatures = ["interactiveTransactions"]
+}
+
+datasource db {
+    provider =        "postgresql"
+    url =             env("DATABASE_URL")
+}
+
+// Enums
+
+enum Language {
+    FR
+    EN
+}
+
+enum Currency {
+    EUR
+    USD
+}
+
+// Common
+
+model Image {
+    id                Int             @id @default(autoincrement())
+    createdAt         DateTime        @default(now())
+    filename           String          @unique
+
+    // External references
+    user              User?
+    shop              Shop?
+}
+
+// Specific entities
+
+model User {
+    id                Int             @id @default(autoincrement())
+    createdAt         DateTime        @default(now())
+    updatedAt         DateTime        @updatedAt
+    email             String          @unique
+    hashedPassword    String
+    firstName          String
+    lastName          String
+    language          Language
+
+    // External references
+    avatarImage       Image?          @relation(fields: [avatarImageId], references: [id], onDelete: SetNull)
+    avatarImageId     Int?            @unique
+    shop              Shop?
+    followedShops     ShopsFollowedByUsers[]
+}
+
+model Product {
+    id                Int             @id @default(autoincrement())
+    createdAt         DateTime        @default(now())
+    updatedAt         DateTime        @updatedAt
+    name              String
+    description       String?
+    priceCentsAmount  Int
+    priceCurrency     Currency
+
+    // External references
+    shop              Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
+    shopId            Int
+}
+
+model Shop {
+    id                Int             @id @default(autoincrement())
+    createdAt         DateTime        @default(now())
+    updatedAt         DateTime        @updatedAt
+    handle            String          @unique
+    name              String
+    description       String?
+    countOfFollowers  Int
+
+    // External references
+    products          Product[]
+    followedByUsers   ShopsFollowedByUsers[]
+    bannerImage       Image?          @relation(fields: [bannerImageId], references: [id], onDelete: SetNull)
+    bannerImageId     Int?
+    user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId            Int             @unique
+}
+
+model ShopsFollowedByUsers {
+  createdAt           DateTime        @default(now())
+  shop                Shop            @relation(fields: [shopId], references: [id], onDelete: Cascade)
+  shopId              Int
+  user                User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              Int
+
+  @@id([shopId, userId])
+}

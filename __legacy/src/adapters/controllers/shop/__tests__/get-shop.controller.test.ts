@@ -1,5 +1,7 @@
-import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
+import { NotFoundClientError } from '@domain/../../../../domain/use-cases/error/client/not-found-client-error';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../application/server/__tests__/initiated-koa-context.mock';
+
 import { getShopControllerFactory } from '../get-shop.controller';
 
 const createMockOfArgs = () => {

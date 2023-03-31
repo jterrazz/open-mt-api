@@ -1,10 +1,9 @@
-import { ClientError } from '@domain/use-cases/error/client/client-error';
-import { ILogger } from '~/domain';
 import { Middleware } from 'koa';
 
-export const handleRequestErrorsMiddlewareFactory = (
-    logger: ILogger,
-): Middleware => {
+import { ClientError } from '@domain/../../domain/use-cases/error/client/client-error';
+import { ILogger } from '~/domain';
+
+export const handleRequestErrorsMiddlewareFactory = (logger: ILogger): Middleware => {
     return async (ctx, next) => {
         try {
             await next();

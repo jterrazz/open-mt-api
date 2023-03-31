@@ -1,8 +1,11 @@
-import { Currency } from '@domain/use-cases/price/currency';
-import { getDependencies } from '~/dependencies';
-import { productRepositoryPrismaFactory } from '../product.prisma-repository';
 import { seedDatabaseWithProduct } from '@tests/../../../../__legacy/tests/seeds/seed-database-with-product';
 import { seedDatabaseWithShop } from '@tests/../../../../__legacy/tests/seeds/seed-database-with-shop';
+
+import { Currency } from '@domain/../../../domain/use-cases/price/currency';
+
+import { productRepositoryPrismaFactory } from '../product.prisma-repository';
+
+import { getDependencies } from '~/dependencies';
 
 const databaseClient = getDependencies().database.client;
 const repository = productRepositoryPrismaFactory(databaseClient);

@@ -1,4 +1,5 @@
-import { ProductEntity } from '@domain/use-cases/product/product.entity';
+import { ProductEntity } from '@domain/../../../../../domain/use-cases/product/product.entity';
+
 import { serializeProductForPublic } from '../../../product/serialize-product-for-public';
 
 describe('serializeProductForPublic()', () => {

@@ -1,6 +1,7 @@
-import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
+import { AuthenticationRequiredClientError } from '@domain/../../../domain/use-cases/error/client/authentication-required-client-error';
+import { ModifyProduct } from '@domain/../../../domain/use-cases/product/modify-product';
+
 import { DeserializeModifyProductKoaRequest } from '@adapters/../../serializers/requests/product/deserialize-modify-product-koa-request';
-import { ModifyProduct } from '@domain/use-cases/product/modify-product';
 import { SerializeModifyProductKoaResponse } from '@adapters/../../serializers/requests/product/serialize-modify-product-koa-response';
 
 export const modifyProductControllerFactory = (

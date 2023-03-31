@@ -1,5 +1,7 @@
+import { createMockOfUserEntity } from '@domain/../../../../../domain/use-cases/user/__mocks__/user-entity.mock';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/server/__tests__/initiated-koa-context.mock';
-import { createMockOfUserEntity } from '@domain/use-cases/user/__mocks__/user-entity.mock';
+
 import { serializeGetUserPublicProfileKoaResponse } from '../serialize-get-user-public-profile-koa-response';
 
 describe('serializeGetUserPublicProfileKoaResponse()', () => {

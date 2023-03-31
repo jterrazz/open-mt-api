@@ -1,5 +1,7 @@
-import { ProductEntity } from '@domain/use-cases/product/product.entity';
+import { ProductEntity } from '@domain/../../../../../domain/use-cases/product/product.entity';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../../application/server/__tests__/initiated-koa-context.mock';
+
 import { serializeCreateProductKoaResponse } from '../serialize-create-product-koa-response';
 
 describe('serializeCreateProductKoaResponse', () => {

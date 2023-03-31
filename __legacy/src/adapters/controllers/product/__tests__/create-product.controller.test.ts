@@ -1,9 +1,11 @@
-import { AuthenticationRequiredClientError } from '@domain/use-cases/error/client/authentication-required-client-error';
-import { ForbiddenClientError } from '@domain/use-cases/error/client/forbidden-client-error';
+import { AuthenticationRequiredClientError } from '@domain/../../../../domain/use-cases/error/client/authentication-required-client-error';
+import { ForbiddenClientError } from '@domain/../../../../domain/use-cases/error/client/forbidden-client-error';
+import { createMockOfProductEntity } from '@domain/../../../../domain/use-cases/product/__mocks__/product.entity.mock';
+import { createMockOfShopRepository } from '@domain/../../../../domain/use-cases/shop/__mocks__/shop.repository.mock';
+import { createMockOfUserEntity } from '@domain/../../../../domain/use-cases/user/__mocks__/user-entity.mock';
+
 import { createMockOfInitiatedKoaContext } from '@infrastructure/../../../../application/server/__tests__/initiated-koa-context.mock';
-import { createMockOfProductEntity } from '@domain/use-cases/product/__mocks__/product.entity.mock';
-import { createMockOfShopRepository } from '@domain/use-cases/shop/__mocks__/shop.repository.mock';
-import { createMockOfUserEntity } from '@domain/use-cases/user/__mocks__/user-entity.mock';
+
 import { createProductControllerFactory } from '../create-product.controller';
 
 const createMockOfArguments = () => {

@@ -1,6 +1,7 @@
 import { Context } from 'koa';
-import { ITrackerRepository } from '@domain/use-cases/tracker/tracker.repository';
-import { UserEntity } from '@domain/use-cases/user/user.entity';
+
+import { ITrackerRepository } from '@domain/../../domain/use-cases/tracker/tracker.repository';
+import { UserEntity } from '@domain/../../domain/use-cases/user/user.entity';
 
 export interface IKoaContext extends Context {
     requestTracker?: ITrackerRepository;
@@ -14,6 +15,4 @@ export interface IInitiatedKoaContext extends Context {
 }
 
 export type IKoaController = (ctx: IKoaContext) => Promise<void>;
-export type IInitiatedKoaController = (
-    ctx: IInitiatedKoaContext,
-) => Promise<void>;
+export type IInitiatedKoaController = (ctx: IInitiatedKoaContext) => Promise<void>;

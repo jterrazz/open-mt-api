@@ -1,6 +1,7 @@
-import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/prisma/prisma-database';
-import { randomUUID } from 'crypto';
 import type { User } from '@prisma/client';
+import { randomUUID } from 'crypto';
+
+import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
 
 export const seedDatabaseWithUser = async (
     database: IPrismaDatabase['client'],

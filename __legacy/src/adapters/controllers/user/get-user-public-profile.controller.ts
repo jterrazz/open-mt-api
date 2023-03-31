@@ -1,8 +1,10 @@
+import { NotFoundClientError } from '@domain/../../../domain/use-cases/error/client/not-found-client-error';
+import { GetUserDetails } from '@domain/../../../domain/use-cases/user/get-user-details';
+
 import { DeserializeGetUserKoaRequest } from '@adapters/../../serializers/requests/user/deserialize-get-user-public-profile-koa-request';
-import { GetUserDetails } from '@domain/use-cases/user/get-user-details';
-import { IInitiatedKoaController } from '../koa-controller';
-import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
 import { SerializeGetUserKoaResponse } from '@adapters/../../serializers/requests/user/serialize-get-user-public-profile-koa-response';
+
+import { IInitiatedKoaController } from '../koa-controller';
 
 export const getUserPublicProfileControllerFactory = (
     getUserPublicProfile: GetUserDetails,

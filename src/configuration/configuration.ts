@@ -18,7 +18,7 @@ export type Configuration = {
 };
 
 export const configurationFactory = (
-    nodeEnv: string | undefined = process.env.NODE_ENV,
+    nodeEnv: string = process.env.NODE_ENV || 'production',
 ): Configuration => {
     process.env.NODE_CONFIG_DIR = './src/configuration/values';
 

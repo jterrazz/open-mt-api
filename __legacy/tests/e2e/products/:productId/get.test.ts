@@ -1,7 +1,8 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import { seedDatabaseWithProduct } from '@tests/../../../seeds/seed-database-with-product';
 
-const { database, requestAgent } = endToEndApplication();
+import { e2eClient } from '../../e2e-client';
+
+const { database, requestAgent } = e2eClient();
 
 describe('END TO END - GET /products/:productId', () => {
     test('get an existing product', async () => {

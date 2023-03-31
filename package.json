@@ -2,21 +2,24 @@
   "name": "open-mt-api",
   "version": "1.0.0",
   "engines": {
-    "node": "16.x"
+    "node": "18.x"
   },
   "author": "Jean-Baptiste TERRAZZONI",
   "private": true,
   "scripts": {
-    "start": "node -r tsconfig-paths/register -r ts-node/register/transpile-only src/start.ts",
-    "dev": "nodemon",
+    "start": "node -r tsconfig-paths/register -r @swc-node/register src/start.ts",
+    "start:dev": "NODE_ENV=development nodemon",
+    "build": "npx __legacy/prisma migrate deploy",
     "test": "jest --silent",
     "test:debug": "jest --runInBand --detectOpenHandles",
-    "build": "yarn && npx prisma migrate deploy",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "lint:dependencies": "depcruise --config .dependency-cruiser.js src"
   },
   "devDependencies": {
-    "@jterrazz/eslint-config-common": "2.0.3",
+    "@jterrazz/eslint-config-common": "3.0.0",
     "@shopify/jest-koa-mocks": "^3.1.5",
+    "@swc/jest": "^0.2.24",
     "@types/config": "^0.0.41",
     "@types/jest": "^27.0.2",
     "@types/koa": "^2.13.4",
@@ -29,14 +32,19 @@
     "@types/passport": "^1.0.7",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.12",
+    "dependency-cruiser": "^12.10.0",
     "eslint": "^8.14.0",
-    "jest": "^27",
+    "eslint-plugin-dependency-cruiser": "^0.1.1",
+    "jest": "^29.4.3",
+    "jest-mock-extended": "^3.0.3",
     "nodemon": "^2.0.16",
     "supertest": "^6.2.3",
-    "ts-jest": "^27.1.4"
+    "ts-jest": "^29.0.5"
   },
   "dependencies": {
     "@prisma/client": "^3.13.0",
+    "@swc/core": "^1.3.37",
+    "@swc-node/register": "^1.6.2",
     "bcrypt": "^5.0.1",
     "config": "^3.3.6",
     "http-status-codes": "^2.1.4",

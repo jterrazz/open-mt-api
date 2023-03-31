@@ -1,8 +1,11 @@
-import { DuplicatedFieldServerError } from '@domain/use-cases/error/server/duplicated-field-server-error';
-import { LANGUAGE } from '@domain/use-cases/user/language';
-import { getDependencies } from '~/dependencies';
 import { seedDatabaseWithUser } from '@tests/../../../../__legacy/tests/seeds/seed-database-with-user';
+
+import { DuplicatedFieldServerError } from '@domain/../../../domain/use-cases/error/server/duplicated-field-server-error';
+import { LANGUAGE } from '@domain/../../../domain/use-cases/user/language';
+
 import { userRepositoryPrismaFactory } from '../user.prisma-repository';
+
+import { getDependencies } from '~/dependencies';
 
 const databaseClient = getDependencies().database.client;
 const repository = userRepositoryPrismaFactory(databaseClient);

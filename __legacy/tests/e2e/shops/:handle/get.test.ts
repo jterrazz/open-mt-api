@@ -1,11 +1,13 @@
-import { endToEndApplication } from '../../end-to-end-application';
 import { seedDatabaseWithShop } from '@tests/../../../seeds/seed-database-with-shop';
+
 import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
+
+import { e2eClient } from '../../e2e-client';
 
 const {
     requestAgent,
     database: { client: databaseClient },
-} = endToEndApplication();
+} = e2eClient();
 
 beforeAll(() => {
     useFakeTimers();

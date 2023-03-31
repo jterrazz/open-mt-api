@@ -1,8 +1,11 @@
-import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/prisma/prisma-database';
-import { Shop, User } from '@prisma/client';
-import { generateRandomId } from '@domain/utils/maths/maths';
-import { seedDatabaseWithShop } from './seed-database-with-shop';
 import type { Product } from '@prisma/client';
+import { Shop, User } from '@prisma/client';
+
+import { generateRandomId } from '@domain/../../src/domain/utils/maths/maths';
+
+import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
+
+import { seedDatabaseWithShop } from './seed-database-with-shop';
 
 export const seedDatabaseWithProduct = async (
     databaseClient: IPrismaDatabase['client'],

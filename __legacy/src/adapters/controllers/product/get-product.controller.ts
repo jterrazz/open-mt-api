@@ -1,7 +1,9 @@
-import { IInitiatedKoaContext, IInitiatedKoaController } from '../koa-controller';
-import { IProductRepository } from '@domain/use-cases/product/product.repository';
-import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
+import { NotFoundClientError } from '@domain/../../../domain/use-cases/error/client/not-found-client-error';
+import { IProductRepository } from '@domain/../../../domain/use-cases/product/product.repository';
+
 import { serializeProductForPublic } from '@adapters/../../serializers/product/serialize-product-for-public';
+
+import { IInitiatedKoaContext, IInitiatedKoaController } from '../koa-controller';
 
 export const deserializeGetProductKoaRequest = (ctx: IInitiatedKoaContext): number => {
     const productId = Number(ctx.params.productId);

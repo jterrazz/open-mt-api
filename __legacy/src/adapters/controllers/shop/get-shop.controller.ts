@@ -1,8 +1,10 @@
+import { NotFoundClientError } from '@domain/../../../domain/use-cases/error/client/not-found-client-error';
+import { GetShop } from '@domain/../../../domain/use-cases/shop/get-shop';
+
 import { DeserializeGetShopKoaRequest } from '@adapters/../../serializers/requests/shop/deserialize-get-shop-koa-request';
-import { GetShop } from '@domain/use-cases/shop/get-shop';
-import { IInitiatedKoaController } from '../koa-controller';
-import { NotFoundClientError } from '@domain/use-cases/error/client/not-found-client-error';
 import { SerializeGetShopKoaResponse } from '@adapters/../../serializers/requests/shop/serialize-get-shop-koa-response';
+
+import { IInitiatedKoaController } from '../koa-controller';
 
 export const getShopControllerFactory = (
     getShop: GetShop,

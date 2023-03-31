@@ -1,7 +1,6 @@
-import { endToEndApplication } from '../../../__legacy/tests/e2e/end-to-end-application';
-import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
+import { E2E } from '@tests/e2e/e2e';
 
-const { requestAgent } = endToEndApplication();
+import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
 
 beforeAll(() => {
     useFakeTimers();
@@ -11,16 +10,16 @@ afterAll(() => {
     useRealTimers();
 });
 
-describe('END TO END - GET /api', function () {
+describe('E2E - GET /status', function () {
     test('returns the API status', async () => {
         // When
-        const response = await requestAgent.get('/');
+        const response = await E2E.getClient().get('/status');
 
         // Then
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
-            env: 'test',
-            state: 'UP',
+            message: 'Hello World!',
+            status: 'OK',
             time: '2000-01-01T00:00:00.000Z',
             version: '1.0.0',
         });
@@ -29,7 +28,7 @@ describe('END TO END - GET /api', function () {
 
     test('returns global API headers', async () => {
         // When
-        const response = await requestAgent.get('/');
+        const response = await E2E.getClient().get('/status');
 
         // Then
         expect(response.headers).toEqual(

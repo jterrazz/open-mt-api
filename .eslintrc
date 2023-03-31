@@ -1,3 +1,4 @@
 {
-    "extends": "@jterrazz/eslint-config-common"
+    "plugins": ["dependency-cruiser"],
+    "extends": ["@jterrazz/eslint-config-common", "plugin:dependency-cruiser/all"]
 }

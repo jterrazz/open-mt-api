@@ -1,7 +1,9 @@
-import { IUserRepository } from '@domain/use-cases/user/user.repository';
-import { LANGUAGE } from '@domain/use-cases/user/language';
 import { PrismaClient, User } from '@prisma/client';
-import { UserEntity } from '@domain/use-cases/user/user.entity';
+
+import { LANGUAGE } from '@domain/../../domain/use-cases/user/language';
+import { UserEntity } from '@domain/../../domain/use-cases/user/user.entity';
+import { IUserRepository } from '@domain/../../domain/use-cases/user/user.repository';
+
 import { mapPrismaErrorToDomain } from '../orm/prisma/map-prisma-error-to-domain';
 
 const mapPersistedUserToUserEntity = (persistedUser: User): UserEntity => ({

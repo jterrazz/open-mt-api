@@ -1,8 +1,10 @@
-import { BrokenOneToOneRelationServerError } from '@domain/use-cases/error/server/broken-one-to-one-relation-server-error';
-import { DuplicatedFieldServerError } from '@domain/use-cases/error/server/duplicated-field-server-error';
-import { NotFoundServerError } from '@domain/use-cases/error/server/not-found-server-error';
+import Prisma from 'database';
+
+import { BrokenOneToOneRelationServerError } from '@domain/../../../domain/use-cases/error/server/broken-one-to-one-relation-server-error';
+import { DuplicatedFieldServerError } from '@domain/../../../domain/use-cases/error/server/duplicated-field-server-error';
+import { NotFoundServerError } from '@domain/../../../domain/use-cases/error/server/not-found-server-error';
+
 import { PrismaErrors } from './prisma-errors';
-import Prisma from 'prisma';
 
 export const mapPrismaErrorToDomain = (prismaError: Prisma.PrismaClientKnownRequestError) => {
     switch (prismaError.code) {
