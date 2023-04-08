@@ -13,6 +13,6 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run tests with docker
-        run: sh setup/docker-test.sh
+        run: sh configuration/docker-test.sh
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

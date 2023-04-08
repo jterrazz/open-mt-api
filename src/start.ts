@@ -12,4 +12,5 @@ export const start = async () => {
     }
 };
 
+// eslint-disable-next-line promise/catch-or-return,promise/valid-params
 start().then();

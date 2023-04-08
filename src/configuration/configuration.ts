@@ -3,6 +3,7 @@ import {
     applicationConfigurationSchema,
 } from '@configuration/schemas/application';
 import {
+    Environment,
     EnvironmentConfiguration,
     environmentConfigurationSchema,
 } from '@configuration/schemas/environment';
@@ -18,7 +19,7 @@ export type Configuration = {
 };
 
 export const configurationFactory = (
-    nodeEnv: string = process.env.NODE_ENV || 'production',
+    nodeEnv: string = process.env.NODE_ENV || Environment.DEVELOPMENT,
 ): Configuration => {
     process.env.NODE_CONFIG_DIR = './src/configuration/values';
 

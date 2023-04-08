@@ -4,7 +4,9 @@ import Router from 'koa-router';
 import { Logger } from '@ports/logger';
 import { Server } from '@ports/server';
 
-import { apiVersionKoaMiddleware } from '@adapters/api/api-version.koa-middleware';
+import { apiVersionKoaMiddlewareFactory } from '@adapters/api/api-version.koa-middleware';
+
+import packageJson from '../../../package.json';
 
 // import bodyParser from 'koa-bodyparser';
 // import passport from 'koa-passport';
@@ -33,13 +35,15 @@ export const koaServerFactory = (logger: Logger, router: Router): KoaServer => {
     // app.use(middlewares.setResponseHeadersMiddleware);
     // app.use(middlewares.handleRequestTrackerMiddleware);
 
+    const apiVersionKoaMiddleware = apiVersionKoaMiddlewareFactory(packageJson.version);
+
     koa.use(apiVersionKoaMiddleware);
 
     koa.use(router.routes()).use(router.allowedMethods());
 
     return {
         koa,
-        start: (port) => {
+        start: async (port) => {
             koa.listen(port, () => {
                 logger.info(`app is listening on port: ${port}`);
             });
