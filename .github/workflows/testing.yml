@@ -1,18 +1,18 @@
 name: Build Pipeline
+
 on:
   push:
     branches:
       - main
       - develop
+
 jobs:
-  test:
-    name: Test API
+  unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Set up repository
         uses: actions/checkout@v2
 
-      - name: Run tests with docker
-        run: sh configuration/docker-test.sh
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Run unit tests
+        run: sh scripts/docker-test.sh

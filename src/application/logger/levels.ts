@@ -1,8 +1,8 @@
-export enum LoggerLevels {
-    NONE = 'none',
-    ERROR = 'error',
-    WARN = 'warn',
-    INFO = 'info',
-    VERBOSE = 'verbose',
-    DEBUG = 'debug',
+export enum LogLevel {
+    None = 'none',
+    Error = 'error',
+    Warn = 'warn',
+    Info = 'info',
+    Verbose = 'verbose',
+    Debug = 'debug',
 }

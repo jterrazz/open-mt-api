@@ -5,7 +5,7 @@ export const loggerFactory: () => Logger = () => ({
         console.log(message);
     },
     error(message: string) {
-        console.log(message);
+        console.error(message);
     },
     info(message: string) {
         console.log(message);
