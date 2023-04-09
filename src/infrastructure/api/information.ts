@@ -5,7 +5,7 @@ export const getApiInformationFactory = (apiVersion: string): GetApiInformation 
     return async () => {
         return {
             message: 'Hello World!',
-            status: ApiStatus.OK,
+            status: ApiStatus.Ok,
             time: new Date(),
             version: apiVersion,
         };

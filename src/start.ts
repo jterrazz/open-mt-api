@@ -1,9 +1,15 @@
-import { applicationDependenciesFactory } from '@application/dependencies';
+import { applicationInjector } from '@application/injector';
 import { applicationFactory } from './application';
 
 export const start = async () => {
-    const { logger, configuration, database, server } = applicationDependenciesFactory();
-    const application = applicationFactory(configuration, logger, database, server);
+    const logger = applicationInjector.resolve('logger');
+
+    const application = applicationFactory(
+        applicationInjector.resolve('configuration'),
+        logger,
+        applicationInjector.resolve('database'),
+        applicationInjector.resolve('server'),
+    );
 
     try {
         await application.start();

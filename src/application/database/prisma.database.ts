@@ -7,7 +7,7 @@ export interface PrismaDatabase extends Database {
     prisma: PrismaClient;
 }
 
-const databaseClientFactory = (databaseUrl: string, logger: Logger) => {
+const prismaClientFactory = (databaseUrl: string, logger: Logger) => {
     // Passing database URL to Prisma client
     process.env['DATABASE_URL'] = databaseUrl;
 
@@ -15,23 +15,17 @@ const databaseClientFactory = (databaseUrl: string, logger: Logger) => {
         log: ['query', 'info', 'warn', 'error'].map((level) => ({ emit: 'event', level })),
     });
 
-    prismaClient.$on('query', (e) => {
+    prismaClient.$on('query', (e: any) =>
         logger.debug(
             `query: ${e.query}, params: ${e.params}, duration: ${e.duration}, target: ${e.target}`,
-        );
-    });
+        ),
+    );
 
-    prismaClient.$on('info', (e) => {
-        logger.info(`message: ${e.message}, target: ${e.target}`);
-    });
-
-    prismaClient.$on('warn', (e) => {
-        logger.warn(`message: ${e.message}, target: ${e.target}`);
-    });
-
-    prismaClient.$on('error', (e) => {
-        logger.error(`message: ${e.message}, target: ${e.target}`);
-    });
+    prismaClient.$on('info', (e: any) => logger.info(`message: ${e.message}, target: ${e.target}`));
+    prismaClient.$on('warn', (e: any) => logger.warn(`message: ${e.message}, target: ${e.target}`));
+    prismaClient.$on('error', (e: any) =>
+        logger.error(`message: ${e.message}, target: ${e.target}`),
+    );
 
     return prismaClient;
 };
@@ -43,7 +37,7 @@ export const prismaDatabaseFactory = (databaseUrl: string, logger: Logger): Pris
         return global.prismaDatabase;
     }
 
-    const prismaClient = databaseClientFactory(databaseUrl, logger);
+    const prismaClient = prismaClientFactory(databaseUrl, logger);
 
     global.prismaDatabase = {
         connect: async () => {

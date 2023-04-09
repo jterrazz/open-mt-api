@@ -119,7 +119,7 @@ This is the technical implementation of our application contracts.
 ##### ℹ️ The injection flow
 
 ```sh
-infrastructure <=> configuration/dependencies.ts
+infrastructure <=> configuration/injector.ts
                                   <=> adapters
                                       <=> application
                                           <=> domain

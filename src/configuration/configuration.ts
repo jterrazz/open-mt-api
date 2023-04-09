@@ -3,7 +3,6 @@ import {
     applicationConfigurationSchema,
 } from '@configuration/schemas/application';
 import {
-    Environment,
     EnvironmentConfiguration,
     environmentConfigurationSchema,
 } from '@configuration/schemas/environment';
@@ -18,9 +17,7 @@ export type Configuration = {
     SERVICES: ServicesConfiguration;
 };
 
-export const configurationFactory = (
-    nodeEnv: string = process.env.NODE_ENV || Environment.DEVELOPMENT,
-): Configuration => {
+export const configurationFactory = (environment: string): Configuration => {
     process.env.NODE_CONFIG_DIR = './src/configuration/values';
 
     // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -37,7 +34,7 @@ export const configurationFactory = (
             ...applicationConfiguration,
             VERSION: versionFromPackage,
         }),
-        ENVIRONMENT: environmentConfigurationSchema.parse(nodeEnv),
+        ENVIRONMENT: environmentConfigurationSchema.parse(environment),
         SERVICES: servicesConfigurationSchema.parse(servicesConfiguration),
     };
 };

@@ -7,22 +7,12 @@ import { defaultKoaDeserializer } from '@adapters/default.koa-deserializer';
 
 import { getApiInformationFactory } from '@infrastructure/api/information';
 
-import packageJson from '../../../package.json';
-
 import { koaRouteFactory } from './koa.route';
 
-// // Authentication
-// router.post(
-//     '/authentication/login',
-//     passport.authenticate('local'),
-//     controllers.authentication.logIn,
-// );
-// router.post('/authentication/logout', controllers.authentication.logOut);
-
-export const koaRouterFactory = (): Router => {
+export const koaRouterFactory = (version: string): Router => {
     const router = new Router();
 
-    const getApiInformation = getApiInformationFactory(packageJson.version);
+    const getApiInformation = getApiInformationFactory(version);
 
     // API
     router.get(

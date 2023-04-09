@@ -1,3 +1,3 @@
 export enum ApiStatus {
-    OK = 'OK',
+    Ok = 'Ok',
 }

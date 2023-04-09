@@ -22,7 +22,7 @@ describe('apiInformationKoaSerializer()', () => {
         const ctx = mock<Koa.Context>();
         const apiInformation: ApiInformation = {
             message: 'message',
-            status: ApiStatus.OK,
+            status: ApiStatus.Ok,
             time: new Date(),
             version: 'version',
         };

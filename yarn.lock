@@ -5633,6 +5633,11 @@ typed-array-length@^1.0.4:
     for-each "^0.3.3"
     is-typed-array "^1.1.9"
 
+typed-inject@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/typed-inject/-/typed-inject-3.0.1.tgz#edd396d3e98ae27dd2f3a209bfee2ad2d447ac5f"
+  integrity sha512-5yr8inrNos7uo/irp5PZ7WNwmYGfoa0w1NiDdCWW6hhIxYH2NCqYwX9BUOXpZgxk964rb1ElEfvBtftuvIPpvw==
+
 typescript@^4.6.4, typescript@^4.9.5:
   version "4.9.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
