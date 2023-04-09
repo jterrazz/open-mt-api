@@ -6,13 +6,11 @@ Learn more about us on [our blog](https://blog.open.mt/) !
 
 ## Get started
 
-### 🌱 Dependencies
+### Dependencies
 
-```sh
-docker
-node 16
-yarn
-```
+- Docker
+- Node.JS
+- Yarn
 
 ### 🍋 Start the project !
 #### Docker
@@ -52,11 +50,14 @@ It follows this structure:
 ```bash
 <root>
 └ compose # docker compose configuration
-└ config # configuration values
-└ prisma # database schema
+└ values # configuration values
+└ database # database schema
 └ src # the application
 └ tests # integrations tests
 ```
+
+### App VS worker
+...
 
 ### Clean architecture
 
@@ -73,19 +74,20 @@ src
 └ application
   # the abstracted use cases of the application
 └ configuration
-  # injects dependencies (technical implementations) to the abstracted application
+  # injects dependencies (server implementations) to the abstracted application
 └ domain
   # core objects of the application
 └ infrastructure
-  # technical implementations
+  # server implementations
 ```
 
 ##### 1. Adapters
 
 It links the abstracted application to the external world. They can be of multiple types:
-- presenter (for frontend applications)
-- controllers (links an HTTP library to its handlers for example)
-- middlewares (intermediate steps of an HTTP library)
+- presenter (for frontend applications) - App
+- controllers (links an HTTP library to its handlers for example) - App
+- middlewares (intermediate steps of an HTTP library) - App
+- consumers - Worker
 
 Its role is only to receive and validate the received data, format the output, and orchestrate the calls to use cases. That's all.
 

@@ -1,13 +1,11 @@
-FROM node:16
+FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /home
 
-# Installs dependencies and cache it based on these 2 files
+# Step 1: Install dependencies only
 COPY ./package.json .
 COPY ./yarn.lock .
-RUN yarn --ci
+RUN yarn install --frozen-lockfile
 
-# Adds the application
-ADD . /app
-
-RUN npx prisma generate
+# Step 2: Copy application files
+COPY . .

@@ -1,8 +1,6 @@
-import { createEndToEndApplication } from '../create-end-to-end-application';
-import { useFakeTimers, useRealTimers } from '@application/utils/node/timer';
-import request from 'supertest';
+import { E2E } from '@tests/e2e/e2e';
 
-const endToEndApplication = createEndToEndApplication();
+import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
 
 beforeAll(() => {
     useFakeTimers();
@@ -12,21 +10,27 @@ afterAll(() => {
     useRealTimers();
 });
 
-describe('END TO END - GET /api', function () {
-    test('returns the API status', async () => {
+describe('E2E - GET /status', function () {
+    test('respond with application information', async () => {
         // When
-        const response = await request(endToEndApplication.app.callback()).get(
-            '/',
-        );
+        const response = await E2E.getClient().get('/status');
 
         // Then
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
-            env: 'test',
-            state: 'UP',
+            message: 'Hello World!',
+            status: 'OK',
             time: '2000-01-01T00:00:00.000Z',
             version: '1.0.0',
         });
-        expect(response.headers['content-type']).toContain('json');
+    });
+
+    test('respond with global headers', async () => {
+        // When
+        const response = await E2E.getClient().get('/status');
+
+        // Then
+        expect(response.headers['api-version']).toEqual(expect.any(String));
+        expect(response.headers['content-type']).toEqual('application/json; charset=utf-8');
     });
 });

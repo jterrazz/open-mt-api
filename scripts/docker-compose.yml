@@ -1,0 +1,7 @@
+version: "3.9"
+
+services:
+  open-mt-api:
+    build:
+      context: ..
+    image: open-mt-api
