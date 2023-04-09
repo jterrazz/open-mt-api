@@ -7,29 +7,12 @@ export interface PrismaDatabase extends Database {
     prisma: PrismaClient;
 }
 
-const buildDatabaseClient = (databaseUrl: string, logger: Logger) => {
+const databaseClientFactory = (databaseUrl: string, logger: Logger) => {
     // Passing database URL to Prisma client
     process.env['DATABASE_URL'] = databaseUrl;
 
     const prismaClient = new PrismaClient({
-        log: [
-            {
-                emit: 'event',
-                level: 'query',
-            },
-            {
-                emit: 'event',
-                level: 'error',
-            },
-            {
-                emit: 'event',
-                level: 'info',
-            },
-            {
-                emit: 'event',
-                level: 'warn',
-            },
-        ],
+        log: ['query', 'info', 'warn', 'error'].map((level) => ({ emit: 'event', level })),
     });
 
     prismaClient.$on('query', (e) => {
@@ -60,7 +43,7 @@ export const prismaDatabaseFactory = (databaseUrl: string, logger: Logger): Pris
         return global.prismaDatabase;
     }
 
-    const prismaClient = buildDatabaseClient(databaseUrl, logger);
+    const prismaClient = databaseClientFactory(databaseUrl, logger);
 
     global.prismaDatabase = {
         connect: async () => {

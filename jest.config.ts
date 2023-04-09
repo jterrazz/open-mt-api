@@ -8,8 +8,7 @@ const configuration = {
     moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
         prefix: '<rootDir>/',
     }),
-    setupFilesAfterEnv: ['<rootDir>/tests/configuration/setup-files-after-env.ts'],
-    testMatch: ['**/?(*.)+(spec|test).ts?(x)'],
+    testMatch: ['<rootDir>/(src|tests)/**/?(*.)+(spec|test).ts?(x)'],
     transform: {
         '^.+\\.(t|j)sx?$': '@swc/jest',
     },
