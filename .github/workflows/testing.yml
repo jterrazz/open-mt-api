@@ -15,4 +15,5 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run unit tests
-        run: sh scripts/docker.sh test
+        shell: bash
+        run: bash scripts/docker.sh test

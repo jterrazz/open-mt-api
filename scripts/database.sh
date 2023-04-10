@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")/.environment.sh"
+. "$(dirname "$0")/.environment.sh"
 
 # Manage the database
 if [ "$1" = "deploy" ]; then

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-BASEDIR=$(dirname "$0")
+BASEDIR=$(realpath "$0")
+BASEDIR="${BASEDIR//\/scripts\/docker.sh}"
 
 # Specific variables for the Docker environment
 if [ -f /.dockerenv ] || [ "$ENVIRONMENT" = "docker" ]; then
