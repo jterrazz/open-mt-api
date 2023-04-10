@@ -1,7 +1,6 @@
-import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
-
 import { createMockOfConfiguration } from '@configuration/__tests__/configuration.mock';
 
+import { useFakeTimers, useRealTimers } from '../../../../../../tests/helpers/timer';
 import { getApiStateFactory } from '../get-api-state';
 
 beforeAll(() => {

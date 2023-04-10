@@ -12,12 +12,13 @@ import packageJson from '../../../package.json';
 // import passport from 'koa-passport';
 // import session from 'koa-session';
 
-interface KoaServer extends Server {
+export interface KoaServer extends Server {
     koa: Koa;
 }
 
 export const koaServerFactory = (logger: Logger, router: Router): KoaServer => {
     logger.debug('initializing koa server');
+
     const koa = new Koa();
 
     // setupPassportStrategies();

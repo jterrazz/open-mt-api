@@ -2,7 +2,7 @@ import type { Shop } from '@prisma/client';
 import { User } from '@prisma/client';
 import { randomUUID } from 'crypto';
 
-import { generateRandomId } from '@domain/../../src/domain/utils/maths/maths';
+import { generateRandomId } from '@domain/../../src/domain/helpers/maths/maths';
 
 import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
 

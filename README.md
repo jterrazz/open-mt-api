@@ -4,46 +4,70 @@
 
 Learn more about us on [our blog](https://blog.open.mt/) !
 
-## Get started
+## Get started 🍋
 
-### Dependencies
+### Quick start with Docker
 
-- Docker
-- Node.JS
-- Yarn
+This project is using **docker** to run the application and its dependencies. If you don't have it installed, you can follow the [official documentation](https://docs.docker.com/get-docker/).
 
-### 🍋 Start the project !
-#### Docker
 ```sh
-yarn docker:dev
+# Start the project
+sh ./scripts/docker.sh start
 ```
 
-#### Local
+To help you **develop**, we provide a few scripts to run the project with hot reload, and run tests.
+
 ```sh
-# 1. Install local packages
+# Develop the project with hot reload
+sh ./scripts/docker.sh dev
+
+# Run tests
+sh ./scripts/docker.sh test
+```
+
+### Quick start with Node.js
+
+If you want to run the project locally, you will need to install the following dependencies:
+- [Node.js](https://nodejs.org/en/download/)
+- [Yarn](https://yarnpkg.com/getting-started/install)
+
+Since this project requires external services (database, etc), you will need to run them manually.
+
+```sh
+sh ./scripts/docker.sh services
+```
+
+#### Start the project
+
+```sh
+# Install dependencies
 yarn
 
-# 2. Spawn external services
-yarn docker:up
+# Start the project
+yarn start
 
-# 3. Develop with the project
-yarn dev # Start API with hot reload
-yarn test # Run API tests
+# Develop the project with hot reload
+yarn start:dev
 ```
 
-### 🏗 Testing your code
+#### Run tests
+
+```sh
+yarn test
+```
+
+## Code quality 🏗
+
+### Tests
 
 The **`jest` framework** is used to run both **integration** (`/tests/e2e/*.test.ts`) and **unit** tests (`__tests__/*.test.ts`).
+The tests are run on **Github Actions** on each push.
 
-**The test flow starts by connecting to a Prisma database**.
-The database is formatted with its latest schema (migrations from `prisma/migrations`).
-A unique `PrismaClient` client is used, so that real postgres tests can be performed efficiently.
+### Linting
 
-⚠️ Warnings:
-- All data tested against the database can interfere with each other. Therefore, each test using the database must be thought **globally**.
-- **Before and after** all tests have be processed, **the database is flushed of all its data.**
+The **`eslint` framework** is used to lint the code. The rules are defined in the `.eslintrc` file.
 
-## Architecture
+### Architecture
 
 It follows this structure:
 
@@ -119,7 +143,7 @@ This is the technical implementation of our application contracts.
 ##### ℹ️ The injection flow
 
 ```sh
-infrastructure <=> configuration/dependencies.ts
+infrastructure <=> configuration/injector.ts
                                   <=> adapters
                                       <=> application
                                           <=> domain

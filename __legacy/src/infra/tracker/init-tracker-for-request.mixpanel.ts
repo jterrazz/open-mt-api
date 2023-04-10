@@ -1,4 +1,4 @@
-import { Applicable } from '@application/../../domain/utils/applicable';
+import { Applicable } from '@application/../../domain/helpers/applicable';
 
 import { InitTrackerForRequest } from '@domain/../../domain/use-cases/tracker/init-tracker-for-request';
 import { IConfiguration } from '~/domain';

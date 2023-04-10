@@ -1,51 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
+import { prismaClientFactory } from '@application/database/prisma.client';
+
 import { Database } from '@ports/database';
 import { Logger } from '@ports/logger';
 
-export interface PrismaDatabase extends Database {
-    prisma: PrismaClient;
-}
-
-const databaseClientFactory = (databaseUrl: string, logger: Logger) => {
-    // Passing database URL to Prisma client
-    process.env['DATABASE_URL'] = databaseUrl;
-
-    const prismaClient = new PrismaClient({
-        log: ['query', 'info', 'warn', 'error'].map((level) => ({ emit: 'event', level })),
-    });
-
-    prismaClient.$on('query', (e) => {
-        logger.debug(
-            `query: ${e.query}, params: ${e.params}, duration: ${e.duration}, target: ${e.target}`,
-        );
-    });
-
-    prismaClient.$on('info', (e) => {
-        logger.info(`message: ${e.message}, target: ${e.target}`);
-    });
-
-    prismaClient.$on('warn', (e) => {
-        logger.warn(`message: ${e.message}, target: ${e.target}`);
-    });
-
-    prismaClient.$on('error', (e) => {
-        logger.error(`message: ${e.message}, target: ${e.target}`);
-    });
-
-    return prismaClient;
-};
-
-export const prismaDatabaseFactory = (databaseUrl: string, logger: Logger): PrismaDatabase => {
-    // Recreating this object would result in failure due to multiple Prisma clients
-    // This variable must never be reassigned in an execution
-    if (global.prismaDatabase) {
-        return global.prismaDatabase;
-    }
-
-    const prismaClient = databaseClientFactory(databaseUrl, logger);
-
-    global.prismaDatabase = {
+const prismaDatabaseFactory = (prismaClient: PrismaClient, logger: Logger): Database => {
+    return {
         connect: async () => {
             logger.info('connecting to database');
             await prismaClient.$connect();
@@ -56,8 +17,28 @@ export const prismaDatabaseFactory = (databaseUrl: string, logger: Logger): Pris
             await prismaClient.$disconnect();
             logger.debug('disconnected database');
         },
-        prisma: prismaClient,
     };
-
-    return global.prismaDatabase;
 };
+
+export class PrismaDatabase {
+    private static database: Database;
+    private static prismaClient: PrismaClient;
+
+    public static getDatabase(databaseUrl: string, logger: Logger): Database {
+        if (!PrismaDatabase.database) {
+            const prismaClient = this.getPrismaClient(databaseUrl, logger);
+
+            PrismaDatabase.database = prismaDatabaseFactory(prismaClient, logger);
+        }
+
+        return PrismaDatabase.database;
+    }
+
+    public static getPrismaClient(databaseUrl: string, logger: Logger): PrismaClient {
+        if (!PrismaDatabase.prismaClient) {
+            PrismaDatabase.prismaClient = prismaClientFactory(databaseUrl, logger);
+        }
+
+        return PrismaDatabase.prismaClient;
+    }
+}

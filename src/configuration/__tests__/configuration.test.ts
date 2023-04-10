@@ -1,9 +1,10 @@
 import { configurationFactory } from '@configuration/configuration';
+import { Environment } from '@configuration/schemas/environment';
 
 describe('configuration', () => {
     test('returns application configuration', async () => {
         // When
-        const result = configurationFactory();
+        const result = configurationFactory(Environment.Test);
 
         // Then
         expect(result).toEqual({
@@ -19,7 +20,7 @@ describe('configuration', () => {
             ENVIRONMENT: 'test',
             SERVICES: {
                 DATABASE: {
-                    URL: 'postgresql://postgres:postgres@127.0.0.1:5432/open_market?pool_timeout=30&connect_timeout=30',
+                    URL: expect.stringMatching(/postgresql:\/\/.+/),
                 },
             },
         });

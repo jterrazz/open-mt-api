@@ -1,7 +1,7 @@
 import type { Product } from '@prisma/client';
 import { Shop, User } from '@prisma/client';
 
-import { generateRandomId } from '@domain/../../src/domain/utils/maths/maths';
+import { generateRandomId } from '@domain/../../src/domain/helpers/maths/maths';
 
 import { IPrismaDatabase } from '@infrastructure/../../src/infra/orm/database/database-database';
 

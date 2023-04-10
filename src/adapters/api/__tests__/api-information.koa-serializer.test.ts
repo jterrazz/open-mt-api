@@ -1,3 +1,4 @@
+import { useFakeTimers } from '@tests/helpers/timer';
 import { mock } from 'jest-mock-extended';
 import Koa from 'koa';
 
@@ -5,8 +6,6 @@ import { ApiInformation } from '@domain/api/information';
 import { ApiStatus } from '@domain/api/status';
 
 import { apiInformationKoaSerializer } from '@adapters/api/api-information.koa-serializer';
-
-import { useFakeTimers } from '@tests/utils/timer';
 
 beforeAll(() => {
     useFakeTimers();
@@ -22,7 +21,7 @@ describe('apiInformationKoaSerializer()', () => {
         const ctx = mock<Koa.Context>();
         const apiInformation: ApiInformation = {
             message: 'message',
-            status: ApiStatus.OK,
+            status: ApiStatus.Ok,
             time: new Date(),
             version: 'version',
         };
