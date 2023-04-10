@@ -1,9 +1,10 @@
 import { configurationFactory } from '@configuration/configuration';
+import { Environment } from '@configuration/schemas/environment';
 
 describe('configuration', () => {
     test('returns application configuration', async () => {
         // When
-        const result = configurationFactory();
+        const result = configurationFactory(Environment.Test);
 
         // Then
         expect(result).toEqual({

@@ -1,4 +1,4 @@
-import { HashedPasswordEntity } from '@domain/../../../application/utils/encryption/encryption-domain/hashed-password.entity';
+import { HashedPasswordEntity } from '@domain/../../../application/helpers/encryption/encryption-domain/hashed-password.entity';
 
 import { LANGUAGE } from './language';
 

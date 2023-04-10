@@ -1,7 +1,6 @@
 import { seedDatabaseWithShop } from '@tests/../../../seeds/seed-database-with-shop';
 
-import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
-
+import { useFakeTimers, useRealTimers } from '../../../../../tests/helpers/timer';
 import { e2eClient } from '../../e2e-client';
 
 const {

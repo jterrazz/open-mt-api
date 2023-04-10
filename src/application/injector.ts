@@ -13,7 +13,7 @@ import packageJson from '../../package.json';
 
 export const applicationInjector = createInjector()
     // Values
-    .provideValue('environment', process.env.NODE_ENV || Environment.DEVELOPMENT)
+    .provideValue('environment', process.env.NODE_ENV || Environment.Development)
     .provideValue('version', packageJson.version)
 
     // Application

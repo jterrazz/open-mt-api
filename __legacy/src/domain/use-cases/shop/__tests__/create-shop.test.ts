@@ -1,5 +1,4 @@
-import { useFakeTimers, useRealTimers } from '@tests/utils/timer';
-
+import { useFakeTimers, useRealTimers } from '../../../../../../tests/helpers/timer';
 import { createMockOfUserEntity } from '../../user/__mocks__/user-entity.mock';
 import { createMockOfShopRepository } from '../__mocks__/shop.repository.mock';
 import { createShopFactory } from '../create-shop';

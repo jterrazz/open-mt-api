@@ -1,6 +1,8 @@
 import * as z from 'zod';
+
+import { zodErrorToUnprocessableEntityErrorWrapper } from '@application/../../../../domain/helpers/zod/zod-error-to-unprocessable-entity-error-wrapper';
+
 import { IKoaDeserializer } from '../koa-serializer';
-import { zodErrorToUnprocessableEntityErrorWrapper } from '@application/../../../../domain/utils/zod/zod-error-to-unprocessable-entity-error-wrapper';
 
 export type DeserializeGetUserKoaRequest = IKoaDeserializer<{
     userId: number;

@@ -1,7 +1,9 @@
 import winston from 'winston';
 
+import { getCallerFile } from '@application/../../../domain/helpers/node/node';
+
 import { IConfiguration, ILogger } from '~/domain';
-import { getCallerFile } from '@application/../../../domain/utils/node/node';
+
 import { winstonLocalFormat } from './local-format';
 
 export const winstonLoggerFactory = (configuration: IConfiguration): ILogger => {
