@@ -4,11 +4,14 @@ services:
   open-mt-api:
     container_name: open-mt-api
     hostname: open-mt-api
+    image: open-mt-api
     build:
-      context: ..
+      context: ../..
     depends_on:
       - open-mt-database
-    image: open-mt-api
+      - open-mt-migration
+    environment:
+      - DATABASE_URL
 
   open-mt-database:
     container_name: open-mt-database
@@ -23,3 +26,14 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - ./postgres:/docker-entrypoint-initdb.d
+
+  open-mt-migration:
+    container_name: open-mt-migration
+    image: open-mt-api
+    build:
+      context: ../..
+    depends_on:
+      - open-mt-database
+    environment:
+      - DATABASE_URL
+    command: [ "sh", "./scripts/database.sh", "deploy" ]

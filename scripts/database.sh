@@ -1,14 +1,6 @@
 #!/bin/bash
 
-source "$(dirname "$0")/.common.sh"
-
-if [ "$2" = "--docker-network" ]; then
-    echo "Using settings for the docker network"
-else
-    echo "Using settings for the localhost network"
-    DATABASE_URL="${DATABASE_URL//${DATABASE_HOST}/localhost}"
-fi
-
+source "$(dirname "$0")/.environment.sh"
 
 # Manage the database
 if [ "$1" = "deploy" ]; then
@@ -23,7 +15,7 @@ elif [ "$1" = "explore" ]; then
 
 # Prints the usage
 else
-    echo "Usage: $0 [deploy|migrate|explore] [--docker-network]"
+    echo "Usage: $0 [deploy|migrate|explore]"
 fi
 
 
