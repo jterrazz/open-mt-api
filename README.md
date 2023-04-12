@@ -19,7 +19,7 @@ To help you **develop**, we provide a few scripts to run the project with hot re
 
 ```sh
 # Develop the project with hot reload
-sh ./scripts/docker.sh dev
+sh ./scripts/docker.sh start:dev
 
 # Run tests
 sh ./scripts/docker.sh test
