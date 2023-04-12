@@ -8,10 +8,6 @@ import { apiVersionKoaMiddlewareFactory } from '@adapters/api/api-version.koa-mi
 
 import packageJson from '../../../package.json';
 
-// import bodyParser from 'koa-bodyparser';
-// import passport from 'koa-passport';
-// import session from 'koa-session';
-
 export interface KoaServer extends Server {
     koa: Koa;
 }

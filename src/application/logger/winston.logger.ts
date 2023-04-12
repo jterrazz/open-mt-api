@@ -1,8 +1,10 @@
 import winston from 'winston';
 
+import { Environment } from '@configuration/schemas/environment';
+
 import { Logger, LoggerLevel } from '@ports/logger';
 
-export const loggerFactory = (environment: string, level: LoggerLevel): Logger => {
+export const loggerFactory = (environment: Environment, level: LoggerLevel): Logger => {
     const devEnvironment = environment === 'development';
 
     // JSON format for the default case
