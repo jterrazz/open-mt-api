@@ -1,10 +1,10 @@
 import * as z from 'zod';
 
-import { LogLevel } from '@application/logger/levels';
+import { LoggerLevel } from '@ports/logger';
 
 export const applicationConfigurationSchema = z.object({
     LOGGER: z.object({
-        LEVEL: z.nativeEnum(LogLevel),
+        LEVEL: z.nativeEnum(LoggerLevel),
     }),
     SERVER: z.object({
         PORT: z.string().regex(/^\d+$/).transform(Number),

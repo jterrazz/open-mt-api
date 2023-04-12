@@ -1,6 +1,6 @@
 {
   "watch": ["src", "package.json", "tsconfig.json"],
-  "ext": "ts",
+  "ext": "ts,yml,json",
   "ignore": ["**/*.test.ts"],
   "exec": "$npm_execpath start"
 }

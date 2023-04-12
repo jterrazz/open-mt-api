@@ -4,7 +4,7 @@ import { injectableConfigurationFactory } from '@configuration/configuration.inj
 import { Environment } from '@configuration/schemas/environment';
 
 import { injectablePrismaDatabaseFactory } from '@application/database/prisma.database.injectable';
-import { loggerFactory } from '@application/logger/logger';
+import { injectableWinstonLoggerFactory } from '@application/logger/winston.logger.injectable';
 import { userRepositoryInMemoryFactory } from '@application/repositories/user-repository.in-memory';
 import { injectableKoaRouterFactory } from '@application/server/koa.router.injectable';
 import { injectableKoaServerFactory } from '@application/server/koa.server.injectable';
@@ -18,7 +18,7 @@ export const applicationInjector = createInjector()
 
     // Application
     .provideFactory('configuration', injectableConfigurationFactory)
-    .provideFactory('logger', loggerFactory)
+    .provideFactory('logger', injectableWinstonLoggerFactory)
     .provideFactory('database', injectablePrismaDatabaseFactory)
 
     // Repositories

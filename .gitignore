@@ -13,7 +13,6 @@ src/configuration/values/local.yml
 .env.production
 
 # NodeJS
-*.log*
 node_modules/
 .yarn
 yarn-error*

@@ -42,11 +42,13 @@ export const koaServerFactory = (logger: Logger, router: Router): KoaServer => {
 
     koa.use(router.routes()).use(router.allowedMethods());
 
+    logger.debug('initialized koa server');
+
     return {
         koa,
         start: async (port) => {
             koa.listen(port, () => {
-                logger.info(`app is listening on port: ${port}`);
+                logger.info(`app is listening on port <${port}>`);
             });
         },
     };

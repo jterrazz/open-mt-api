@@ -18,7 +18,7 @@ export const applicationFactory = (
 ): Application => {
     return {
         start: async () => {
-            logger.info(`application is starting with environment: ${configuration.ENVIRONMENT}`);
+            logger.info(`application is starting with environment <${configuration.ENVIRONMENT}>`);
 
             await retry(() => database.connect(), {
                 delay: 500,
