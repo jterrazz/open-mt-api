@@ -1,16 +1,19 @@
 import Router from 'koa-router';
 
 import { koaRouterFactory } from '@application/server/koa.router';
+import { KoaRoute } from '@application/server/routes/koa-route';
+
+import { GetApiStatusController } from '@domain/api/get-api-status.controller';
+import { GetMeController } from '@domain/user/get-me.controller';
 
 import { Logger } from '@ports/logger';
-import { UserRepository } from '@ports/repositories/user-repository';
 
 export const injectableKoaRouterFactory = (
-    version: string,
-    repositories: { userRepository: UserRepository },
     logger: Logger,
+    getApiStatusRoute: KoaRoute<GetApiStatusController>,
+    getMeRoute: KoaRoute<GetMeController>,
 ): Router => {
-    return koaRouterFactory(version, repositories.userRepository, logger);
+    return koaRouterFactory(logger, getApiStatusRoute, getMeRoute);
 };
 
-injectableKoaRouterFactory.inject = ['version', 'repositories', 'logger'] as const;
+injectableKoaRouterFactory.inject = ['logger', 'getApiStatusRoute', 'getMeRoute'] as const;

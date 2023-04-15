@@ -8,6 +8,8 @@ import { injectableWinstonLoggerFactory } from '@application/logger/winston.logg
 import { injectablePrismaRepositoriesFactory } from '@application/repositories/prisma.repositories.injectable';
 import { injectableKoaRouterFactory } from '@application/server/koa.router.injectable';
 import { injectableKoaServerFactory } from '@application/server/koa.server.injectable';
+import { GetApiStatusKoaRoute } from '@application/server/routes/get-api-status.koa-route';
+import { GetMeStatusKoaRoute } from '@application/server/routes/get-me-status.koa-route';
 
 import packageJson from '../../package.json';
 
@@ -23,6 +25,10 @@ export const applicationInjector = createInjector()
 
     // Repositories
     .provideFactory('repositories', injectablePrismaRepositoriesFactory)
+
+    // Routes
+    .provideClass('getApiStatusRoute', GetApiStatusKoaRoute)
+    .provideClass('getMeRoute', GetMeStatusKoaRoute)
 
     // Server
     .provideFactory('router', injectableKoaRouterFactory)

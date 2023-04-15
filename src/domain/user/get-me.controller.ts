@@ -1,5 +1,4 @@
+import { Controller } from '@domain/controller';
 import { User } from '@domain/user/user';
 
-export interface GetMeController {
-    (id: number): Promise<User>;
-}
+export type GetMeController = Controller<number, User>;
