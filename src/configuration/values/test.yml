@@ -2,7 +2,7 @@ APPLICATION:
   SERVER:
     PORT: '9999'
   LOGGER:
-    LEVEL: 'error'
+    LEVEL: 'debug'
 
 SERVICES:
   DATABASE:

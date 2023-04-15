@@ -10,7 +10,7 @@ describe('configuration', () => {
         expect(result).toEqual({
             APPLICATION: {
                 LOGGER: {
-                    LEVEL: 'error',
+                    LEVEL: 'debug',
                 },
                 SERVER: {
                     PORT: 9999,

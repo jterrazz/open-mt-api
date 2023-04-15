@@ -5,7 +5,8 @@ import { Environment } from '@configuration/schemas/environment';
 import { Logger, LoggerLevel } from '@ports/logger';
 
 export const loggerFactory = (environment: Environment, level: LoggerLevel): Logger => {
-    const devEnvironment = environment === 'development';
+    const readableEnvironment =
+        environment === Environment.Development || environment === Environment.Test;
 
     // JSON format for the default case
     const jsonFormat = winston.format.combine(winston.format.timestamp(), winston.format.json());
@@ -20,7 +21,7 @@ export const loggerFactory = (environment: Environment, level: LoggerLevel): Log
     );
 
     const logger = winston.createLogger({
-        format: devEnvironment ? coloredFormat : jsonFormat,
+        format: readableEnvironment ? coloredFormat : jsonFormat,
         level,
         transports: [new winston.transports.Console()],
     });

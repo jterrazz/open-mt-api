@@ -9,7 +9,7 @@ export const prismaUserRepositoryFactory = (
 ): UserRepository => {
     return {
         findUserById: async (id: number) => {
-            logger.debug(`Finding user by id: ${id}`);
+            logger.debug(`finding user by id: ${id}`);
 
             return prismaClient.user.findUnique({
                 where: {

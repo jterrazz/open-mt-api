@@ -19,7 +19,7 @@
     "@jterrazz/eslint-config-common": "3.0.0",
     "@swc/jest": "^0.2.24",
     "@types/config": "^0.0.41",
-    "@types/jest": "^27.0.2",
+    "@types/jest": "^29.5.0",
     "@types/koa": "^2.13.4",
     "@types/koa-bodyparser": "^4.3.7",
     "@types/koa-passport": "^4.0.3",
