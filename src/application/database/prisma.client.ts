@@ -3,7 +3,7 @@ import { Prisma, PrismaClient } from '@prisma/client';
 export const prismaClientFactory = (
     databaseUrl: string,
     prismaLogger: (level: Prisma.LogLevel, message: string) => void,
-) => {
+): PrismaClient => {
     // Passing database URL to Prisma client
     process.env['DATABASE_URL'] = databaseUrl;
 

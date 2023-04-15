@@ -10,7 +10,7 @@ afterAll(() => {
 });
 
 describe('E2E - GET /status', function () {
-    test('respond with application information', async () => {
+    test('responds with api status information', async () => {
         // When
         const response = await TestContext.getRequest().get('/status');
 
@@ -18,13 +18,13 @@ describe('E2E - GET /status', function () {
         expect(response.status).toEqual(200);
         expect(response.body).toEqual({
             message: 'Hello World!',
-            status: 'OK',
+            status: 'UP',
             time: '2000-01-01T00:00:00.000Z',
             version: '1.0.0',
         });
     });
 
-    test('respond with global headers', async () => {
+    test('responds with global headers', async () => {
         // When
         const response = await TestContext.getRequest().get('/status');
 

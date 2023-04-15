@@ -1,13 +1,5 @@
-require('tsconfig-paths/register');
+import 'tsconfig-paths/register';
 
-// import { dangerouslyDropAllDatabaseRows } from '@infrastructure/../../__legacy/src/infra/orm/database/dangerously-drop-all-database-rows';
-// import { getDependencies } from '~/dependencies';
+const globalSetup = async () => {};
 
-module.exports = async () => {
-    // const { database, logger } = getDependencies();
-    //
-    // logger.info('connecting to test database');
-    // await database.connect();
-    // logger.info('connected to test database');
-    // await dangerouslyDropAllDatabaseRows(database.client);
-};
+export default globalSetup;

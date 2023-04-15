@@ -2,8 +2,13 @@ import Router from 'koa-router';
 
 import { koaRouterFactory } from '@application/server/koa.router';
 
-export const injectableKoaRouterFactory = (version: string): Router => {
-    return koaRouterFactory(version);
+import { UserRepository } from '@ports/repositories/user-repository';
+
+export const injectableKoaRouterFactory = (
+    version: string,
+    repositories: { userRepository: UserRepository },
+): Router => {
+    return koaRouterFactory(version, repositories.userRepository);
 };
 
-injectableKoaRouterFactory.inject = ['version'] as const;
+injectableKoaRouterFactory.inject = ['version', 'repositories'] as const;

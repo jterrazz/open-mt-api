@@ -1,10 +1,11 @@
 import { applicationInjector } from '@application/injector';
-import { applicationFactory } from './application';
 
-export const start = async () => {
+import { apiFactory } from './api';
+
+export const startApi = async () => {
     const logger = applicationInjector.resolve('logger');
 
-    const application = applicationFactory(
+    const api = apiFactory(
         applicationInjector.resolve('configuration'),
         logger,
         applicationInjector.resolve('database'),
@@ -12,11 +13,11 @@ export const start = async () => {
     );
 
     try {
-        await application.start();
+        await api.start();
     } catch (error) {
         logger.error(error);
     }
 };
 
 // eslint-disable-next-line promise/catch-or-return,promise/valid-params
-start().then();
+startApi().then();

@@ -117,7 +117,7 @@ Its role is only to receive and validate the received data, format the output, a
 
 For example here, we connect the `koa` controllers and middlewares to our abstracted application.
 
-##### 2. Application
+##### 2. Api
 
 The base of the applications is at the `contracts` level.
 These contracts represent abstract methods of the higher levels of the application (database, external services, etc). Meaning that the implementations are never found here, but are injected at the application runtime.

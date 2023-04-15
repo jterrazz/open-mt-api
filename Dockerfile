@@ -9,7 +9,7 @@ COPY ./package.json .
 COPY ./yarn.lock .
 RUN yarn install --frozen-lockfile
 
-# Step 2: Copy Application Files
+# Step 2: Copy Api Files
 COPY . .
 
 # Step 3: Generate Prisma Client

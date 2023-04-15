@@ -1,27 +1,40 @@
 import Router from 'koa-router';
 
-import { ApiInformation } from '@domain/api/information';
+import { ApiStatusMetadata } from '@domain/api/status';
+import { User } from '@domain/user/user';
 
-import { apiInformationKoaSerializer } from '@adapters/api/api-information.koa-serializer';
+import { UserRepository } from '@ports/repositories/user-repository';
+
+import { apiStatusKoaSerializer } from '@adapters/api/api-status.koa-serializer';
 import { defaultKoaDeserializer } from '@adapters/default.koa-deserializer';
+import { getMeKoaDeserializer } from '@adapters/me/get-me.koa-deserializer';
+import { getMeKoaSerializer } from '@adapters/me/get-me.koa-serializer';
 
-import { getApiInformationFactory } from '@infrastructure/api/information';
+import { getApiStatusFactory } from '@infrastructure/api/status';
+import { getUserFactory } from '@infrastructure/user/user';
 
 import { koaRouteFactory } from './koa.route';
 
-export const koaRouterFactory = (version: string): Router => {
+export const koaRouterFactory = (version: string, userRepository: UserRepository): Router => {
     const router = new Router();
 
-    const getApiInformation = getApiInformationFactory(version);
+    const getApiStatus = getApiStatusFactory(version);
+    const getUser = getUserFactory(userRepository);
 
     // API
     router.get(
         '/status',
-        koaRouteFactory<undefined, ApiInformation>(
+        koaRouteFactory<undefined, ApiStatusMetadata>(
             defaultKoaDeserializer,
-            getApiInformation,
-            apiInformationKoaSerializer,
+            getApiStatus,
+            apiStatusKoaSerializer,
         ),
+    );
+
+    // Me
+    router.get(
+        '/me',
+        koaRouteFactory<number, User | null>(getMeKoaDeserializer, getUser, getMeKoaSerializer),
     );
 
     return router;

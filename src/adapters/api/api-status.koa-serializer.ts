@@ -1,8 +1,8 @@
-import { ApiInformation } from '@domain/api/information';
+import { ApiStatusMetadata } from '@domain/api/status';
 
 import { KoaSerializer } from '@adapters/koa-serializer.adapter';
 
-export const apiInformationKoaSerializer: KoaSerializer<ApiInformation> = (ctx, apiStatus) => {
+export const apiStatusKoaSerializer: KoaSerializer<ApiStatusMetadata> = (ctx, apiStatus) => {
     ctx.status = 200;
     ctx.body = {
         message: apiStatus.message,

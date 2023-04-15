@@ -1,12 +1,9 @@
-// import { dangerouslyDropAllDatabaseRows } from '@infrastructure/../../__legacy/src/infra/orm/prisma/dangerously-drop-all-database-rows';
-// import { getDependencies } from '~/dependencies';
+import { applicationInjector } from '@application/injector';
 
-module.exports = async () => {
-    // const { database, logger } = getDependencies();
-    //
-    // logger.info('ending all tests');
-    // logger.info('will drop all database data and disconnect');
-    //
-    // await dangerouslyDropAllDatabaseRows(database.client);
-    // await database.disconnect();
+const globalTeardown = async () => {
+    const database = applicationInjector.resolve('database');
+
+    await database.disconnect();
 };
+
+export default globalTeardown;

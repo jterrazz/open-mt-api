@@ -7,10 +7,11 @@
   "author": "Jean-Baptiste TERRAZZONI",
   "private": true,
   "scripts": {
-    "start": "node -r tsconfig-paths/register -r @swc-node/register src/start.ts",
+    "start": "node -r tsconfig-paths/register -r @swc-node/register src/start-api.ts",
     "start:dev": "NODE_ENV=development nodemon",
     "test": "jest --silent",
-    "test:debug": "jest --runInBand --detectOpenHandles",
+    "test:unit": "jest --silent ./src",
+    "test:integration": "jest --silent ./tests",
     "lint": "eslint .",
     "lint:dependencies": "depcruise --config .dependency-cruiser.js src"
   },

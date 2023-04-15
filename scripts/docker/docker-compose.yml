@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
   open-mt-api:
-    container_name: open-mt-api
-    hostname: open-mt-api
+    container_name: open-mt-status
+    hostname: open-mt-status
     image: open-mt-api
     build:
       context: ../..

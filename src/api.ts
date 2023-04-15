@@ -6,16 +6,16 @@ import { Server } from '@ports/server';
 
 import { retry } from '@utils/retry';
 
-interface Application {
+interface Api {
     start: () => Promise<void>;
 }
 
-export const applicationFactory = (
+export const apiFactory = (
     configuration: Configuration,
     logger: Logger,
     database: Database,
     server: Server,
-): Application => {
+): Api => {
     return {
         start: async () => {
             logger.info(`application is starting with environment <${configuration.ENVIRONMENT}>`);
