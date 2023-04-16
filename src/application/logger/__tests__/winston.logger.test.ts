@@ -12,8 +12,8 @@ beforeEach(() => {
     stdoutSpy.mockClear();
 });
 
-describe('loggerFactory()', () => {
-    test('logger outputs JSON format in production environment', () => {
+describe('logger', () => {
+    test('should output JSON format in production environment', () => {
         // Given
         const logger = loggerFactory(Environment.Production, LoggerLevel.Debug);
 
@@ -26,7 +26,7 @@ describe('loggerFactory()', () => {
         expect(loggedMessage.message).toBe('Test message in production');
     });
 
-    test('logger outputs colored text format in development environment', () => {
+    test('should output colored text format in development environment', () => {
         // Given
         const logger = loggerFactory(Environment.Development, LoggerLevel.Debug);
 

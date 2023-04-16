@@ -3,8 +3,8 @@ import Koa from 'koa';
 
 import { apiVersionKoaMiddlewareFactory } from '@adapters/api/api-version.koa-middleware';
 
-describe('apiVersionKoaMiddleware()', () => {
-    test('sets the api-version header', () => {
+describe('apiVersionKoaMiddleware', () => {
+    test('should set api-version header', () => {
         // Given
         const apiVersion = '1.0.0';
         const ctx = mock<Koa.Context>();

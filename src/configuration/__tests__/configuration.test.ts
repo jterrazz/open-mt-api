@@ -2,7 +2,7 @@ import { configurationFactory } from '@configuration/configuration';
 import { Environment } from '@configuration/schemas/environment';
 
 describe('configuration', () => {
-    test('returns application configuration', async () => {
+    test('should return default values of configuration', async () => {
         // When
         const result = configurationFactory(Environment.Test);
 
@@ -26,7 +26,7 @@ describe('configuration', () => {
         });
     });
 
-    test('throws when a required variable is missing', async () => {
+    test('should throw when a required variable is missing', async () => {
         // Given
         const nodeEnv = null;
 

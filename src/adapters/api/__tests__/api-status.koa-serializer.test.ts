@@ -2,7 +2,8 @@ import { useFakeTimers } from '@tests/helpers/timer';
 import { mock } from 'jest-mock-extended';
 import Koa from 'koa';
 
-import { API_STATUS, ApiStatusMetadata } from '@domain/api/status';
+import { ApiStatusMetadata } from '@domain/api/get-api-status.controller';
+import { API_STATUS } from '@domain/api/status';
 
 import { apiStatusKoaSerializer } from '@adapters/api/api-status.koa-serializer';
 
@@ -14,8 +15,8 @@ afterAll(() => {
     jest.useRealTimers();
 });
 
-describe('apiStatusKoaSerializer()', () => {
-    test('serializes the status information', () => {
+describe('apiStatusKoaSerializer', () => {
+    test('should serialize status information', () => {
         // Given
         const ctx = mock<Koa.Context>();
         const apiInformation: ApiStatusMetadata = {

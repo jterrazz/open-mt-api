@@ -14,7 +14,7 @@ export const retry = async <T>(fn: () => Promise<T>, options: RetryOptions = {})
     } catch (error) {
         options.onError?.(error);
 
-        if (tries <= 0) {
+        if (tries <= 1) {
             throw error;
         }
 

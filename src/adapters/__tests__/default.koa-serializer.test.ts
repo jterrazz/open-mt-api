@@ -3,8 +3,8 @@ import { Context } from 'koa';
 
 import { defaultKoaSerializer } from '@adapters/default.koa-serializer';
 
-describe('defaultKoaSerializer()', () => {
-    test('returns a 200 status code', () => {
+describe('defaultKoaSerializer', () => {
+    test('should return 200 status code', () => {
         // Given
         const ctx = mock<Context>();
 

@@ -2,7 +2,9 @@ import { Prisma } from '@prisma/client';
 
 import { Logger } from '@ports/logger';
 
-export const prismaLoggerFactory = (logger: Logger) => {
+export type PrismaLogger = (level: Prisma.LogLevel, message: string) => void;
+
+export const prismaLoggerFactory = (logger: Logger): PrismaLogger => {
     return (level: Prisma.LogLevel, message: string) => {
         if (level === 'query') {
             logger.debug(message);
