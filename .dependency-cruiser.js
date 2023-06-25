@@ -122,17 +122,6 @@ module.exports = {
       }
     },
     {
-      name: 'not-to-unresolvable',
-      comment:
-        "This module depends on a module that cannot be found ('resolved to disk'). If it's an npm " +
-        'module: add it to your package.json. In all other cases you likely already know what to do.',
-      severity: 'error',
-      from: {},
-      to: {
-        couldNotResolve: true
-      }
-    },
-    {
       name: 'no-duplicate-dep-types',
       comment:
         "Likely this module depends on an external ('npm') package that occurs more than once " +
