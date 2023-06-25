@@ -2,8 +2,8 @@ import { GetUserController } from '@domain/controllers/get-user.controller';
 import { ExposedError } from '@domain/errors/exposed.error';
 import { NotFoundError } from '@domain/errors/functional/not-found.error';
 
+import { UserRepository } from '@ports/database';
 import { Logger } from '@ports/logger';
-import { UserRepository } from '@ports/repositories/user-repository';
 
 export const getUserControllerFactory = (
     userRepository: UserRepository,

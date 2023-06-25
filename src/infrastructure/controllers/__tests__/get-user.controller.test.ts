@@ -4,8 +4,8 @@ import { ExposedError } from '@domain/errors/exposed.error';
 import { NotFoundError } from '@domain/errors/functional/not-found.error';
 import { createMockOfUser } from '@domain/models/user/__tests__/user.mock';
 
+import { UserRepository } from '@ports/database';
 import { Logger } from '@ports/logger';
-import { UserRepository } from '@ports/repositories/user-repository';
 
 import { getUserControllerFactory } from '@infrastructure/controllers/get-user.controller';
 
