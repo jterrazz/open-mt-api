@@ -6,7 +6,7 @@ const simulateSleep = async (sleepDuration: number, advanceTimeBy: number) => {
     const sleepPromise = sleep(sleepDuration);
     const promiseResolved = jest.fn();
 
-    sleepPromise.then(promiseResolved); // eslint-disable-line promise/catch-or-return
+    void sleepPromise.then(promiseResolved); // eslint-disable-line promise/catch-or-return
 
     // Advance timers by the specified time
     jest.advanceTimersByTime(advanceTimeBy);

@@ -16,7 +16,7 @@
     "lint:dependencies": "depcruise --config .dependency-cruiser.js src"
   },
   "devDependencies": {
-    "@jterrazz/eslint-config-common": "3.0.0",
+    "@jterrazz/eslint-config-common": "3.1.3",
     "@swc/jest": "^0.2.24",
     "@types/config": "^0.0.41",
     "@types/jest": "^29.5.0",

@@ -11,7 +11,7 @@ export const prismaUserRepositoryFactory = (
         create: async (email) => {
             logger.debug(`creating user with email: ${email}`);
 
-            const user = prismaClient.user.create({
+            const user = await prismaClient.user.create({
                 data: {
                     email,
                 },
@@ -25,7 +25,7 @@ export const prismaUserRepositoryFactory = (
         findByEmail: async (email: string) => {
             logger.debug(`finding user by email: ${email}`);
 
-            const user = prismaClient.user.findUnique({
+            const user = await prismaClient.user.findUnique({
                 where: {
                     email,
                 },
@@ -39,7 +39,7 @@ export const prismaUserRepositoryFactory = (
         findById: async (id: number) => {
             logger.debug(`finding user by id: ${id}`);
 
-            const user = prismaClient.user.findUnique({
+            const user = await prismaClient.user.findUnique({
                 where: {
                     id,
                 },

@@ -671,10 +671,10 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@jterrazz/eslint-config-common@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@jterrazz/eslint-config-common/-/eslint-config-common-3.0.0.tgz#d4cd401a58901879563f30d036dc6b2074de9bdf"
-  integrity sha512-aki03fO/sLHyFnz5p8fUCObc+k7O7M5uHvvI8gSGrvTA141kpNoHu7dy2phI0P/6JpcVaJm9huyCpz7nWaaI0A==
+"@jterrazz/eslint-config-common@3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@jterrazz/eslint-config-common/-/eslint-config-common-3.1.3.tgz#3b7a5640384437f0b357c07a0e83b2379ce3e352"
+  integrity sha512-+zdMMy7K5mRQbewezbEaNKaFQ7mHnq7MkyfHq+J3Rfj+CDSNjvvScQGOV26KiZ4Lq75CIiN7cRgLZqo/GJa1Kw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.54.0"
     "@typescript-eslint/parser" "^5.54.0"

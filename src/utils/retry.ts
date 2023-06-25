@@ -20,6 +20,6 @@ export const retry = async <T>(fn: () => Promise<T>, options: RetryOptions = {})
 
         await sleep(delay);
 
-        return await retry(fn, { delay, tries: tries - 1 });
+        return retry(fn, { delay, tries: tries - 1 });
     }
 };
