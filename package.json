@@ -2,7 +2,7 @@
   "name": "open-mt-api",
   "version": "1.0.0",
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   },
   "author": "Jean-Baptiste TERRAZZONI",
   "private": true,
