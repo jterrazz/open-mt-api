@@ -19,5 +19,4 @@ export const startApi = async () => {
     }
 };
 
-// eslint-disable-next-line promise/catch-or-return,promise/valid-params
-startApi().then();
+startApi().then(); // eslint-disable-line promise/catch-or-return,promise/valid-params

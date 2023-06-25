@@ -31,6 +31,7 @@
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts",
+    "node_modules/handlebars/types/index.d.ts",
     "node_modules/handlebars/types/index.d.ts"
   ]
 }

@@ -1,10 +1,8 @@
 // Mock the console to capture log messages
 
-import { Environment } from '@configuration/schemas/environment';
-
-import { loggerFactory } from '@application/logger/winston.logger';
-
-import { LoggerLevel } from '@ports/logger';
+import { Environment } from '@application/environment';
+import { LoggerLevel } from '@application/logger/logger.level';
+import { winstonLoggerFactory } from '@application/logger/winston.logger';
 
 const stdoutSpy = jest.spyOn(process.stdout, 'write').mockImplementation();
 
@@ -15,7 +13,7 @@ beforeEach(() => {
 describe('logger', () => {
     test('should output JSON format in production environment', () => {
         // Given
-        const logger = loggerFactory(Environment.Production, LoggerLevel.Debug);
+        const logger = winstonLoggerFactory(Environment.Production, LoggerLevel.Debug);
 
         // When
         logger.info('Test message in production');
@@ -28,7 +26,7 @@ describe('logger', () => {
 
     test('should output colored text format in development environment', () => {
         // Given
-        const logger = loggerFactory(Environment.Development, LoggerLevel.Debug);
+        const logger = winstonLoggerFactory(Environment.Development, LoggerLevel.Debug);
 
         // When
         logger.info('Test message in development');

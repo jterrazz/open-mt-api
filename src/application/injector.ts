@@ -1,15 +1,12 @@
 import { createInjector } from 'typed-inject';
 
 import { injectableConfigurationFactory } from '@configuration/configuration.injectable';
-import { Environment } from '@configuration/schemas/environment';
 
-import { injectablePrismaDatabaseFactory } from '@application/database/prisma.database.injectable';
-import { injectableWinstonLoggerFactory } from '@application/logger/winston.logger.injectable';
-import { injectablePrismaRepositoriesFactory } from '@application/repositories/prisma.repositories.injectable';
-import { injectableKoaRouterFactory } from '@application/server/koa.router.injectable';
-import { injectableKoaServerFactory } from '@application/server/koa.server.injectable';
-import { GetApiStatusKoaRoute } from '@application/server/routes/get-api-status.koa-route';
-import { GetMeStatusKoaRoute } from '@application/server/routes/get-me-status.koa-route';
+import { injectableDatabaseFactory } from '@application/database/database.injectable';
+import { injectableRepositoriesFactory } from '@application/database/repositories/repositories.injectable';
+import { Environment } from '@application/environment';
+import { injectableLoggerFactory } from '@application/logger/logger.injectable';
+import { injectableServerFactory } from '@application/server/server.injectable';
 
 import packageJson from '../../package.json';
 
@@ -20,16 +17,11 @@ export const applicationInjector = createInjector()
 
     // Application
     .provideFactory('configuration', injectableConfigurationFactory)
-    .provideFactory('logger', injectableWinstonLoggerFactory)
-    .provideFactory('database', injectablePrismaDatabaseFactory)
+    .provideFactory('logger', injectableLoggerFactory)
+    .provideFactory('database', injectableDatabaseFactory)
 
     // Repositories
-    .provideFactory('repositories', injectablePrismaRepositoriesFactory)
-
-    // Routes
-    .provideClass('getApiStatusRoute', GetApiStatusKoaRoute)
-    .provideClass('getMeRoute', GetMeStatusKoaRoute)
+    .provideFactory('repositories', injectableRepositoriesFactory)
 
     // Server
-    .provideFactory('router', injectableKoaRouterFactory)
-    .provideFactory('server', injectableKoaServerFactory);
+    .provideFactory('server', injectableServerFactory);

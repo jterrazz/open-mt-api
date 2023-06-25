@@ -3,29 +3,29 @@ import { mock } from 'jest-mock-extended';
 
 import { prismaLoggerFactory } from '@application/database/prisma.logger';
 
-import { Logger, LoggerLevel } from '@ports/logger';
+import { Logger } from '@ports/logger';
 
 describe('prismaLogger', () => {
-    const mockLogger = mock<Logger>();
+    const mockOfLogger = mock<Logger>();
 
     afterEach(() => {
         jest.clearAllMocks();
     });
 
-    test.each<[Prisma.LogLevel, LoggerLevel]>([
-        ['query', LoggerLevel.Debug],
-        ['info', LoggerLevel.Info],
-        ['warn', LoggerLevel.Warn],
-        ['error', LoggerLevel.Error],
+    test.each<[Prisma.LogLevel, keyof Logger]>([
+        ['query', 'debug'],
+        ['info', 'info'],
+        ['warn', 'warn'],
+        ['error', 'error'],
     ])('should call the correct logger method for log level %s', (level, loggerMethod) => {
         // Given
-        const prismaLogger = prismaLoggerFactory(mockLogger);
+        const prismaLogger = prismaLoggerFactory(mockOfLogger);
         const message = `Test message for level: ${level}`;
 
         // When
         prismaLogger(level, message);
 
         // Then
-        expect(mockLogger[loggerMethod]).toHaveBeenCalledWith(message);
+        expect(mockOfLogger[loggerMethod]).toHaveBeenCalledWith(message);
     });
 });

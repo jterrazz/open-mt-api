@@ -1,10 +1,12 @@
 import winston from 'winston';
 
-import { Environment } from '@configuration/schemas/environment';
+import { Environment } from '@application/environment';
 
-import { Logger, LoggerLevel } from '@ports/logger';
+import { Logger } from '@ports/logger';
 
-export const loggerFactory = (environment: Environment, level: LoggerLevel): Logger => {
+import { LoggerLevel } from './logger.level';
+
+export const winstonLoggerFactory = (environment: Environment, level: LoggerLevel): Logger => {
     const readableEnvironment =
         environment === Environment.Development || environment === Environment.Test;
 

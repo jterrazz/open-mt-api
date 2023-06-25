@@ -158,7 +158,7 @@ module.exports = {
         "or there's something in the test folder that isn't a test.",
       severity: 'error',
       from: {
-        pathNot: '^(tests)'
+        pathNot: '(^(tests)|test\\.ts)'
       },
       to: {
         path: '^(tests)'

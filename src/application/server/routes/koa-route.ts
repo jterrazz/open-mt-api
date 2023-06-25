@@ -1,20 +1,26 @@
-import { PromiseReturnType } from '@prisma/client/scripts/default-index';
+import { Controller } from '@domain/controllers/controller';
 
-import { KoaContext, KoaDeserializer } from '@adapters/koa-deserializer.adapter';
-import { KoaSerializer } from '@adapters/koa-serializer.adapter';
+import { Logger } from '@ports/logger';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export class KoaRoute<Controller extends (arg: any) => Promise<any>> {
-    constructor(
-        private readonly deserializer: KoaDeserializer<Parameters<typeof controller>[0]>,
-        private readonly controller: Controller,
-        private readonly serializer: KoaSerializer<PromiseReturnType<typeof controller>>,
-    ) {}
+import { getTypeSafeInputsFromKoaFactory } from '@adapters/routes/get-type-safe-inputs-from.koa';
+import { KoaContext, KoaDeserializer } from '@adapters/routes/koa-deserializer.adapter';
+import { KoaSerializer } from '@adapters/routes/koa-serializer.adapter';
+import ResolvedValue = jest.ResolvedValue;
 
-    public async route(ctx: KoaContext): Promise<void> {
-        const input = await this.deserializer(ctx);
-        const output = await this.controller(input);
+export const koaRouteFactory = <T extends Controller<any, any>>( // eslint-disable-line  @typescript-eslint/no-explicit-any
+    logger: Logger,
+    // FROM infrastructure
+    controller: T,
+    // FROM adapters
+    deserializer: KoaDeserializer<Parameters<typeof controller>[0]>,
+    serializer: KoaSerializer<ResolvedValue<ReturnType<typeof controller>>>,
+) => {
+    return async (ctx: KoaContext): Promise<void> => {
+        const getTypeSafeInputsFromKoa = getTypeSafeInputsFromKoaFactory(logger, ctx);
 
-        await this.serializer(ctx, output);
-    }
-}
+        const input = await deserializer(getTypeSafeInputsFromKoa);
+        const output = await controller(input);
+
+        await serializer(ctx, output);
+    };
+};

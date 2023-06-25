@@ -34,7 +34,7 @@ If you want to run the project locally, you will need to install the following d
 Since this project requires external services (database, etc), you will need to run them manually.
 
 ```sh
-sh ./scripts/docker.sh services
+sh ./scripts/docker.sh start:infra
 ```
 
 #### Start the project

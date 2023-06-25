@@ -1,5 +1,7 @@
-import { User } from '@domain/user/user';
+import { User } from '@domain/models/user/user';
 
 export interface UserRepository {
-    findUserById(id: number): Promise<User | null>;
+    findById(id: number): Promise<User | null>;
+    findByEmail(email: string): Promise<User | null>;
+    create(email: string): Promise<User | null>;
 }

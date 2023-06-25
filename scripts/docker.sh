@@ -11,6 +11,8 @@ if [ "$1" = "start" ]; then
     docker $COMPOSE_ARGUMENT run open-mt-api yarn start
 elif [ "$1" = "start:dev" ]; then
     docker $COMPOSE_ARGUMENT run $HOT_RELOAD_ARGUMENT open-mt-api yarn start:dev
+elif [ "$1" = "start:infra" ]; then
+    docker $COMPOSE_ARGUMENT up open-mt-database open-mt-migration
 
 # Run the tests
 elif [ "$1" = "test" ]; then
@@ -24,11 +26,7 @@ elif [ "$1" = "test:integration" ]; then
 elif [ "$1" = "lint" ]; then
     docker $COMPOSE_ARGUMENT run $HOT_RELOAD_ARGUMENT open-mt-api yarn lint
 
-# Start the external services
-elif [ "$1" = "services" ]; then
-    docker $COMPOSE_ARGUMENT up open-mt-database open-mt-migration
-
 # Print the usage
 else
-    echo "Usage: $0 [start|dev|test|test:unit|test:integration|lint|services]"
+    echo "Usage: $0 [start|start:dev|start:infra|test|test:unit|test:integration|lint]"
 fi

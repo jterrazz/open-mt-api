@@ -4,10 +4,3 @@ export interface Logger {
     info(message: string): void;
     debug(message: string): void;
 }
-
-export enum LoggerLevel {
-    Error = 'error',
-    Warn = 'warn',
-    Info = 'info',
-    Debug = 'debug',
-}

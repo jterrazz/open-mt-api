@@ -1,9 +1,7 @@
-import { applicationInjector } from '@application/injector';
+import { TestContext } from '@tests/e2e/context';
 
 const globalTeardown = async () => {
-    const database = applicationInjector.resolve('database');
-
-    await database.disconnect();
+    await TestContext.database().disconnect();
 };
 
 export default globalTeardown;

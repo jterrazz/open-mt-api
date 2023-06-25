@@ -1,17 +1,17 @@
 import { mock } from 'jest-mock-extended';
 import { Context } from 'koa';
 
-import { defaultKoaSerializer } from '@adapters/default.koa-serializer';
+import { defaultKoaSerializer } from '@adapters/routes/default.koa-serializer';
 
 describe('defaultKoaSerializer', () => {
     test('should return 200 status code', () => {
         // Given
-        const ctx = mock<Context>();
+        const mockOfCtx = mock<Context>();
 
         // When
-        defaultKoaSerializer(ctx);
+        defaultKoaSerializer(mockOfCtx);
 
         // Then
-        expect(ctx.status).toBe(200);
+        expect(mockOfCtx.status).toBe(200);
     });
 });

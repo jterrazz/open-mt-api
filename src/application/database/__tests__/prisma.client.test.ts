@@ -31,8 +31,8 @@ describe('prismaClient', () => {
         expect(PrismaClient).toHaveBeenCalledTimes(1);
     });
 
-    test.each(['info', 'warn', 'error'])(
-        'should call the provided logger with the correct level and message when an <%s> event is emitted',
+    test.each(['query', 'info', 'warn', 'error'])(
+        'should log information when the <%s> event is emitted',
         (level) => {
             // Given
             const message = 'the-message';
@@ -45,16 +45,4 @@ describe('prismaClient', () => {
             expect(prismaLogger).toHaveBeenCalledWith(level, message);
         },
     );
-
-    test('should call the provided logger with the correct level and message when an <%s> event is emitted', () => {
-        // Given
-        const query = 'the-query';
-        prismaClientFactory(databaseUrl, prismaLogger);
-
-        // When
-        prismaEventHandlers.query({ query });
-
-        // Then
-        expect(prismaLogger).toHaveBeenCalledWith('query', query);
-    });
 });

@@ -1,5 +1,6 @@
 import { configurationFactory } from '@configuration/configuration';
-import { Environment } from '@configuration/schemas/environment';
+
+import { Environment } from '@application/environment';
 
 describe('configuration', () => {
     test('should return default values of configuration', async () => {
@@ -9,6 +10,9 @@ describe('configuration', () => {
         // Then
         expect(result).toEqual({
             APPLICATION: {
+                DATABASE: {
+                    URL: expect.stringMatching(/postgresql:\/\/.+/),
+                },
                 LOGGER: {
                     LEVEL: 'debug',
                 },
@@ -18,11 +22,7 @@ describe('configuration', () => {
                 VERSION: '1.0.0',
             },
             ENVIRONMENT: 'test',
-            SERVICES: {
-                DATABASE: {
-                    URL: expect.stringMatching(/postgresql:\/\/.+/),
-                },
-            },
+            // SERVICES: {},
         });
     });
 
@@ -31,9 +31,7 @@ describe('configuration', () => {
         const nodeEnv = null;
 
         // When
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        const ft = () => configurationFactory(nodeEnv);
+        const ft = () => configurationFactory(nodeEnv as unknown as string);
 
         // Then
         expect(ft).toThrow();

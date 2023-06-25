@@ -1,5 +1,7 @@
 import 'tsconfig-paths/register';
 
-const globalSetup = async () => {};
+const globalSetup = async () => {
+    // Empty setup
+};
 
 export default globalSetup;
