@@ -1,0 +1,9 @@
+APPLICATION:
+  SERVER:
+    PORT: '3000'
+  LOGGER:
+    LEVEL: 'debug'
+  DATABASE:
+    URL: 'postgresql://postgres:postgres@localhost:5432/open_mt?pool_timeout=30&connect_timeout=30'
+
+#SERVICES:

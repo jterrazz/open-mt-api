@@ -1,13 +1,16 @@
-FROM node:16
+FROM node:18-alpine
 
-WORKDIR /app
+WORKDIR /home
 
-# Installs dependencies and cache it based on these 2 files
+RUN apk add --no-cache --upgrade bash
+
+# Step 1: Install Dependencies
 COPY ./package.json .
 COPY ./yarn.lock .
-RUN yarn --ci
+RUN yarn install --frozen-lockfile
 
-# Adds the application
-ADD . /app
+# Step 2: Copy Api Files
+COPY . .
 
+# Step 3: Generate Prisma Client
 RUN npx prisma generate

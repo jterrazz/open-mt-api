@@ -1,0 +1,51 @@
+name: Quality Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+
+      - name: Run unit tests
+        shell: bash
+        run: bash scripts/docker.sh test:unit
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+
+      - name: Run integration tests
+        shell: bash
+        run: bash scripts/docker.sh test:integration
+
+  linter:
+    name: Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+
+      - name: Run linter
+        shell: bash
+        run: bash scripts/docker.sh lint
+
+  compiler:
+    name: Compiler
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up repository
+        uses: actions/checkout@v2
+
+      - name: Run TS compiler
+        run: bash scripts/docker.sh build

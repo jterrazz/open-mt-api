@@ -1,0 +1,5 @@
+APPLICATION:
+  SERVER:
+    PORT: '3000'
+  LOGGER:
+    LEVEL: 'info'

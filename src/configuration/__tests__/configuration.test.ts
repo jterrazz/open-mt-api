@@ -1,23 +1,39 @@
 import { configurationFactory } from '@configuration/configuration';
 
+import { Environment } from '@application/environment';
+
 describe('configuration', () => {
-    test('throws when a required variable is missing', async () => {
+    test('should return default values of configuration', async () => {
+        // When
+        const result = configurationFactory(Environment.Test);
+
+        // Then
+        expect(result).toEqual({
+            APPLICATION: {
+                DATABASE: {
+                    URL: expect.stringMatching(/postgresql:\/\/.+/),
+                },
+                LOGGER: {
+                    LEVEL: 'debug',
+                },
+                SERVER: {
+                    PORT: 9999,
+                },
+                VERSION: '1.0.0',
+            },
+            ENVIRONMENT: 'test',
+            // SERVICES: {},
+        });
+    });
+
+    test('should throw when a required variable is missing', async () => {
         // Given
         const nodeEnv = null;
 
         // When
-        // @ts-ignore
-        const ft = () => configurationFactory(nodeEnv);
+        const ft = () => configurationFactory(nodeEnv as unknown as string);
 
         // Then
         expect(ft).toThrow();
-    });
-
-    test('returns application configuration', async () => {
-        // When
-        const result = configurationFactory();
-
-        // Then
-        expect(result).toBeDefined();
     });
 });
