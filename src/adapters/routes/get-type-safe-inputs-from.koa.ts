@@ -1,3 +1,4 @@
+import Router from 'koa-router';
 import { ZodObject, ZodRawShape } from 'zod';
 
 import { ExposedError } from '@domain/errors/exposed.error';
@@ -5,15 +6,13 @@ import { UnprocessableEntityError } from '@domain/errors/functional/unprocessabl
 
 import { Logger } from '@ports/logger';
 
-import { KoaContext } from '@adapters/routes/koa-deserializer.adapter';
-
 export type GetTypeSafeInputsFromKoa = <T extends ZodObject<ZodRawShape>>(
     schema: T,
 ) => ReturnType<T['parse']>;
 
 export const getTypeSafeInputsFromKoaFactory = (
     logger: Logger,
-    ctx: KoaContext,
+    ctx: Router.RouterContext,
 ): GetTypeSafeInputsFromKoa => {
     return (schema: ZodObject<ZodRawShape>) => {
         try {

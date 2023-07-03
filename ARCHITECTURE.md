@@ -1,105 +1,80 @@
-### Architecture
+# Architecture Overview
 
+The architecture of this project is designed to ensure a clear **separation of concerns** and follows the principles of **clean architecture**. It enables better maintainability and scalability by abstracting the business logic from the technical implementation. Let's explore the different components and directories of the project in detail for a comprehensive understanding:
 
-- Domain / Infrastructure: Separating "métier" logic from abstract to technical implementation
-- Configuration: external forlder that separates injected configuration (only params that makes sense to send through the lauching application like a server port)
-- Application: contains the files used to start an application with some parameters. The best example to understand this is with a logger, or the server library used to handle requests 
-- Ports: The interfaces exposed by the "application":
-- Adapters: connects the domain / infra use controllers to the application.
-- Utils: contains some files
+### Project Structure
 
-
-- // TODO Redo this file
-
-
-
-...
-
-Thighly linking getTypeSafeInputsFromRequest to deserializer to force its use everytime
-Even if it is upside down, i believe it will force the use of this safety net
-
-
-
-// TODO Stop execution if TS fails and eslint !!!
-// TODO Write in docs that TS and ESlint checks for architecture is respected
-
-
-It follows this structure:
+The project is structured into the following main directories:
 
 ```bash
 <root>
-└ compose # docker compose configuration
-└ values # configuration values
-└ database # database schema
-└ src # the application
-└ tests # integrations tests
+└ scripts # Contains scripts for docker and database management
+└ prisma # Houses the database schemas
+└ src # Holds the core application code
+└ tests # Contains integration tests
 ```
 
-### App VS worker
-...
+### Components: App and Worker
 
-### Clean architecture
+The project comprises two main components: the "App" and the "Worker."
 
-The project follows **clean architecture** concepts.
-Because of that, we benefit from a better separation of concerns:
-the application is developed on solid abstracted interfaces and methods, and the technical implementation of this code is pushed to the side of the project.
+#### Server
 
-#### The clean architecture structure
+The "Server" component represents the server part of the application. It handles incoming requests and facilitates interaction with the frontend. Essentially, it is responsible for handling user interactions and responding to them accordingly.
+
+#### Worker
+
+The "Worker" component focuses on background tasks and asynchronous processing. It performs tasks that do not require immediate user interaction and can be processed independently. For example, it can handle long-running processes, background jobs, or tasks that need to be executed at specific intervals.
+
+### Clean Architecture
+
+The project strictly adheres to the principles of clean architecture, which emphasizes a strong separation of concerns. It consists of the following key layers:
 
 ```bash
 src
 └ adapters
-  # links the application to the external world
+  # Connects the domain and infrastructure with the application
 └ application
-  # the abstracted use cases of the application
+  # Contains the abstracted use cases of the application
 └ configuration
-  # injects dependencies (server implementations) to the abstracted application
+  # Injects dependencies (e.g., server implementations) into the abstracted application
 └ domain
-  # core objects of the application
+  # Contains the core business logic and domain objects
 └ infrastructure
-  # server implementations
+  # Houses the technical implementations (e.g., server components, database implementations)
 ```
 
-##### 1. Adapters
+#### 1. Domain
 
-It links the abstracted application to the external world. They can be of multiple types:
-- presenter (for frontend applications) - App
-- controllers (links an HTTP library to its handlers for example) - App
-- middlewares (intermediate steps of an HTTP library) - App
-- consumers - Worker
+The "Domain" layer represents the core of the application, where the essential business logic resides. It encapsulates the domain objects, business rules, and use cases. This layer focuses solely on the business-specific rules and is entirely independent of external factors like frameworks or technologies.
 
-Its role is only to receive and validate the received data, format the output, and orchestrate the calls to use cases. That's all.
+#### 2. Infrastructure
 
-For example here, we connect the `koa` controllers and middlewares to our abstracted application.
+The "Infrastructure" layer contains the technical implementations of the application contracts. Here, you will find the implementations of server components, database interactions, and other external dependencies. This layer acts as a bridge between the core business logic and the technical details, ensuring that the domain remains isolated from specific implementations.
 
-##### 2. Api
+#### 3. Application
 
-The base of the applications is at the `contracts` level.
-These contracts represent abstract methods of the higher levels of the application (database, external services, etc). Meaning that the implementations are never found here, but are injected at the application runtime.
-The `use-cases` section will describe the behaviour of what our application can concretely do.
+The "Application" layer is where the abstracted use cases of the application reside. It communicates with the "Domain" layer to access the core business logic. This layer relies on interfaces (or ports) to interact with the lower-level components, such as the database or external services. The actual implementations of these interfaces are injected at runtime, allowing flexibility and testability.
 
-For example, we can:
-- Register a user
-- Get the details of a user
-- Add a product to a shop
+#### 4. Adapters
 
-So it can communicate to the higher levels (DB, repositories, web) only by using interfaces.
-The implementations are injected at the runtime. It can only create this logic based on the injected interfaces, and it can require the lower level: the domain.
+The "Adapters" layer connects the domain and infrastructure to the application. It serves as an intermediary between the core application and external components, ensuring seamless integration. The adapters include various types, such as:
 
-##### 3. Domain
-This layer is independent, you will never see any “require (‘…’)” to another part of the application
-This layer is not be affected by external changes like routing or controllers.
+- Presenters: For frontend applications (e.g., App)
+- Controllers: Links an HTTP library to its handlers (e.g., App)
+- Middlewares: Intermediate steps of an HTTP library (e.g., App)
+- Consumers: Used in the Worker for asynchronous processing
 
-##### 4. Infrastructure
-This is the technical implementation of our application contracts.
+Adapters handle tasks like data validation, formatting outputs, and orchestrating calls to use cases, but they do not contain complex business logic.
 
-> "This layer is where all the details go. The web is a detail. The database is a detail. We keep these things on the outside where they can do little harm"
+### Configuration and Utils
 
-##### ℹ️ The injection flow
+- **Configuration**: The "Configuration" directory holds external configurations that need to be injected into the application. For example, server settings like the port number are managed here.
 
-```sh
-infrastructure <=> configuration/injector.ts
-                                  <=> adapters
-                                      <=> application
-                                          <=> domain
-```
+- **Utils**: The "Utils" directory contains utility files or helper functions that can be used across different parts of the application. These files encapsulate commonly used functionalities, promoting code reusability and maintainability.
+
+### Ports
+
+The "Ports" directory includes interfaces exposed by the application. These interfaces define the contract between different layers of the architecture. For instance, interfaces representing database access methods or API calls would be included in this directory. By relying on interfaces, the application remains adaptable to changes without altering the core business logic.
+
+By following clean architecture principles and ensuring a clear separation of concerns, the project achieves a robust, maintainable, and flexible codebase. The architecture promotes abstracting business logic from technical details, making it easier to adapt to changes and ensuring the application's long-term success and sustainability.

@@ -1,20 +1,27 @@
 # Open.MT - Open Market API
 
-> [Open.MT](https://open.mt) is a marketplace that allows customers to discover and transact with their communities.
+Welcome to the Open.MT API! Our API powers the marketplace that enables customers to discover and transact with their communities.
 
-Learn more about us on [our blog](https://blog.open.mt/) !
+## About Open.MT
 
-## Get started 🍋
+[Open.MT](https://open.mt) is a marketplace that enable seamless interactions between customers and their communities. We are dedicated to providing a platform that empowers merchants of all backgrounds, from big brands to small businesses and artisans. Our vision is to revolutionize the world of online commerce by leveraging the potential of decentralization and open technologies.
 
-### Quick start with Docker
+To learn more about our mission, latest updates, and exciting stories from entrepreneurs, visit [our blog](https://blog.open.mt/).
 
-This project is using **docker** to run the application and its dependencies. If you don't have it installed, you can follow the [official documentation](https://docs.docker.com/get-docker/).
+## Get Started 🍋
+
+### Quick Start with Docker
+
+Getting started with our API is simple! We use **docker** to manage the application and its dependencies. If you haven't installed Docker yet, you can follow the [official documentation](https://docs.docker.com/get-docker/) to set it up.
+
+To launch the project, use the following command:
 
 ```sh
 # Start the project
 sh ./scripts/docker.sh start
 ```
 
+With this quick setup, you'll be ready to explore the power of our Open Market API and build seamless experiences for customers. Happy coding!
 To help you **develop**, we provide a few scripts to run the project with hot reload, and run tests.
 
 ```sh

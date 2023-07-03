@@ -1,9 +1,4 @@
-# fly.toml app configuration file generated for open-mt-api on 2023-06-25T15:17:40+02:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = "open-mt-api" # TODO Move to staging by default
+app = "open-mt-api-staging"
 primary_region = "cdg"
 
 [build]

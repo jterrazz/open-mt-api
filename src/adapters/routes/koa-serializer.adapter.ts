@@ -1,5 +1,5 @@
-import { KoaContext } from '@adapters/routes/koa-deserializer.adapter';
+import Router from 'koa-router';
 
 export interface KoaSerializer<T> {
-    (ctx: KoaContext, data: T): unknown;
+    (ctx: Router.RouterContext, data: T): unknown;
 }
